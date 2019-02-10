@@ -1,2 +1,1 @@
-# ksenia
-Augmented memory network
+# Ksenia (Ksenia stores externally now it all)
