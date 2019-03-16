@@ -24,7 +24,7 @@ class NTMHeadBase(nn.Module):
         :param memory: The :class:`NTMMemory` to be addressed by the head.
         :param controller_size: The size of the internal representation.
         """
-        super(NTMHeadBase, self).__init__()
+        super().__init__()
 
         self.memory = memory
         self.N, self.M = memory.size()
@@ -54,7 +54,7 @@ class NTMHeadBase(nn.Module):
 
 class NTMReadHead(NTMHeadBase):
     def __init__(self, memory, controller_size):
-        super(NTMReadHead, self).__init__(memory, controller_size)
+        super().__init__(memory, controller_size)
 
         # Corresponding to k, β, g, s, γ sizes from the paper
         self.read_lengths = [self.M, 1, 1, 3, 1]
@@ -86,7 +86,7 @@ class NTMReadHead(NTMHeadBase):
         w = self._address_memory(key, beta, gate, shift, gamma, w_prev)
         r = self.memory.read(w)
 
-        return r, w
+        return w, r
 
 
 class NTMWriteHead(NTMHeadBase):

@@ -1,0 +1,17 @@
+#+TITLE: What to do next
+* Todos [0/3]
+- [ ] Get basic NTM implementation working on gpu
+  Use [[https://github.com/loudinthecloud/pytorch-ntm%20this%20][this]] implementation as a main reference
+- [ ] Test on copy and repeat copy
+- [ ] Implement DNC
+* Ideas
+- Test different versions of manns against default lstm baselines in some real
+  world tasks (such as speech recognition, question answering)
+- Use different controller networks (for example pretrained ones, and than add
+  interaction with memory).
+- Test how each part of a DNC contributes to the results. Make many
+  visualizations, try different real and synthetic tasks.
+  - Separate keys from values in DNC memory like in DNTM
+  - Combine vision and language tasks
+- Test different read/write heads configurations
+- Experiments with a stack (much simpler reading and writing)

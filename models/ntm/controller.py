@@ -5,19 +5,32 @@ from torch import nn
 from torch.nn import Parameter
 
 
-class LSTMController(nn.Module):
+class BaseNTMController(nn.Module):
+    """An NTM controller base class."""
+    def __init__(self, num_inputs, num_outputs):
+        super().__init__()
+        self.num_inputs = num_inputs
+        self.num_outputs = num_outputs
+
+    def size(self):
+        return self.num_inputs, self.num_outputs
+
+    def create_new_state(self, batch_size):
+        raise NotImplementedError
+
+
+class LSTMController(BaseNTMController):
     """An NTM controller based on LSTM."""
 
     def __init__(self, num_inputs, num_outputs, num_layers):
-        super().__init__()
+        super().__init__(num_inputs, num_outputs)
 
-        self.num_inputs = num_inputs
-        self.num_outputs = num_outputs
         self.num_layers = num_layers
-
-        self.lstm = nn.LSTM(input_size=num_inputs,
-                            hidden_size=num_outputs,
-                            num_layers=num_layers)
+        self.lstm = nn.LSTM(
+            input_size=self.num_inputs,
+            hidden_size=self.num_outputs,
+            num_layers=self.num_layers,
+        )
 
         # The hidden state is a learned parameter
         self.lstm_h_bias = Parameter(torch.randn(
@@ -41,9 +54,6 @@ class LSTMController(nn.Module):
                 stdev = 5 / (np.sqrt(self.num_inputs + self.num_outputs))
                 nn.init.uniform_(p, -stdev, stdev)
 
-    def size(self):
-        return self.num_inputs, self.num_outputs
-
     def forward(self, x, prev_state):
         x = x.unsqueeze(0)
         outp, state = self.lstm(x, prev_state)
@@ -51,24 +61,25 @@ class LSTMController(nn.Module):
 
 
 # TODO add support to NTM
-class LinearController(nn.Module):
+class LinearController(BaseNTMController):
     "NTM controller based on FCNN."
 
     def __init__(self, layers):
-        super().__init__()
+        super().__init__(num_inputs=layers[0], num_outputs=layers[-1])
 
-        self.num_inputs = layers[0]
-        self.num_outputs = layers[-1]
         self.num_layers = len(layers) - 1
 
         mlp = []
-
         for i, (in_features, out_features) in enumerate(zip(layers[:-1], layers[1:]), 1):
             mlp.append(nn.Linear(in_features, out_features))
             if i != self.num_layers:
                 mlp.append(nn.LeakyReLU())
 
         self.mlp = nn.Sequential(*mlp)
+
+    def create_new_state(self, batch_size):
+        # Do nothing, just for unified interface in NTM
+        return None
 
     def reset_parameters(self):
         for p in self.parameters():
@@ -77,5 +88,5 @@ class LinearController(nn.Module):
             else:
                 nn.init.normal_(p, std=0.01)
 
-    def forward(self, x):
+    def forward(self, x, prev_state):
         return self.mlp(x)

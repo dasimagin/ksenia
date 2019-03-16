@@ -1,49 +1,35 @@
 #!/usr/bin/env python3
-
-"""
-Main script for training different models
-"""
-
 import argparse
-import json
+import datetime
+import pathlib
 import logging
-import time
-import random
-import re
-import sys
 
-import attr
-import argcomplete
 import torch
 import numpy as np
+import tensorboardX
 
-from tasks.copytask import CopyTaskModelTraining, CopyTaskParams
+from models.ntm import create_ntm
+from tasks.copytask import CopyDataLoader
+# TODO implement dnc in pytorch
+
 
 LOGGER = logging.getLogger(__name__)
-TASKS = {
-    'copy': (CopyTaskModelTraining, CopyTaskParams)
-}
-
-# Default values for program arguments
-RANDOM_SEED = 1000
-REPORT_INTERVAL = 200
-CHECKPOINT_INTERVAL = 1000
-
-
-def get_ms():
-    """Returns the current time in miliseconds."""
-    return time.time() * 1000
 
 
 def init_seed(seed=None):
     """Seed the RNGs for predicatability/reproduction purposes."""
     if seed is None:
-        seed = int(get_ms() // 1000)
+        seed = int(datetime.datetime.now().timestamp())
 
     LOGGER.info("Using seed=%d", seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
-    random.seed(seed)
+
+
+def clip_grads(net):
+    parameters = list(filter(lambda p: p.grad is not None, net.parameters()))
+    for p in parameters:
+        torch.nn.utils.clip_grad_value_(p, 10)
 
 
 def progress_clean():
@@ -59,228 +45,170 @@ def progress_bar(batch_num, report_interval, last_loss):
         "=" * fill, " " * (40 - fill), batch_num, last_loss), end='')
 
 
-def save_checkpoint(net, name, args, batch_num, losses, costs, seq_lengths):
-    progress_clean()
-
-    basename = "{}/{}-{}-batch-{}".format(args.checkpoint_path, name, args.seed, batch_num)
-    model_fname = basename + ".model"
-    LOGGER.info("Saving model checkpoint to: '%s'", model_fname)
-    torch.save(net.state_dict(), model_fname)
-
-    # Save the training history
-    train_fname = basename + ".json"
-    LOGGER.info("Saving model training history to '%s'", train_fname)
-    content = {
-        "loss": losses,
-        "cost": costs,
-        "seq_lengths": seq_lengths
-    }
-    open(train_fname, 'wt').write(json.dumps(content))
-
-
-def clip_grads(net):
-    """Gradient clipping to the range [10, 10]."""
-    parameters = list(filter(lambda p: p.grad is not None, net.parameters()))
-    for p in parameters:
-        p.grad.data.clamp_(-10, 10)
-
-
-def train_batch(net, criterion, optimizer, X, Y):
+def train_batch(model, criterion, optimizer, x, y):
     """Trains a single batch."""
+    model.train()
     optimizer.zero_grad()
-    inp_seq_len = X.size(0)
-    outp_seq_len, batch_size, _ = Y.size()
+    inp_seq_len = x.size(0)
+    outp_seq_len, batch_size, _ = y.size()
 
     # New sequence
-    net.init_sequence(batch_size)
+    model.init_sequence(batch_size)
+    prev_state = model.create_new_state(batch_size)
 
     # Feed the sequence + delimiter
     for i in range(inp_seq_len):
-        net(X[i])
+        _, prev_state = model(x[i], prev_state)
 
-    # Read the output (no input given)
-    y_out = torch.zeros(Y.size())
+    # Collect sequence
+    y_out = torch.zeros(y.size())
+    x_inp = torch.zeros(batch_size, x.size(2))
     for i in range(outp_seq_len):
-        y_out[i], _ = net()
+        y_out[i], prev_state = model(x_inp, prev_state)
 
-    loss = criterion(y_out, Y)
+    loss = criterion(y_out, y)
     loss.backward()
-    clip_grads(net)
+    clip_grads(model)
     optimizer.step()
 
     y_out_binarized = y_out.clone().data
     y_out_binarized.apply_(lambda x: 0 if x < 0.5 else 1)
 
     # The cost is the number of error bits per sequence
-    cost = torch.sum(torch.abs(y_out_binarized - Y.data))
+    cost = torch.sum(torch.abs(y_out_binarized - y.data))
 
     return loss.item(), cost.item() / batch_size
 
 
-def evaluate(net, criterion, X, Y):
-    """Evaluate a single batch (without training)."""
-    inp_seq_len = X.size(0)
-    outp_seq_len, batch_size, _ = Y.size()
+def save_checkpoint(model, name, batch_num, checkpoint_path):
+    progress_clean()
+    checkpoint_path = pathlib.Path(checkpoint_path)
+    checkpoint_path.mkdir(parents=True, exist_ok=True)
 
-    # New sequence
-    net.init_sequence(batch_size)
-
-    # Feed the sequence + delimiter
-    states = []
-    for i in range(inp_seq_len):
-        o, state = net(X[i])
-        states += [state]
-
-    # Read the output (no input given)
-    y_out = torch.zeros(Y.size())
-    for i in range(outp_seq_len):
-        y_out[i], state = net()
-        states += [state]
-
-    loss = criterion(y_out, Y)
-
-    y_out_binarized = y_out.clone().data
-    y_out_binarized.apply_(lambda x: 0 if x < 0.5 else 1)
-
-    # The cost is the number of error bits per sequence
-    cost = torch.sum(torch.abs(y_out_binarized - Y.data))
-
-    result = {
-        'loss': loss.data[0],
-        'cost': cost / batch_size,
-        'y_out': y_out,
-        'y_out_binarized': y_out_binarized,
-        'states': states
-    }
-
-    return result
+    model_fname = f"{name}-batch-{batch_num}.model"
+    LOGGER.info("Saving model checkpoint to: '%s'", model_fname)
+    torch.save(model.state_dict(), checkpoint_path/model_fname)
 
 
-def train_model(model, args):
-    num_batches = model.params.num_batches
-    batch_size = model.params.batch_size
+def train(model, criterion, optimizer, dataloader, args):
+    """Train model generic function."""
+    LOGGER.info("Training model for %d batches (batch_size=%d)...", args.num_batches, args.batch_size)
+    start_time = datetime.datetime.now()
+    writer = tensorboardX.SummaryWriter(log_dir=args.tensorboard_logs)
+    mean_loss = 0.
+    mean_cost = 0.
 
-    LOGGER.info("Training model for %d batches (batch_size=%d)...",
-                num_batches, batch_size)
-
-    losses = []
-    costs = []
-    seq_lengths = []
-    start_ms = get_ms()
-
-    for batch_num, x, y in model.dataloader:
-        if torch.cuda.is_available():
+    for batch_num, x, y in dataloader.generate():
+        if not args.no_gpu and torch.cuda.is_available():
             x = x.cuda()
             y = y.cuda()
 
-        loss, cost = train_batch(model.net, model.criterion, model.optimizer, x, y)
-        losses += [loss]
-        costs += [cost]
-        seq_lengths += [y.size(0)]
+        loss, cost = train_batch(model, criterion, optimizer, x, y)
+        mean_loss = (mean_loss * (batch_num - 1) + loss) / batch_num
+        mean_cost = (mean_cost * (batch_num - 1) + cost) / batch_num
 
-        # Update the progress bar
         progress_bar(batch_num, args.report_interval, loss)
+        writer.add_scalar('loss', loss)
+        writer.add_scalar('cost', cost)
 
         # Report
         if batch_num % args.report_interval == 0:
-            mean_loss = np.array(losses[-args.report_interval:]).mean()
-            mean_cost = np.array(costs[-args.report_interval:]).mean()
-            mean_time = int(((get_ms() - start_ms) / args.report_interval) / batch_size)
-            progress_clean()
-            LOGGER.info("Batch %d Loss: %.6f Cost: %.2f Time: %d ms/sequence",
-                        batch_num, mean_loss, mean_cost, mean_time)
-            start_ms = get_ms()
+            LOGGER.info(
+                "Batch %d Loss: %.6f Cost: %.2f Time: %d seconds",
+                batch_num, mean_loss, mean_cost,
+                (datetime.datetime.now() - start_time).total_seconds()
+            )
 
         # Checkpoint
-        if (args.checkpoint_interval != 0) and (batch_num % args.checkpoint_interval == 0):
-            save_checkpoint(model.net, model.params.name, args,
-                            batch_num, losses, costs, seq_lengths)
+        if args.checkpoint_interval != 0 and batch_num % args.checkpoint_interval == 0:
+            save_checkpoint(model, type(model).__name__, batch_num, args.checkpoint_path)
 
     LOGGER.info("Done training.")
 
 
 def init_arguments():
     parser = argparse.ArgumentParser(prog='train.py')
-    parser.add_argument('--seed', type=int, default=RANDOM_SEED, help="Seed value for RNGs")
-    parser.add_argument('--task', action='store', choices=list(TASKS.keys()), default='copy',
-                        help="Choose the task to train (default: copy)")
-    parser.add_argument('-p', '--param', action='append', default=[],
-                        help='Override model params. Example: "-pbatch_size=4 -pnum_heads=2"')
-    parser.add_argument('--checkpoint-interval', type=int, default=CHECKPOINT_INTERVAL,
-                        help="Checkpoint interval (default: {}). "
-                             "Use 0 to disable checkpointing".format(CHECKPOINT_INTERVAL))
-    parser.add_argument('--checkpoint-path', action='store', default='./',
-                        help="Path for saving checkpoint data (default: './')")
-    parser.add_argument('--report-interval', type=int, default=REPORT_INTERVAL,
-                        help="Reporting interval")
 
-    argcomplete.autocomplete(parser)
+    # Common training parameters
+    parser.add_argument(
+        '--seed', type=int, default=1000,
+        help="Seed value for RNGs",
+    )
+
+    parser.add_argument(
+        '--no-gpu', action='store_true',
+        help='Do not use gpu for training',
+    )
+
+    parser.add_argument(
+        '--task', action='store', choices=['copy'], default='copy',
+        help="Choose the task to train (default: copy)"
+    )
+
+    parser.add_argument(
+        '--report-interval', type=int, default=200,
+        help="Reporting interval"
+    )
+
+    parser.add_argument(
+        '--checkpoint-interval', type=int, default=1000,
+        help="Checkpoint interval (default: 1000). "
+        "Use 0 to disable checkpointing"
+    )
+
+    parser.add_argument(
+        '--checkpoint-path', action='store', default='./',
+        help="Path for saving checkpoint data (default: './')"
+    )
+
+    parser.add_argument(
+        '--tensorboard-logs', type=str, action='store', default='./',
+        help='Path for saving tensorboard logs (default: ./)'
+    )
+
+    # Task or model specific TODO better organize different tasks and models
+    parser.add_argument('--num-batches', type=int, default=50000)
+    parser.add_argument('--batch-size', type=int, default=10)
+    parser.add_argument('--seq-width', type=int, default=8)
+    parser.add_argument('--min-len', type=int, default=1)
+    parser.add_argument('--max-len', type=int, default=20)
+    parser.add_argument('--memory-n', type=int, default=128)
+    parser.add_argument('--memory-m', type=int, default=20)
 
     args = parser.parse_args()
-    args.checkpoint_path = args.checkpoint_path.rstrip('/')
-
     return args
 
 
-def update_model_params(params, update):
-    """Updates the default parameters using supplied user arguments."""
-
-    update_dict = {}
-    for p in update:
-        m = re.match("(.*)=(.*)", p)
-        if not m:
-            LOGGER.error("Unable to parse param update '%s'", p)
-            sys.exit(1)
-
-        k, v = m.groups()
-        update_dict[k] = v
-
-    try:
-        params = attr.evolve(params, **update_dict)
-    except TypeError as e:
-        LOGGER.error(e)
-        LOGGER.error("Valid parameters: %s", list(attr.asdict(params).keys()))
-        sys.exit(1)
-
-    return params
-
-
-def init_model(args):
-    LOGGER.info("Training for the **%s** task", args.task)
-
-    model_cls, params_cls = TASKS[args.task]
-    params = params_cls()
-    params = update_model_params(params, args.param)
-
-    LOGGER.info(params)
-
-    model = model_cls(params=params)
-    return model
-
-
 def init_logging():
-    logging.basicConfig(format='[%(asctime)s] [%(levelname)s] [%(name)s]  %(message)s',
-                        level=logging.DEBUG)
+    logging.basicConfig(
+        format='[%(asctime)s] [%(levelname)s] [%(name)s]  %(message)s',
+        level=logging.DEBUG
+    )
 
 
 def main():
     init_logging()
-
-    # Initialize arguments
     args = init_arguments()
-
-    # Initialize random
     init_seed(args.seed)
 
-    # Initialize the model
-    model = init_model(args)
+    model = create_ntm(
+        args.seq_width + 1, args.seq_width, args.memory_n, args.memory_m,
+    )
 
-    if torch.cuda.is_available():
-        model.net = model.net.cuda()
+    dataloader = CopyDataLoader(
+        args.num_batches,
+        args.batch_size,
+        args.seq_width,
+        args.min_len,
+        args.max_len,
+    )
 
-    LOGGER.info("Total number of parameters: %d", model.net.calculate_num_params())
-    train_model(model, args)
+    criterion = torch.nn.BCELoss()
+    optimizer = torch.optim.RMSprop(model.parameters(), lr=1e-4, alpha=0.95, momentum=0.9)
+
+    LOGGER.info("Total number of parameters: %d", model.calculate_num_params())
+    train(model, criterion, optimizer, dataloader, args)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

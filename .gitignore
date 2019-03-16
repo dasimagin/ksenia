@@ -1,5 +1,6 @@
 # MacOS
 .DS_Store
+.local
 
 # Developer tools
 .vscode/settings.json

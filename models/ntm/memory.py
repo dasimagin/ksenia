@@ -20,11 +20,8 @@ class NTMMemory(nn.Module):
 
         The memory's dimensions are (batch_size x N x M).
         Each batch has it's own memory matrix.
-
-        :param N: Number of rows in the memory.
-        :param M: Number of columns/features in the memory.
         """
-        super(NTMMemory, self).__init__()
+        super().__init__()
 
         self.N = N
         self.M = M
@@ -33,14 +30,12 @@ class NTMMemory(nn.Module):
         # memory locations by content
         self.register_buffer('mem_bias', torch.Tensor(N, M))
 
-        # Initialize memory bias
-        # TODO try different initializations
+        # Initialize memory bias TODO: different initializations
         stdev = 1 / (np.sqrt(N + M))
         nn.init.uniform_(self.mem_bias, -stdev, stdev)
 
     def reset(self, batch_size):
         """Initialize memory from bias, for start-of-sequence."""
-        # memory is not a model parameter, so it wont be in parameters()
         self.batch_size = batch_size
         self.memory = self.mem_bias.clone().repeat(batch_size, 1, 1)
 
@@ -53,23 +48,14 @@ class NTMMemory(nn.Module):
 
     def write(self, w, e, a):
         """write to memory (according to section 3.2)."""
-        self.prev_mem = self.memory
-        self.memory = torch.Tensor(self.batch_size, self.N, self.M)
         erase = torch.matmul(w.unsqueeze(-1), e.unsqueeze(1))
         add = torch.matmul(w.unsqueeze(-1), a.unsqueeze(1))
-        self.memory = self.prev_mem * (1 - erase) + add
+        self.memory = self.memory * (1 - erase) + add
 
     def address(self, key, beta, gate, shift, gamma, w_prev):
         """NTM Addressing (according to section 3.3).
 
         Returns a softmax weighting over the rows of the memory matrix.
-
-        :param k: The key vector.
-        :param β: The key strength (focus).
-        :param g: Scalar interpolation gate (with previous weighting).
-        :param s: Shift weighting.
-        :param γ: Sharpen weighting scalar.
-        :param w_prev: The weighting produced in the previous time step.
         """
         # Content focus
         w_content = self._similarity(key, beta)
@@ -86,16 +72,16 @@ class NTMMemory(nn.Module):
         w = F.softmax(beta * F.cosine_similarity(self.memory + 1e-16, k + 1e-16, dim=-1), dim=1)
         return w
 
-    def _interpolate(self, w_prev, wc, g):
-        return g * wc + (1 - g) * w_prev
+    def _interpolate(self, w_prev, w, g):
+        return g * w + (1 - g) * w_prev
 
-    def _shift(self, wg, s):
-        result = torch.zeros(wg.size())
+    def _shift(self, w, s):
+        result = torch.zeros(w.size())
         for b in range(self.batch_size):
-            result[b] = _convolve(wg[b], s[b])
+            result[b] = _convolve(w[b], s[b])
         return result
 
-    def _sharpen(self, ŵ, γ):
-        w = ŵ ** γ
-        w = torch.div(w, torch.sum(w, dim=1).view(-1, 1) + 1e-16)
+    def _sharpen(self, w, gamma):
+        w_sharp = w ** gamma
+        w_sharp = torch.div(w_sharp, torch.sum(w_sharp, dim=1).view(-1, 1) + 1e-16)
         return w
