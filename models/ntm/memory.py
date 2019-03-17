@@ -76,7 +76,7 @@ class NTMMemory(nn.Module):
         return g * w + (1 - g) * w_prev
 
     def _shift(self, w, s):
-        result = torch.zeros(w.size())
+        result = torch.zeros(w.size(), device=next(self.buffers()).device)
         for b in range(self.batch_size):
             result[b] = _convolve(w[b], s[b])
         return result

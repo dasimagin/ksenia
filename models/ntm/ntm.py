@@ -20,7 +20,7 @@ class NTM(nn.Module):
         self.num_inputs = num_inputs
         self.num_outputs = num_outputs
         self.controller = controller
-        self.heads = heads
+        self.heads = nn.ModuleList(heads)
         self.memory = memory
 
         # Initialize sizes
@@ -31,13 +31,12 @@ class NTM(nn.Module):
         self.M = M
 
         # Initialize the initial previous read values to random biases
+        device = next(self.parameters()).device
         self.num_read_heads = 0
-        self.init_r = []
         for head in heads:
             if head.is_read_head():
-                init_r_bias = torch.randn(1, self.M) * 0.01
+                init_r_bias = torch.randn(1, self.M, device=device) * 0.01
                 self.register_buffer(f"read{self.num_read_heads}_bias", init_r_bias.data)
-                self.init_r.append(init_r_bias)
                 self.num_read_heads += 1
 
         # Perform checks
@@ -54,7 +53,10 @@ class NTM(nn.Module):
         self.memory.reset(batch_size)
 
     def create_new_state(self, batch_size):
-        init_r = [r.clone().repeat(batch_size, 1) for r in self.init_r]
+        init_r = []
+        for name, r in self.named_buffers(recurse=True):
+            if name.startswith('read'):
+                init_r.append(r.clone().repeat(batch_size, 1))
         controller_state = self.controller.create_new_state(batch_size)
         heads_state = [head.create_new_state(batch_size) for head in self.heads]
         return init_r, heads_state, controller_state

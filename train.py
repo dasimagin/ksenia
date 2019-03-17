@@ -61,8 +61,8 @@ def train_batch(model, criterion, optimizer, x, y):
         _, prev_state = model(x[i], prev_state)
 
     # Collect sequence
-    y_out = torch.zeros(y.size())
-    x_inp = torch.zeros(batch_size, x.size(2))
+    y_out = torch.zeros(y.size(), device=x.device)
+    x_inp = torch.zeros(batch_size, x.size(2), device=x.device)
     for i in range(outp_seq_len):
         y_out[i], prev_state = model(x_inp, prev_state)
 
@@ -71,8 +71,7 @@ def train_batch(model, criterion, optimizer, x, y):
     clip_grads(model)
     optimizer.step()
 
-    y_out_binarized = y_out.clone().data
-    y_out_binarized.apply_(lambda x: 0 if x < 0.5 else 1)
+    y_out_binarized = (y_out.clone().data < 0.5).float()
 
     # The cost is the number of error bits per sequence
     cost = torch.sum(torch.abs(y_out_binarized - y.data))
