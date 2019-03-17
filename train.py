@@ -195,6 +195,9 @@ def main():
         args.seq_width + 1, args.seq_width, args.memory_n, args.memory_m,
     )
 
+    if not args.no_gpu and torch.cuda.is_available():
+        model = model.cuda()
+
     dataloader = CopyDataLoader(
         args.num_batches,
         args.batch_size,
