@@ -30,11 +30,12 @@ def setup():
     )
 
     args = parser.parse_args()
+    assert args.name, 'Must supply a name of the experiment'
     path = pathlib.Path('experiments')/args.name
     assert (path/'config.yaml').exists(), 'Must supply configuration file.'
 
     with open(path/'config.yaml') as f:
-        config = yaml.load(f)
+        config = yaml.safe_load(f)
 
     (path/'tensorboard').mkdir(exist_ok=True)
     (path/'checkpoints').mkdir(exist_ok=True)
