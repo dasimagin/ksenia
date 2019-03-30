@@ -1,6 +1,5 @@
 import torch
 import logging
-import shutil
 
 
 class DotDict(dict):

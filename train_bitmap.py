@@ -90,11 +90,15 @@ def train(config):
 
     iter_start_time = time.time()
     writer = tensorboardX.SummaryWriter(log_dir=str(config.tensorboard))
-    data_loader = torch.utils.data.DataLoader(dataset, batch_sampler=batch_sampler, pin_memory=False)
+    data_loader = torch.utils.data.DataLoader(dataset, batch_sampler=batch_sampler, pin_memory=config.gpu)
 
     model.train()
     for i, (x, y) in enumerate(data_loader, 1):
         seq_len, batch_size, seq_width = x.shape
+        if config.gpu and torch.cuda.is_available():
+            x = x.cuda()
+            y = y.cuda()
+
         optimizer.zero_grad()
         pred = model(x)
         loss = dataset.loss(pred, y)
@@ -116,17 +120,17 @@ def train(config):
 
             logging.info(message)
 
-        if i % config.valid_interval == 0:
-            pass  # TODO add vizualization
+        # if i % config.valid_interval == 0:
+        #     pass  # TODO add vizualization
 
         if i % config.save_interval == 0:
             utils.save_checkpoint(model, config.checkpoints, loss.item(), cost.item())
 
         # Write scalars to tensorboard
-        writer.add_scalar('loss', loss.item(), global_step=i)
-        writer.add_scalar('cost', cost.item(), global_step=i)
+        writer.add_scalar('loss', loss.item(), global_step=i * config.batch_size)
+        writer.add_scalar('cost', cost.item(), global_step=i * config.batch_size)
 
-        if not running:
+        if not running or i * config.batch_size > config.exit_after:
             return
 
 

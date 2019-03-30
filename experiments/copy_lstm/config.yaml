@@ -27,6 +27,7 @@ momentum: 0.9
 grad_clip: 10.0
 
 # Logging and other misc parameters
-save_interval: 2000  # in #(of batches)
-valid_interval: 2000
+save_interval: 500  # in number of batches
 info_interval: 10
+exit_after: 500000  # in number of sequences
+# valid_interval: 500 TODO
