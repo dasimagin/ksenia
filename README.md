@@ -23,3 +23,17 @@
   - [ ] [Memory-based control with recurrent neural networks](https://paperswithcode.com/paper/memory-based-control-with-recurrent-neural)
   - [ ] [GLOBAL-TO-LOCAL MEMORY POINTER NETWORKS FOR TASK-ORIENTED DIALOGUE](https://arxiv.org/pdf/1901.04713v1.pdf)
   - [ ] [Learning to Remember More with Less Memorization](https://arxiv.org/pdf/1901.01347.pdf)
+
+### Nikita's plans
+* Implement utils:
+  - [ ] Implement abstract class for arithmetic task dataset
+  - [ ] Implement memory visualization for further research
+* Compare next arithmetic tasks for [NTM](https://arxiv.org/abs/1410.5401) and [DNC](https://www.nature.com/articles/nature20101)
+  - [ ] a + b; a and b - binary numbers
+  - [ ] a * b; a and b - binary numbers
+  - [ ] a + b + c; a, b and c - binary numbers
+  - [ ] a + b * c; a, b and c - binary numbers
+  - [ ] a * b + c; a, b and c - binary numbers
+  - [ ] Compare results of experiments
+* Read papers:
+  - [ ] [Neural Arithmetic Logic Units](https://arxiv.org/abs/1808.00508)
