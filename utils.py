@@ -1,10 +1,11 @@
 import torch
 import logging
+import matplotlib.pyplot as plt
+from mpl_toolkits.axes_grid1 import ImageGrid
 
 
 class DotDict(dict):
-    """
-    a dictionary that supports dot notation
+    """A dictionary that supports dot notation
     as well as dictionary access notation
     usage: d = DotDict() or d = DotDict({'val1':'first'})
     set attributes: d.val2 = 'second' or d['val2'] = 'second'
@@ -51,3 +52,42 @@ def save_checkpoint(model, path, loss, cost):
     name = type(model).__name__
     filename = f"{name}-loss-{loss:.2f}-cost-{cost:.2f}.pth.tar"
     torch.save(model.state_dict(), path/filename)
+
+
+def plot_input_output(target, output):
+    """Plot target and output sequences of bit vectors.
+    One under the other. Matplotlib figure size is tweaked
+    best for sequence legth in [20, 40, 100].
+
+    Input:
+      target (np.array)
+      output (np.array)  (same shape as target)
+    Returns:
+      matplotlib.figure.Figure
+    """
+
+    fig_shape = int(0.15 * target.shape[1])
+    fig = plt.figure(figsize=(fig_shape, fig_shape))
+    grid = ImageGrid(
+        fig, 111,
+        nrows_ncols=(2, 1),
+        axes_pad=0.3,
+        add_all=True,
+        aspect=True,
+        label_mode="L",
+        cbar_mode="single",
+        cbar_size=0.15,
+        cbar_pad=0.1
+    )
+    plt.axis('off')
+
+    grid[0].imshow(target, cmap='jet')
+    grid[0].axis('off')
+    grid[0].set_title('Target:', loc='left')
+
+    im = grid[1].imshow(output, cmap='jet')
+    grid[1].axis('off')
+    grid[1].set_title('Output:', loc='left')
+    grid.cbar_axes[0].colorbar(im)
+
+    return fig
