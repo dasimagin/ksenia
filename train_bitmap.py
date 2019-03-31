@@ -50,6 +50,7 @@ def setup():
 def train(config):
     # Setup manual seed
     torch.manual_seed(config.seed)
+    device = torch.device('cuda' if config.gpu and torch.cuda.is_available() else 'cpu')
 
     # Load Model
     if config.model == 'lstm':
@@ -93,8 +94,27 @@ def train(config):
     writer = tensorboardX.SummaryWriter(log_dir=str(config.tensorboard))
     data_loader = torch.utils.data.DataLoader(dataset, batch_sampler=batch_sampler, pin_memory=config.gpu)
 
-    model.train()
+    # fix 3 different (input, target) pairs for testing
+    # also test generalization on longer sequences
+    if config.valid_interval:
+        valid_dataset = CopyTask(bit_width=config.bit_width, seed=config.seed)
+        # TODO add validation cost to tensorboard
+        # valid_batch_sampler = BitBatchSampler(
+        #     batch_size=config.batch_size,
+        #     min_len=21,  # TODO add config params
+        #     max_len=100,
+        #     min_rep=1,
+        #     max_rep=1,
+        #     seed=config.seed,
+        # )
+        # valid_data_loader = torch.utils.data.DataLoader(
+        #     valid_dataset, batch_sampler=valid_batch_sampler, pin_memory=config.gpu)
+
+        # using length hack
+        examples = [(valid_dataset[j], j) for j in (20, 40, 100)]
+
     for i, (x, y) in enumerate(data_loader, 1):
+        model.train()
         seq_len, batch_size, seq_width = x.shape
         if config.gpu and torch.cuda.is_available():
             x = x.cuda()
@@ -121,17 +141,33 @@ def train(config):
 
             logging.info(message)
 
-        # if i % config.valid_interval == 0:
-        #     pass  # TODO add vizualization
+        if i % config.valid_interval == 0:
+            logging.info('Validating model on longer sequences')
+            model.eval()
+            for ex, ex_len in examples:
+                # Store io plots in tensorboard
+                ex_input, ex_target = ex
+                ex_output = model(torch.tensor(ex_input, device=device).unsqueeze(0))
+                ex_output = ex_output.detach().to('cpu').numpy()[0].T
+                ex_target = ex_target.T
+
+                fig = utils.plot_input_output(
+                    ex_target[:, ex_target.shape[1] // 2 + 1:],
+                    ex_output[:, ex_output.shape[1] // 2 + 1:],
+                )
+                writer.add_figure(f"io/{ex_len}", fig, global_step=i * config.batch_size)
 
         if i % config.save_interval == 0:
             utils.save_checkpoint(model, config.checkpoints, loss.item(), cost.item())
 
         # Write scalars to tensorboard
-        writer.add_scalar('loss', loss.item(), global_step=i * config.batch_size)
-        writer.add_scalar('cost', cost.item(), global_step=i * config.batch_size)
+        writer.add_scalar('train/loss', loss.item(), global_step=i * config.batch_size)
+        writer.add_scalar('train/cost', cost.item(), global_step=i * config.batch_size)
 
-        if not running or i * config.batch_size > config.exit_after:
+        # Stopping
+        if not running:
+            return
+        if config.exit_after and i * config.batch_size > config.exit_after:
             return
 
 
