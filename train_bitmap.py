@@ -14,6 +14,7 @@ import torch.utils.data
 import utils
 from tasks.bitmap import RepeatCopyTask, CopyTask, BitBatchSampler
 from models.lstm import LSTM
+from models.ntm import NTM
 
 
 def setup():
@@ -53,13 +54,27 @@ def train(config):
     device = torch.device('cuda' if config.gpu and torch.cuda.is_available() else 'cpu')
 
     # Load Model
-    if config.model == 'lstm':
+    if config.model.name == 'lstm':
         model = LSTM(
-            n_inputs=config.bit_width + 1,
-            n_outputs=config.bit_width if config.task == 'copy' else config.bit_width + 1,
-            n_hidden=config.n_hidden,
-            n_layers=config.n_layers,
+            n_inputs=config.task.bit_width + 1,
+            n_outputs=config.task.bit_width if config.task.name == 'copy' else config.task.bit_width + 1,
+            n_hidden=config.model.n_hidden,
+            n_layers=config.model.n_layers,
         )
+    elif config.model.name == 'ntm':
+        model = NTM(
+            input_size=config.task.bit_width + 1,
+            output_size=config.task.bit_width if config.task.name == 'copy' else config.task.bit_width + 1,
+            mem_word_length=config.model.mem_word_length,
+            mem_cells_count=config.model.mem_cells_count,
+            n_writes=config.model.n_writes,
+            n_reads=config.model.n_reads,
+            controller_n_hidden=config.model.controller_n_hidden,
+            controller_n_layers=config.model.controller_n_layers,
+            controller_clip=config.model.controller_clip,
+        )
+    else:
+        raise Exception('Unknown task')
 
     if config.gpu and torch.cuda.is_available():
         model = model.cuda()
@@ -69,24 +84,26 @@ def train(config):
 
     # Optimizers
     if config.optimizer == 'sgd':
-        optimizer = torch.optim.SGD(model.parameters(), lr=config.lr, momentum=config.momentum)
+        optimizer = torch.optim.SGD(model.parameters(), lr=config.learning_rate, momentum=config.momentum)
     if config.optimizer == 'rmsprop':
-        optimizer = torch.optim.RMSprop(model.parameters(), lr=config.lr, momentum=config.momentum)
+        optimizer = torch.optim.RMSprop(model.parameters(), lr=config.learning_rate, momentum=config.momentum)
     if config.optimizer == 'adam':
-        optimizer = torch.optim.Adam(model.parameters(), lr=config.lr)
+        optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate)
 
     # Load data
-    if config.task == 'copy':
-        dataset = CopyTask(bit_width=config.bit_width, seed=config.seed)
-    if config.task == 'repeat':
-        dataset = RepeatCopyTask(bit_width=config.bit_width, seed=config.seed)
+    if config.task.name == 'copy':
+        dataset = CopyTask(bit_width=config.task.bit_width, seed=config.seed)
+    elif config.task.name == 'repeat':
+        dataset = RepeatCopyTask(bit_width=config.task.bit_width, seed=config.seed)
+    else:
+        raise Exception('Unknown task')
 
     batch_sampler = BitBatchSampler(
-        batch_size=config.batch_size,
-        min_len=config.min_len,
-        max_len=config.max_len,
-        min_rep=config.min_rep,
-        max_rep=config.max_rep,
+        batch_size=config.task.batch_size,
+        min_len=config.task.min_len,
+        max_len=config.task.max_len,
+        min_rep=config.task.min_rep,
+        max_rep=config.task.max_rep,
         seed=config.seed,
     )
 
@@ -96,8 +113,8 @@ def train(config):
 
     # fix 3 different (input, target) pairs for testing
     # also test generalization on longer sequences
-    if config.valid_interval:
-        valid_dataset = CopyTask(bit_width=config.bit_width, seed=config.seed)
+    if config.report_interval:
+        valid_dataset = CopyTask(bit_width=config.task.bit_width, seed=config.seed)
         # TODO add validation cost to tensorboard
         # valid_batch_sampler = BitBatchSampler(
         #     batch_size=config.batch_size,
@@ -126,22 +143,22 @@ def train(config):
         loss.backward()
 
         # clip gradients
-        torch.nn.utils.clip_grad_norm_(model.parameters(), config.grad_clip)
+        torch.nn.utils.clip_grad_norm_(model.parameters(), config.gradient_clipping)
         optimizer.step()
 
         pred_binarized = (pred.clone().data > 0.5).float()
         cost = torch.sum(torch.abs(pred_binarized - y.data)) / (seq_len * seq_width * batch_size)
 
-        if i % config.info_interval == 0:
+        if i % config.verbose_interval == 0:
             time_now = time.time()
-            time_per_iter = (time_now - iter_start_time) / config.info_interval * 1000.0
-            message = f"Sequences: {i * config.batch_size}, loss: {loss.item():.2f}, cost: {cost.item():.2f} "
+            time_per_iter = (time_now - iter_start_time) / config.verbose_interval * 1000.0
+            message = f"Sequences: {i * config.task.batch_size}, loss: {loss.item():.2f}, cost: {cost.item():.2f} "
             message += f"({time_per_iter:.2f} ms/iter)"
             iter_start_time = time_now
 
             logging.info(message)
 
-        if i % config.valid_interval == 0:
+        if i % config.report_interval == 0:
             logging.info('Validating model on longer sequences')
             model.eval()
             for ex, ex_len in examples:
@@ -155,19 +172,19 @@ def train(config):
                     ex_target[:, ex_target.shape[1] // 2 + 1:],
                     ex_output[:, ex_output.shape[1] // 2 + 1:],
                 )
-                writer.add_figure(f"io/{ex_len}", fig, global_step=i * config.batch_size)
+                writer.add_figure(f"io/{ex_len}", fig, global_step=i * config.task.batch_size)
 
-        if i % config.save_interval == 0:
+        if i % config.checkpoint_interval == 0:
             utils.save_checkpoint(model, config.checkpoints, loss.item(), cost.item())
 
         # Write scalars to tensorboard
-        writer.add_scalar('train/loss', loss.item(), global_step=i * config.batch_size)
-        writer.add_scalar('train/cost', cost.item(), global_step=i * config.batch_size)
+        writer.add_scalar('train/loss', loss.item(), global_step=i * config.task.batch_size)
+        writer.add_scalar('train/cost', cost.item(), global_step=i * config.task.batch_size)
 
         # Stopping
         if not running:
             return
-        if config.exit_after and i * config.batch_size > config.exit_after:
+        if config.exit_after and i * config.task.batch_size > config.exit_after:
             return
 
 

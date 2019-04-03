@@ -23,6 +23,7 @@ class LSTM(nn.Module):
         # The hidden state is a learned parameter
         self.lstm_h_bias = nn.Parameter(torch.randn(self.n_layers, 1, self.n_hidden) * 0.05)
         self.lstm_c_bias = nn.Parameter(torch.randn(self.n_layers, 1, self.n_hidden) * 0.05)
+        self.reset_parameters()
 
     def reset_parameters(self):
         # Linear layer

@@ -1,4 +1,4 @@
-name: Copy LSTM
+name: Copy NTM
 
 task:
   name: copy
@@ -7,15 +7,20 @@ task:
   max_rep: 1
   min_len: 1
   max_len: 20
-  batch_size: 64
+  batch_size: 16
 
 model:
-  name: lstm
-  n_hidden: 256
-  n_layers: 3
+  name: ntm
+  mem_word_length: 20
+  mem_cells_count: 128
+  n_writes: 1
+  n_reads: 1
+  controller_n_hidden: 256
+  controller_n_layers: 1
+  controller_clip: null
 
-gpu: true
 seed: 1
+gpu: true
 
 optimizer: rmsprop
 learning_rate: 0.0001
