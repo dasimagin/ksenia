@@ -17,7 +17,7 @@ model:
   n_reads: 1
   controller_n_hidden: 256
   controller_n_layers: 1
-  controller_clip: null
+  controller_clip: 20
 
 seed: 1
 gpu: true

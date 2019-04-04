@@ -48,17 +48,27 @@ def circular_convolution(weights, shifts):
     ).view(weights.size())
 
 
+def cosine_distance(memory, keys):
+    memory = memory.unsqueeze(1)
+    keys = keys.unsqueeze(-2)
+    norm = keys.norm(dim=-1)
+    norm = norm * memory.norm(dim=-1)
+    scores = (memory * keys).sum(-1) / (norm + EPS)
+    return scores
+
+
 def address_memory(memory, keys, betas, gates, shifts, gammas, prev_weights):
     # constraints
-    betas = nn.functional.softplus(betas)
+    keys = torch.tanh(keys)
+    betas = F.softplus(betas)
     gates = torch.sigmoid(gates)
-    shifts = nn.functional.softmax(shifts, dim=1)
-    gammas = 1.0 + nn.functional.softplus(gammas)
+    shifts = F.softmax(shifts, dim=-1)
+    gammas = 1.0 + F.softplus(gammas)
 
     # content based attention
-    scores = F.cosine_similarity(memory.unsqueeze(1), keys.unsqueeze(-2), dim=-1)
+    scores = cosine_distance(memory, keys)
     scores = scores * betas
-    w_content = F.softmax(scores, dim=-1)
+    w_content = F.softmax(scores, scores.dim() - 1)
 
     # interpolate & shift weights
     w_interpolated = gates * w_content + (1 - gates) * prev_weights
@@ -118,11 +128,9 @@ class WriteHead(nn.Module):
         keys, erase_vectors, write_vectors = tensors[:3]
         betas, gates, shifts, gammas = tensors[3:]
 
-        # generate weights
         self.write_dist = address_memory(
             memory, keys, betas, gates, shifts, gammas, self.get_prev_dist(memory),
         )
-
         self.write_data = write_vectors
         self.erase_data = erase_vectors
 
@@ -195,10 +203,12 @@ class NTM(nn.Module):
         controls_size = self.read_head.input_size + self.write_head.input_size
 
         self.controller = LSTMController(controller_input, controller_n_hidden, controller_n_layers)
+        self.controller_clip = controller_clip
         self.controller_to_controls = nn.Linear(controller_n_hidden, controls_size)
         self.controller_to_output = nn.Linear(controller_n_hidden, output_size)
         self.reads_to_output = nn.Linear(mem_word_length * n_reads, output_size)
 
+        self.register_buffer('mem_bias', torch.Tensor(mem_cells_count, mem_word_length))
         self.mem_word_length = mem_word_length
         self.mem_cells_count = mem_cells_count
         self.memory = None
@@ -209,6 +219,8 @@ class NTM(nn.Module):
         linear_reset(self.controller_to_output)
         linear_reset(self.reads_to_output)
         self.controller.reset_parameters()
+        stdev = 1 / np.sqrt(self.mem_cells_count + self.mem_word_length)
+        nn.init.uniform_(self.mem_bias, -stdev, stdev)
 
     def calculate_num_params(self):
         count = 0
@@ -222,7 +234,8 @@ class NTM(nn.Module):
         prev_read_data = self.read_head.get_prev_data(self.memory).view(batch_size, -1)
         controller_output = self.controller(torch.cat([inp, prev_read_data], -1))
         controls_vector = self.controller_to_controls(controller_output)
-        # controls_vector = controls_vector.clamp(-self.controller_clip, self.controller_clip)
+        if self.controller_clip:
+            controls_vector = controls_vector.clamp(-self.controller_clip, self.controller_clip)
 
         shapes = [[self.write_head.input_size], [self.read_head.input_size]]
         write_head_controls, read_head_controls = split_tensor(controls_vector, shapes)
@@ -233,8 +246,7 @@ class NTM(nn.Module):
                 self.reads_to_output(reads.view(batch_size, -1)))
 
     def mem_init(self, batch_size, device):
-        self.memory = torch.zeros(
-            batch_size, self.mem_cells_count, self.mem_word_length).to(device)
+        self.memory = self.mem_bias.clone().repeat(batch_size, 1, 1).to(device)
 
     def forward(self, x, debug=None):
         """Run ntm on a batch of sequences.

@@ -61,7 +61,7 @@ class CopyTask(torch.utils.data.Dataset):
         return inp.astype(np.float32), out.astype(np.float32)
 
     def loss(self, prediction, target):
-        return F.binary_cross_entropy(prediction, target, reduction='mean')
+        return F.binary_cross_entropy(prediction, target, reduction='sum') / target.size(0)
 
 
 class RepeatCopyTask(torch.utils.data.Dataset):

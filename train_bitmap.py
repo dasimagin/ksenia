@@ -107,27 +107,16 @@ def train(config):
         seed=config.seed,
     )
 
-    iter_start_time = time.time()
-    writer = tensorboardX.SummaryWriter(log_dir=str(config.tensorboard))
     data_loader = torch.utils.data.DataLoader(dataset, batch_sampler=batch_sampler, pin_memory=config.gpu)
+    writer = tensorboardX.SummaryWriter(log_dir=str(config.tensorboard))
+    iter_start_time = time.time()
+    loss_sum = 0.0
+    cost_sum = 0.0
 
     # fix 3 different (input, target) pairs for testing
     # also test generalization on longer sequences
     if config.report_interval:
         valid_dataset = CopyTask(bit_width=config.task.bit_width, seed=config.seed)
-        # TODO add validation cost to tensorboard
-        # valid_batch_sampler = BitBatchSampler(
-        #     batch_size=config.batch_size,
-        #     min_len=21,  # TODO add config params
-        #     max_len=100,
-        #     min_rep=1,
-        #     max_rep=1,
-        #     seed=config.seed,
-        # )
-        # valid_data_loader = torch.utils.data.DataLoader(
-        #     valid_dataset, batch_sampler=valid_batch_sampler, pin_memory=config.gpu)
-
-        # using length hack
         examples = [(valid_dataset[j], j) for j in (20, 40, 100)]
 
     for i, (x, y) in enumerate(data_loader, 1):
@@ -149,14 +138,22 @@ def train(config):
         pred_binarized = (pred.clone().data > 0.5).float()
         cost = torch.sum(torch.abs(pred_binarized - y.data)) / (seq_len * seq_width * batch_size)
 
+        loss_sum += loss.item()
+        cost_sum += cost.item()
+
         if i % config.verbose_interval == 0:
             time_now = time.time()
             time_per_iter = (time_now - iter_start_time) / config.verbose_interval * 1000.0
-            message = f"Sequences: {i * config.task.batch_size}, loss: {loss.item():.2f}, cost: {cost.item():.2f} "
-            message += f"({time_per_iter:.2f} ms/iter)"
-            iter_start_time = time_now
+            loss_avg = loss_sum / config.verbose_interval
+            cost_avg = cost_sum / config.verbose_interval
 
+            message = f"Sequences: {i * config.task.batch_size}, loss: {loss_avg:.2f}, cost: {cost_avg:.2f} "
+            message += f"({time_per_iter:.2f} ms/iter)"
             logging.info(message)
+
+            iter_start_time = time_now
+            loss_sum = 0.0
+            cost_sum = 0.0
 
         if i % config.report_interval == 0:
             logging.info('Validating model on longer sequences')
