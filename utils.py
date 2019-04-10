@@ -1,7 +1,11 @@
-import torch
 import logging
+import io
+
+import torch
+import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import ImageGrid
+from PIL import Image
 
 
 class DotDict(dict):
@@ -54,7 +58,7 @@ def save_checkpoint(model, path, loss, cost):
     torch.save(model.state_dict(), path/filename)
 
 
-def plot_input_output(target, output):
+def input_output_img(target, output):
     """Plot target and output sequences of bit vectors.
     One under the other. Matplotlib figure size is tweaked
     best for sequence legth in [20, 40, 100].
@@ -90,4 +94,9 @@ def plot_input_output(target, output):
     grid[1].set_title('Output:', loc='left')
     grid.cbar_axes[0].colorbar(im)
 
-    return fig
+    buff = io.BytesIO()
+    fig.savefig(buff, bbox_inches='tight', pad_inches=0.1, dpi=90)
+    buff.seek(0)
+    img = np.rollaxis(np.asarray(Image.open(buff)), -1, 0)
+    plt.close(fig)
+    return img

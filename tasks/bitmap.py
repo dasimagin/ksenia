@@ -1,122 +1,134 @@
-"""Datasets for different tasks with bit vectors.
-Contains torch datasets for copy, repeat-copy, associative-recall
+"""Dataloaders for different tasks with bit vectors.
 """
 
-import numpy as np
 import torch
-import torch.utils.data
+import numpy as np
 import torch.nn.functional as F
 
 
-class BitBatchSampler():
-    """Generates indexes equal to randomly chosen seq_len for each batch.
+class CopyTask:
+    """Data generator for copy and repeat copy tasks.
     """
-    def __init__(self, batch_size, min_len=1, max_len=20, min_rep=1, max_rep=1, length=None, seed=5):
+    def __init__(self, batch_size, min_len, max_len, bit_width=8, seed=1):
         self.batch_size = batch_size
         self.min_len = min_len
         self.max_len = max_len
-        self.min_rep = min_rep
-        self.max_rep = max_rep
-        self.length = length
+        self.bit_width = bit_width
         self.rand = np.random.RandomState(seed)
+
+    def gen_batch(self, batch_size, seq_len=None):
+        pass
 
     def __iter__(self):
         while True:
             seq_len = self.rand.randint(self.min_len, self.max_len + 1)
-            num_rep = self.rand.randint(self.min_rep, self.max_rep + 1)
+            yield self.gen_batch(seq_len, self.batch_size)
 
-            if self.max_rep == 1:                           # copy task
-                yield [seq_len] * self.batch_size
-            else:                                           # repeat copy task
-                yield [(seq_len, num_rep)] * self.batch_size
+    @staticmethod
+    def loss(prediction, target, mask):
+        """Compute scalar NLL of target sequence.
 
-    def __len__(self):
-        if self.length:
-            return self.length
-        return 0x7FFFFFFF
+        Irrelevant time steps are masked out by mask tensor.
+
+        Args:
+          prediction: batch first 3D tensor with predictions
+          target: batch first 3D tensor with targets
+          mask: batch first 2D tensor of {1, 0} to mask time steps
+        """
+        xent = F.binary_cross_entropy(prediction, target, reduction='none')
+        loss_time_batch = xent.sum(-1)
+        loss_batch = torch.sum(loss_time_batch * mask, dim=-1)
+        return loss_batch.sum() / loss_batch.size(0)
 
 
-class CopyTask(torch.utils.data.Dataset):
-    """Dataset for generating copy and repeat copy examples.
-    Uses hack with batch sampler to get same length samples in mini-batch.
-    """
-    def __init__(self, bit_width=8, seed=1):
+class RepeatCopyTask:
+    def __init__(
+            self,
+            batch_size,
+            bit_width,
+            min_len,
+            max_len,
+            min_rep,
+            max_rep,
+            norm_max,
+            seed,
+    ):
+        self.batch_size = batch_size
         self.bit_width = bit_width
+        self.min_len = min_len
+        self.max_len = max_len
+        self.min_rep = min_rep
+        self.max_rep = max_rep
+        self.norm_max = norm_max
         self.rand = np.random.RandomState(seed)
 
-    def __len__(self):
-        return 0x7FFFFFFF
+    def _normalize(self, x):
+        return x / self.norm_max
 
-    def __getitem__(self, seq_len):
-        seq = self.rand.binomial(1, 0.5, size=(seq_len, self.bit_width)).astype(np.float32)
+    def gen_batch(
+            self,
+            batch_size,
+            bit_width,
+            min_len, max_len,
+            min_rep, max_rep,
+    ):
+        full_input_width = bit_width + 2
+        full_output_width = bit_width + 1
 
-        # extra channel for delimeter
-        inp = np.zeros((2 * seq_len + 1, self.bit_width + 1))
-        inp[:seq_len, :self.bit_width] = seq
-        inp[seq_len, self.bit_width] = 1.0
+        seq_len_batch = self.rand.randint(min_len, max_len + 1, size=batch_size)
+        num_rep_batch = self.rand.randint(min_rep, max_rep + 1, size=batch_size)
 
-        out = np.zeros((2 * seq_len + 1, self.bit_width))
-        out[seq_len + 1:, :self.bit_width] = seq
+        total_len_batch = seq_len_batch * (num_rep_batch + 1) + 3
+        max_len_batch = np.max(total_len_batch)
 
-        return inp.astype(np.float32), out.astype(np.float32)
+        inp = np.zeros((batch_size, max_len_batch, full_input_width))
+        out = np.zeros((batch_size, max_len_batch, full_output_width))
+        mask = np.zeros((batch_size, max_len_batch))
 
-    def loss(self, prediction, target):
-        return F.binary_cross_entropy(prediction, target, reduction='sum') / target.size(0)
+        # generate random vectors
+        for i in range(batch_size):
+            seq_len = seq_len_batch[i]
+            total_len = total_len_batch[i]
+            num_rep = num_rep_batch[i]
 
+            seq = self.rand.binomial(1, 0.5, size=(seq_len, bit_width)).astype(float)
 
-class RepeatCopyTask(torch.utils.data.Dataset):
-    def __init__(self, bit_width=8, seed=1):
-        self.bit_width = bit_width
-        self.rand = np.random.RandomState(seed)
+            inp[i, :seq_len, :bit_width] = seq
+            inp[i, seq_len, bit_width] = 1.0
+            inp[i, seq_len + 1, bit_width + 1] = self._normalize(num_rep)
 
-    def __len__(self):
-        return 0x7FFFFFFF
+            out[i, seq_len + 2:total_len - 1, :bit_width] = np.tile(seq, (num_rep, 1))
+            out[i, total_len - 1, bit_width] = 1.0
 
-    def __getitem__(self, key):
-        seq_len, num_rep = key
-        seq = self.rand.binomial(1, 0.5, size=(seq_len, self.bit_width)).astype(np.float32)
-        actual_len = seq_len * (num_rep + 1) + 2    # two extra vectors (num_rep and ending)
+            mask[i, seq_len + 2:total_len] = 1.0
 
-        inp = np.zeros((actual_len, self.bit_width + 1))
-        inp[:seq_len, :self.bit_width] = seq
-        inp[seq_len, self.bit_width] = float(num_rep)
+        inp = torch.tensor(inp).float()
+        out = torch.tensor(out).float()
+        mask = torch.tensor(mask).float()
 
-        out = np.zeros((actual_len, self.bit_width + 1))
-        out[-1, -1] = 1.0   # ending marker
-        out[seq_len + 1:-1, :self.bit_width] = np.tile(seq, (num_rep, 1))
+        return inp, out, mask
 
-        return inp, out
+    def __iter__(self):
+        while True:
+            yield self.gen_batch(
+                self.batch_size,
+                self.bit_width,
+                self.min_len, self.max_len,
+                self.min_rep, self.max_rep,
+            )
 
-    def loss(self, prediction, target):
-        return F.binary_cross_entropy(prediction, target, reduction='mean')
+    @staticmethod
+    def loss(prediction, target, mask):
+        """Compute scalar NLL of target sequence.
 
+        Irrelevant time steps are masked out by mask tensor.
 
-class AssociativeRecall(torch.utils.data.Dataset):
-    # TODO
-    pass
-
-
-if __name__ == "__main__":
-    copy_sampler = BitBatchSampler(batch_size=10, max_len=2, min_rep=1, max_rep=1, seed=1)
-    repeat_sampler = BitBatchSampler(batch_size=10, max_len=2, min_rep=2, max_rep=2, seed=1)
-
-    copy_loader = torch.utils.data.DataLoader(CopyTask(seed=1), batch_sampler=copy_sampler)
-    repeat_loader = torch.utils.data.DataLoader(RepeatCopyTask(seed=1), batch_sampler=repeat_sampler)
-
-    print('Copy')
-    inp, out = next(iter(copy_loader))
-    print('Input shape:', inp.shape)
-    print('Output shape:', out.shape)
-    print('Input:')
-    print(inp)
-    print('Output:')
-    print(out)
-
-    print('Repeat copy')
-    inp, out = next(iter(repeat_loader))
-    print('Input shape:', inp.shape)
-    print('Output shape:', out.shape)
-    print('Input:')
-    print(inp)
-    print('Output:')
-    print(out)
+        Args:
+          prediction: batch first 3D tensor with predictions
+          target: batch first 3D tensor with targets
+          mask: batch first 2D tensor of {1, 0} to mask time steps
+        """
+        xent = F.binary_cross_entropy(prediction, target, reduction='none')
+        loss_time_batch = xent.sum(-1)
+        loss_batch = torch.sum(loss_time_batch * mask, dim=-1)
+        return loss_batch.sum() / loss_batch.size(0)

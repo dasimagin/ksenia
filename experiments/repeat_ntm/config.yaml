@@ -1,13 +1,13 @@
-name: Copy NTM
+name: Repeat Copy NTM
 
 task:
-  name: copy
+  name: repeat
   bit_width: 8
   min_rep: 1
-  max_rep: 1
+  max_rep: 10
   min_len: 1
-  max_len: 20
-  batch_size: 16
+  max_len: 10
+  batch_size: 64
 
 model:
   name: ntm
@@ -28,6 +28,6 @@ momentum: 0.9
 gradient_clipping: 10.0
 
 checkpoint_interval: 500
-report_interval: 1000
+report_interval: 200
 verbose_interval: 10
 exit_after: null
