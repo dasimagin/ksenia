@@ -19,6 +19,9 @@ from models.ntm import NTM
 
 
 def train(model, optimizer, criterion, train_data, validation_data, config):
+    if config.scheduler is not None:
+        optimizer, scheduler = optimizer
+
     writer = tensorboardX.SummaryWriter(log_dir=str(config.tensorboard))
     iter_start_time = time.time()
     loss_sum = 0
@@ -42,7 +45,9 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
         optimizer.step()
 
         pred_binarized = (pred.clone().data > 0.5).float()
-        cost = torch.sum(torch.abs(pred_binarized - y.data)) / batch_size
+        cost_time_batch = torch.sum(torch.abs(pred_binarized - y.data), dim=-1)
+        cost_batch = torch.sum(cost_time_batch * m, dim=-1)
+        cost = cost_batch.sum() / batch_size
 
         loss_sum += loss.item()
         cost_sum += cost.item()
@@ -62,12 +67,16 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
             loss_sum = 0
             cost_sum = 0
 
-        if i % config.report_interval == 0:
+        if i % config.checkpoint_interval == 0:
+            logging.info('Saving checkpoint')
+            utils.save_checkpoint(model, config.checkpoints, loss.item(), cost.item())
+
             logging.info('Validating model on longer sequences')
             evaluate(i, model, validation_data, writer, config)
 
-        if i % config.checkpoint_interval == 0:
-            utils.save_checkpoint(model, config.checkpoints, loss.item(), cost.item())
+        if config.scheduler is not None and i % config.scheduler.interval == 0:
+            logging.info('Learning rate scheduler')
+            scheduler.step(cost.item())
 
         # Write scalars to tensorboard
         writer.add_scalar('train/loss', loss.item(), global_step=i * config.task.batch_size)
@@ -80,42 +89,99 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
             return
 
 
-def evaluate(i, model, data, writer, config):
+def evaluate(step, model, data, writer, config):
     model.eval()
     device = 'cuda' if config.gpu and torch.cuda.is_available() else 'cpu'
 
-    for example, length, min_rep, max_rep in data:
-        inp, target, mask = example
-        output = model(inp.to(device))
-        output = output.data.to('cpu').numpy()[0].T
-        target = target.data.numpy()[0].T
+    with torch.no_grad():
+        for instance in data:
+            if config.task.name == 'copy':
+                example, length = instance
+                start = length + 1
+                name = f"io/len_{length}"
+            elif config.task.name == 'repeat':
+                example, length, num_rep = instance
+                start = length + 2
+                name = f"io/len_{length}_rep_{num_rep}"
 
-        img = utils.input_output_img(
-            target[:, length + 1:],
-            output[:, length + 1:],
-        )
-        writer.add_image(
-            f"io/len_{length}_rep_{max_rep}",
-            img, global_step=i * config.task.batch_size
-        )
+            inp, target, mask = example
+            output = model(inp.to(device))
+            output = output.data.to('cpu').numpy()[0].T
+            target = target.data.numpy()[0].T
+
+            img = utils.input_output_img(
+                target[:, start:],
+                output[:, start:],
+            )
+
+            writer.add_image(
+                name,
+                img, global_step=step * config.task.batch_size
+            )
 
 
 def setup_model(config):
-    # Setup manual seed
-    torch.manual_seed(config.seed)
+    # Load data
+    if config.task.name == 'copy':
+        train_data = CopyTask(
+            batch_size=config.task.batch_size,
+            min_len=config.task.min_len,
+            max_len=config.task.max_len,
+            bit_width=config.task.bit_width,
+            seed=config.task.seed,
+        )
 
-    # Load Model
+        params = [20, 40, 100]
+        validation_data = []
+
+        for length in params:
+            example = train_data.gen_batch(
+                batch_size=1,
+                min_len=length, max_len=length,
+            )
+            validation_data.append((example, length))
+        loss = CopyTask.loss
+    elif config.task.name == 'repeat':
+        train_data = RepeatCopyTask(
+            batch_size=config.task.batch_size,
+            bit_width=config.task.bit_width,
+            min_len=config.task.min_len,
+            max_len=config.task.max_len,
+            min_rep=config.task.min_rep,
+            max_rep=config.task.max_rep,
+            norm_max=10,
+            seed=config.task.seed,
+        )
+
+        params = [(10, 10), (20, 10), (10, 20)]
+        validation_data = []
+
+        for length, num_rep in params:
+            example = train_data.gen_batch(
+                batch_size=1,
+                min_len=length, max_len=length,
+                min_rep=num_rep, max_rep=num_rep,
+            )
+
+            validation_data.append((example, length, num_rep))
+        loss = RepeatCopyTask.loss
+    else:
+        logging.info('Unknown task')
+        exit(0)
+
+    # Setup model
+    torch.manual_seed(config.model.seed)
     if config.model.name == 'lstm':
         model = LSTM(
-            n_inputs=config.task.bit_width + (1 if config.task.name == 'copy' else 2),
-            n_outputs=config.task.bit_width + 1,
+            n_inputs=train_data.full_input_width,
+            n_outputs=train_data.full_output_width,
             n_hidden=config.model.n_hidden,
             n_layers=config.model.n_layers,
         )
     elif config.model.name == 'ntm':
         model = NTM(
-            input_size=config.task.bit_width + (1 if config.task.name == 'copy' else 2),
-            output_size=config.task.bit_width + 1,
+            input_size=train_data.full_input_width,
+            output_size=train_data.full_output_width,
             mem_word_length=config.model.mem_word_length,
             mem_cells_count=config.model.mem_cells_count,
             n_writes=config.model.n_writes,
@@ -134,54 +200,35 @@ def setup_model(config):
     logging.info('Loaded model')
     logging.info('Total number of parameters %d', model.calculate_num_params())
 
+    # Setup optimizer
     if config.optimizer == 'sgd':
-        optimizer = torch.optim.SGD(model.parameters(), lr=config.learning_rate, momentum=config.momentum)
+        optimizer = torch.optim.SGD(
+            model.parameters(),
+            lr=config.learning_rate,
+            momentum=config.momentum
+        )
     if config.optimizer == 'rmsprop':
-        optimizer = torch.optim.RMSprop(model.parameters(), lr=config.learning_rate, momentum=config.momentum)
+        optimizer = torch.optim.RMSprop(
+            model.parameters(),
+            lr=config.learning_rate,
+            momentum=config.momentum,
+        )
     if config.optimizer == 'adam':
-        optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate)
-
-    if config.task.name == 'copy':
-        train_data = CopyTask(
-            batch_size=config.task.batch_size,
-            min_len=config.task.min_len,
-            max_len=config.task.max_len,
-            bit_width=config.task.bit_width,
-            seed=config.seed,
+        optimizer = torch.optim.Adam(
+            model.parameters(),
+            lr=config.learning_rate
         )
 
-        params = [(20, 1, 1), (40, 1, 1), (100, 1, 1)]
-        validation_data = []
-
-        for length, min_rep, max_rep in params:
-            validation_data.append(
-                (train_data.gen_batch(length, batch_size=1), length, min_rep, max_rep)
-            )
-        loss = CopyTask.loss
-    elif config.task.name == 'repeat':
-        train_data = RepeatCopyTask(
-            batch_size=config.task.batch_size,
-            bit_width=config.task.bit_width,
-            min_len=config.task.min_len,
-            max_len=config.task.max_len,
-            min_rep=config.task.min_rep,
-            max_rep=config.task.max_rep,
-            norm_max=10,
-            seed=config.seed,
+    if config.scheduler is not None:
+        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+            optimizer,
+            mode='min',
+            factor=config.scheduler.factor,
+            patience=config.scheduler.patience,
+            verbose=config.scheduler.verbose,
+            threshold=config.scheduler.threshold,
         )
-        params = [(10, 10, 10), (20, 10, 10), (10, 20, 20)]
-        validation_data = []
-
-        for length, min_rep, max_rep in params:
-            validation_data.append(
-                (train_data.gen_batch(
-                    1, 8, length, length, min_rep, min_rep), length, min_rep, max_rep)
-            )
-        loss = RepeatCopyTask.loss
-
-    else:
-        logging.info('Unknown task')
-        exit(0)
+        optimizer = (optimizer, scheduler)
 
     return model, optimizer, loss, train_data, validation_data
 
@@ -197,7 +244,7 @@ def read_config():
         '--name',
         type=str,
         required=True,
-        help='Name of the current experiment.'
+        help='Name of the current experiment. Can also provide name/with/path for grouping'
     )
     parser.add_argument(
         '-k',
@@ -216,8 +263,8 @@ def read_config():
         config = utils.DotDict(yaml.safe_load(f))
 
     if not args.keep:
-        shutil.rmtree(path/'tensorboard')
-        shutil.rmtree(path/'checkpoints')
+        (path/'tensorboard').exists() and shutil.rmtree(path/'tensorboard')
+        (path/'checkpoints').exists() and shutil.rmtree(path/'checkpoints')
         open(path/'train.log', 'w').close()
 
     (path/'tensorboard').mkdir(exist_ok=True)

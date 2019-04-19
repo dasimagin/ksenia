@@ -219,8 +219,8 @@ class NTM(nn.Module):
         linear_reset(self.controller_to_output)
         linear_reset(self.reads_to_output)
         self.controller.reset_parameters()
-        stdev = 1 / np.sqrt(self.mem_cells_count + self.mem_word_length)
-        nn.init.uniform_(self.mem_bias, -stdev, stdev)
+        stddev = 1 / np.sqrt(self.mem_word_length + self.mem_cells_count)
+        nn.init.uniform_(self.mem_bias, -stddev, stddev)
 
     def calculate_num_params(self):
         count = 0
