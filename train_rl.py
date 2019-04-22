@@ -16,13 +16,15 @@ from tasks.rl_envs import *
 from models.lstm import LSTM
 from models.ntm import NTM
 from rl_utils.q_learning import *
+from rl_utils.memory import *
+from copy import copy
 
 
 def validate(model, env, device):
     model.init_sequence(1, device)
     temp_env = env.reset()
     while not temp_env.finished:
-        readed = np.eye(temp_env.len_alphabet)[temp_env.read()]
+        readed = torch.eye(temp_env.len_alphabet)[temp_env.read()]
         action_probas = model.step(readed)
         _ = temp_env.step(action_probas.argmax())
     return temp_env.episode_total_reward
@@ -129,7 +131,7 @@ def train(config):
             model.parameters(),
             lr=config.optim.learning_rate,
             momentum=config.optim.momentum)
-    if config.optimizer == 'adam':
+    if config.optim.optimizer == 'adam':
         optimizer = torch.optim.Adam(
             model.parameters(), lr=config.optim.learning_rate)
 
@@ -155,7 +157,7 @@ def train(config):
     # fix 3 different (input, target) pairs for testing
     # also test generalization on longer sequences
     if config.train.report_interval:
-        valid_env = copy(env).reset(task_len=config.validation.task_len)
+        valid_env = copy(env).reset(len_input_seq=config.validation.len_val_seq)
 
     if config.train.loss == 'mse':
         loss = nn.MSELoss
@@ -173,10 +175,12 @@ def train(config):
 
         episode_total_rewards = []
         for _ in range(config.train.batch_size):
-            episode_total_rewards.append(save_episode(memory, curricua, env, model))
+            episode_total_rewards.append(save_episode(memory, curricua, env, model, device))
         episode_total_rewards = np.array(episode_total_rewards)
 
         optimize_model(model, memory, optimizer, loss, device, config)
+
+        curricua.update(episode_total_rewards.mean())
 
         if i % config.train.verbose_interval == 0:
             time_now = time.time()
@@ -197,7 +201,7 @@ def train(config):
             validation_rewards = []
             for _ in range(config.validation.iterations):
                 # Store io plots in tensorboard
-                env = valid_env.reset(task_len=config.validation.task_len)
+                env = valid_env.reset(len_input_seq=config.validation.len_val_seq)
                 validation_rewards.append(validate(model, env, device))
                 ex_output = env.output_panel
                 ex_target = env.true_output

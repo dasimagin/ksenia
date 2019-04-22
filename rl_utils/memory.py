@@ -1,3 +1,7 @@
+from collections import namedtuple
+import numpy as np
+import torch
+
 Transition = namedtuple('Transition',
                         ('state', 'action', 'next_state', 'reward'))
 
@@ -33,14 +37,16 @@ def save_episode(
          curricua,
          env,
          model,
+         device
     ):
     task_len = curricua.sample()
     temp_env = env.reset(task_len)
     model.init_sequence(1, device)
     while not temp_env.finished:
-        readed = np.eye(temp_env.len_alphabet)[temp_env.read()]
+        readed = torch.eye(temp_env.len_alphabet)[temp_env.read()]
         action_probas = model.step(readed)
         reward = temp_env.step(action_probas.argmax())
-        new_readed = np.eye(temp_env.len_alphabet)[temp_env.read()] if not temp_env.finished else None
-        memory.push(readed, action_probas.argmax(), new_readed, reward)
+        new_readed = torch.eye(temp_env.len_alphabet)[temp_env.read()] if not temp_env.finished else None
+        # print(action_probas.argmax().view(1, -1).shape)
+        memory.push(readed, action_probas.argmax().view(1, -1), new_readed, reward)
     return temp_env.episode_total_reward

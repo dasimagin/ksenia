@@ -37,7 +37,7 @@ class CopyEnv(object):
         if seed is None:
             self.random = np.random
         else:
-            self.random = np.RandomState(seed)
+            self.random = np.random.RandomState(seed)
         self.reset()
 
     def reset(self, len_input_seq=None):
@@ -46,7 +46,7 @@ class CopyEnv(object):
         self.output_place = 0
         self.time = 0
         self.time_limit = 3 * len(self.input_panel)
-        self.true_output = np.array(list(input_seq.flatten()) * self.n_copies)
+        self.true_output = np.array(list(self.input_panel.flatten()) * self.n_copies)
         self.output_panel = np.full_like(self.true_output, -1)
         self.finished = False
         self.action_space = np.arange(self.len_alphabet + 2)
@@ -55,7 +55,7 @@ class CopyEnv(object):
 
     def _create_input(self, len_input_seq, **params):
         self.len_input_seq = self.random.choice(20) if len_input_seq is None else len_input_seq
-        return self.random.randint(self.len_alphabet, size=len_input_seq)
+        return self.random.randint(self.len_alphabet, size=self.len_input_seq)
 
     def read(self):
         if not self.finished:
@@ -64,6 +64,7 @@ class CopyEnv(object):
             return -1
 
     def step(self, action):
+        action = int(action)
         if action not in self.action_space:
             raise ValueError('Vy mem')
         self.time += 1
@@ -93,6 +94,6 @@ class CopyEnv(object):
             raise ValueError('Unknown action')
 
     def render(self, **print_params):
-        print(f'Input:   {arr_to_str(self.input_panel[:self.input_place])} {colorize(self.input_panel[self.input_place], 'green', highlight=True)} {arr_to_str(self.input_panel[self.input_place + 1:])}',  **print_params)
-        print(f'Output:   {arr_to_str(self.output_panel[:self.output_place])} {colorize(self.output_panel[self.output_place], 'green', highlight=True)} {arr_to_str(self.output_panel[self.output_place + 1:])}', **print_params)
+        print(f'Input:   {arr_to_str(self.input_panel[:self.input_place])} {colorize(self.input_panel[self.input_place], "green", highlight=True)} {arr_to_str(self.input_panel[self.input_place + 1:])}',  **print_params)
+        print(f'Output:   {arr_to_str(self.output_panel[:self.output_place])} {colorize(self.output_panel[self.output_place], "green", highlight=True)} {arr_to_str(self.output_panel[self.output_place + 1:])}', **print_params)
         print(f'Total reward: {self.episode_total_reward}')

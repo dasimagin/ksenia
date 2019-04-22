@@ -11,7 +11,7 @@ task:
   min_len: 1
   max_len: 20
   n_copies: 1
-  batch_size: 16
+  update_limit: 0.9
 
 model:
   name: lstm
@@ -24,10 +24,11 @@ train:
   verbose_interval: 10
   train_iterations: 1000000
   batch_size: 1
+  loss: mse
 
 validation:
   iterations: 10
-  task_len: 25
+  len_val_seq: 25
 
 optim:
   optimizer: rmsprop
