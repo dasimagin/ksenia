@@ -2,12 +2,14 @@ import numpy as np
 import torch.nn.functional as F
 import torch.nn as nn
 import torch
+import math
+import random
 
-def q_learning(state_values, action_batch, reward_batch, next_state_values, device, gamma=0.97, alpha=0.5):
+def q_learning(state_values, action_batch, reward_batch, next_state_values, device, config):
     state_action_values = state_values.gather(1, action_batch)
-    expected_state_action_values = (next_state_values.max(1)[0] * gamma) + reward_batch
+    expected_state_action_values = (next_state_values.max(1)[0] * config.q_learning.gamma) + reward_batch
     true_state_values = state_action_values.clone().detach()
-    true_state_values = (1 - alpha) * state_action_values + alpha * expected_state_action_values
+    true_state_values = (1 - config.q_learning.alpha) * state_action_values + config.q_learning.alpha * expected_state_action_values
     return state_action_values, true_state_values
 
 def mse_and_penalty(input, target):
@@ -22,6 +24,20 @@ def validate(model, env, device):
         _ = temp_env.step(action_probas.argmax())
     return temp_env.episode_total_reward
 
+def temp_epsilon(iteration, config):
+    return config.q_learning.eps_end + (config.q_learning.eps_start - config.q_learning.eps_end) * \
+            math.exp(-1. * iteration / config.q_learning.eps_decay)
+
+def select_action(action_probas, iteration, device, config):
+    sample = random.random()
+    eps_threshold = config.q_learning.eps_end + (config.q_learning.eps_start - config.q_learning.eps_end) * \
+        math.exp(-1. * iteration / config.q_learning.eps_decay)
+    if sample > eps_threshold:
+        with torch.no_grad():
+            return action_probas.argmax(1)
+    else:
+        return torch.tensor([random.randrange(config.task.len_alphabet + 2)], device=device, dtype=torch.long)
+
 def learn_episode(
          curricua,
          env,
@@ -30,8 +46,8 @@ def learn_episode(
          loss,
          device,
          config,
-         q_learning=q_learning,
-         **q_params
+         iteration,
+         q_learning=q_learning
     ):
     task_len = curricua.sample()
     temp_env = env.reset(task_len)
@@ -40,10 +56,11 @@ def learn_episode(
     action_probas = model.step(readed)
     acc_loss = torch.zeros(1, device=device)
     while not temp_env.finished:
-        reward = temp_env.step(action_probas.argmax())
+        action = select_action(action_probas.view(1, -1), iteration, device, config)
+        reward = temp_env.step(action)
         new_readed = torch.eye(temp_env.len_alphabet)[temp_env.read()] if not temp_env.finished else None
         new_action_probas = model.step(new_readed) if new_readed is not None else torch.zeros(1, device=device)
-        acc_loss += loss(*q_learning(action_probas.view(1, -1), action_probas.argmax().view(1, -1), torch.Tensor([reward]).view(1, -1), new_action_probas.view(1, -1), device, **q_params))
+        acc_loss += loss(*q_learning(action_probas.view(1, -1), action_probas.argmax().view(1, -1), torch.Tensor([reward]).view(1, -1), new_action_probas.view(1, -1), device, config))
         action_probas = new_action_probas
     optimizer.zero_grad()
     acc_loss.backward()

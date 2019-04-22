@@ -136,7 +136,7 @@ def train(config):
         episode_total_rewards = 0.
         total_loss = 0.
         for _ in range(config.train.batch_size):
-            acc_loss, episode_total_reward = learn_episode(curricua, env, model, optimizer, loss, device, config)
+            acc_loss, episode_total_reward = learn_episode(curricua, env, model, optimizer, loss, device, config, i)
             episode_total_rewards += episode_total_reward
             total_loss += acc_loss
         episode_total_rewards /= config.train.batch_size
@@ -153,7 +153,7 @@ def train(config):
             episode_total_rewards_avg = episode_total_rewards / config.train.verbose_interval
 
             message = f"Sequences: {i * config.train.batch_size}, Mean episode_total_rewards: {episode_total_rewards_avg}, loss_avg: {loss_avg}"
-            message += f"({time_per_iter:.2f} ms/iter)"
+            message += f", epsilon: {temp_epsilon(i, config)} ({time_per_iter:.2f} ms/iter)"
             logging.info(message)
 
             iter_start_time = time_now
@@ -189,6 +189,10 @@ def train(config):
             'train/loss', total_loss, global_step=i)
         writer.add_scalar(
             'train/reward', episode_total_rewards, global_step=i)
+
+        global running
+        if not running:
+            break
 
 
 def signal_handler(signal, frame):
