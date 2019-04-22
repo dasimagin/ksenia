@@ -19,44 +19,6 @@ from rl_utils.q_learning import *
 from rl_utils.memory import *
 from copy import copy
 
-
-def validate(model, env, device):
-    model.init_sequence(1, device)
-    temp_env = env.reset()
-    while not temp_env.finished:
-        readed = torch.eye(temp_env.len_alphabet)[temp_env.read()]
-        action_probas = model.step(readed)
-        _ = temp_env.step(action_probas.argmax())
-    return temp_env.episode_total_reward
-
-
-def optimize_model(model, memory, optimizer, loss, device, config, q_learning=q_learning, **q_params):
-    transitions = memory.reverse_sample()
-    batch = Transition(*zip(*transitions))
-    state_batch = torch.cat(batch.state)
-    action_batch = torch.cat(batch.action)
-    reward_batch = torch.cat(batch.reward)
-    with torch.no_grad():
-        non_final_mask = torch.tensor(tuple(map(lambda s: s is not None,
-                                              batch.next_state)), device=device, dtype=torch.uint8)
-        non_final_next_states = torch.cat([s for s in batch.next_state
-                                                    if s is not None])
-        next_state_values = torch.zeros(BATCH_SIZE, device=device)
-        next_state_values[non_final_mask] = model(non_final_next_states.unsqueeze(1)).max(1)[0].detach()
-    state_values = model(state_batch.unsqueeze(1)).gather(1, action_batch)
-
-    true_state_values = q_learning(state_values, action_batch, reward_batch, next_state_values, **q_params)
-
-    # Compute loss
-    loss = loss(state_values, true_state_values)
-
-    # Optimize the model
-    optimizer.zero_grad()
-    loss.backward()
-    torch.nn.utils.clip_grad_norm_(model.parameters(),
-                                   config.optim.gradient_clipping)
-    optimizer.step()
-
 def setup():
     parser = argparse.ArgumentParser(
         prog='Train/Eval script',
@@ -160,36 +122,37 @@ def train(config):
         valid_env = copy(env).reset(len_input_seq=config.validation.len_val_seq)
 
     if config.train.loss == 'mse':
-        loss = nn.MSELoss
+        loss = nn.MSELoss()
     elif config.train.loss == 'mse_penalty':
         loss = mse_and_penalty
     else:
         raise ValueError('Unknown loss')
 
-    memory = ReplayMemory(10000)
     iter_start_time = time.time()
 
     for i in range(config.train.train_iterations):
         model.train()
-        memory.reset()
 
-        episode_total_rewards = []
+        episode_total_rewards = 0.
+        total_loss = 0.
         for _ in range(config.train.batch_size):
-            episode_total_rewards.append(save_episode(memory, curricua, env, model, device))
-        episode_total_rewards = np.array(episode_total_rewards)
+            acc_loss, episode_total_reward = learn_episode(curricua, env, model, optimizer, loss, device, config)
+            episode_total_rewards += episode_total_reward
+            total_loss += acc_loss
+        episode_total_rewards /= config.train.batch_size
+        total_loss /= config.train.batch_size
+        total_loss = float(total_loss)
 
-        optimize_model(model, memory, optimizer, loss, device, config)
-
-        curricua.update(episode_total_rewards.mean())
+        curricua.update(episode_total_rewards)
 
         if i % config.train.verbose_interval == 0:
             time_now = time.time()
             time_per_iter = (
                 time_now - iter_start_time) / config.train.verbose_interval * 1000.0
-            loss_avg = loss_sum / config.train.verbose_interval
-            cost_avg = cost_sum / config.train.verbose_interval
+            loss_avg = total_loss / config.train.verbose_interval
+            episode_total_rewards_avg = episode_total_rewards / config.train.verbose_interval
 
-            message = f"Sequences: {i * config.train.batch_size}, Mean episode_total_rewards: {episode_total_rewards.mean()} "
+            message = f"Sequences: {i * config.train.batch_size}, Mean episode_total_rewards: {episode_total_rewards_avg}, loss_avg: {loss_avg}"
             message += f"({time_per_iter:.2f} ms/iter)"
             logging.info(message)
 
@@ -207,25 +170,25 @@ def train(config):
                 ex_target = env.true_output
 
                 fig = utils.plot_input_output(
-                    ex_target[:, ex_target.shape[1] // 2 + 1:],
-                    ex_output[:, ex_output.shape[1] // 2 + 1:],
+                    np.array(ex_target).reshape(1, -1),
+                    np.array(ex_output).reshape(1, -1),
                 )
                 writer.add_figure(
-                    f"io/{ex_len}",
+                    f"io/{config.validation.len_val_seq}",
                     fig,
                     global_step=i)
             writer.add_scalar(
                 'validation/reward', np.array(validation_rewards).mean(), global_step=i)
 
         if i % config.train.checkpoint_interval == 0:
-            utils.save_checkpoint(model, config.checkpoints, loss.item(),
-                                  episode_total_rewards.mean())
+            utils.save_checkpoint(model, config.checkpoints, total_loss,
+                                  episode_total_rewards)
 
         # Write scalars to tensorboard
         writer.add_scalar(
-            'train/loss', loss.item(), global_step=i)
+            'train/loss', total_loss, global_step=i)
         writer.add_scalar(
-            'train/reward', episode_total_rewards.mean(), global_step=i)
+            'train/reward', episode_total_rewards, global_step=i)
 
 
 def signal_handler(signal, frame):

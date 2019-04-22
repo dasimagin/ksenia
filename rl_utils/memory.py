@@ -47,6 +47,5 @@ def save_episode(
         action_probas = model.step(readed)
         reward = temp_env.step(action_probas.argmax())
         new_readed = torch.eye(temp_env.len_alphabet)[temp_env.read()] if not temp_env.finished else None
-        # print(action_probas.argmax().view(1, -1).shape)
-        memory.push(readed, action_probas.argmax().view(1, -1), new_readed, reward)
+        memory.push(readed, action_probas.argmax().view(1, -1), new_readed, torch.Tensor([reward]))
     return temp_env.episode_total_reward

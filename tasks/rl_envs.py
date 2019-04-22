@@ -85,10 +85,12 @@ class CopyEnv(object):
         elif action == 0:
             # go left
             self.input_place -= 1
+            self.input_place %= len(self.input_panel)
             return 0
         elif action == 1:
             # go right
             self.input_place += 1
+            self.input_place %= len(self.input_panel)
             return 0
         else:
             raise ValueError('Unknown action')

@@ -27,7 +27,7 @@ train:
   loss: mse
 
 validation:
-  iterations: 10
+  iterations: 5
   len_val_seq: 25
 
 optim:

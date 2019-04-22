@@ -488,3 +488,1592 @@
 2019-04-22 22:01:28,937:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
 2019-04-22 22:01:28,937:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
 2019-04-22 22:01:28,937:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:07:44,794:INFO: Loaded config
+2019-04-22 23:07:44,794:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:07:44,794:INFO: ('seed', 1)
+2019-04-22 23:07:44,794:INFO: ('gpu', True)
+2019-04-22 23:07:44,794:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:07:44,794:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:07:44,794:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:07:44,794:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:07:44,794:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:07:44,794:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:07:44,794:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:07:44,795:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:07:44,795:INFO: Start training
+2019-04-22 23:07:44,813:INFO: Loaded model
+2019-04-22 23:07:44,813:INFO: Total number of parameters 798471
+2019-04-22 23:07:44,844:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:07:44,863:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:07:44,871:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:07:44,871:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:07:44,871:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:08:10,820:INFO: Loaded config
+2019-04-22 23:08:10,820:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:08:10,820:INFO: ('seed', 1)
+2019-04-22 23:08:10,820:INFO: ('gpu', True)
+2019-04-22 23:08:10,820:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:08:10,820:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:08:10,820:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:08:10,820:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:08:10,821:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:08:10,821:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:08:10,821:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:08:10,821:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:08:10,821:INFO: Start training
+2019-04-22 23:08:10,834:INFO: Loaded model
+2019-04-22 23:08:10,834:INFO: Total number of parameters 798471
+2019-04-22 23:08:10,865:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:08:10,884:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:08:10,892:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:08:10,892:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:08:10,892:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:08:26,426:INFO: Loaded config
+2019-04-22 23:08:26,426:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:08:26,426:INFO: ('seed', 1)
+2019-04-22 23:08:26,426:INFO: ('gpu', True)
+2019-04-22 23:08:26,426:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:08:26,426:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:08:26,427:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:08:26,427:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:08:26,427:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:08:26,427:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:08:26,427:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:08:26,427:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:08:26,427:INFO: Start training
+2019-04-22 23:08:26,441:INFO: Loaded model
+2019-04-22 23:08:26,441:INFO: Total number of parameters 798471
+2019-04-22 23:08:26,473:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:08:26,492:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:08:26,500:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:08:26,500:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:08:26,500:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:08:56,293:INFO: Loaded config
+2019-04-22 23:08:56,293:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:08:56,293:INFO: ('seed', 1)
+2019-04-22 23:08:56,293:INFO: ('gpu', True)
+2019-04-22 23:08:56,293:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:08:56,294:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:08:56,294:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:08:56,294:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:08:56,294:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:08:56,294:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:08:56,294:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:08:56,294:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:08:56,294:INFO: Start training
+2019-04-22 23:08:56,307:INFO: Loaded model
+2019-04-22 23:08:56,307:INFO: Total number of parameters 798471
+2019-04-22 23:08:56,338:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:08:56,356:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:08:56,365:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:08:56,365:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:08:56,365:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:09:15,217:INFO: Loaded config
+2019-04-22 23:09:15,217:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:09:15,217:INFO: ('seed', 1)
+2019-04-22 23:09:15,217:INFO: ('gpu', True)
+2019-04-22 23:09:15,217:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:09:15,217:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:09:15,217:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:09:15,217:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:09:15,217:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:09:15,217:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:09:15,217:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:09:15,217:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:09:15,217:INFO: Start training
+2019-04-22 23:09:15,230:INFO: Loaded model
+2019-04-22 23:09:15,231:INFO: Total number of parameters 798471
+2019-04-22 23:09:15,262:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:09:15,280:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:09:15,288:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:09:15,288:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:09:15,288:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:09:48,940:INFO: Loaded config
+2019-04-22 23:09:48,940:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:09:48,940:INFO: ('seed', 1)
+2019-04-22 23:09:48,940:INFO: ('gpu', True)
+2019-04-22 23:09:48,940:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:09:48,940:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:09:48,940:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:09:48,941:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:09:48,941:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:09:48,941:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:09:48,941:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:09:48,941:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:09:48,941:INFO: Start training
+2019-04-22 23:09:48,954:INFO: Loaded model
+2019-04-22 23:09:48,954:INFO: Total number of parameters 798471
+2019-04-22 23:09:48,985:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:09:49,004:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:09:49,012:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:09:49,013:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:09:49,013:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:10:23,800:INFO: Loaded config
+2019-04-22 23:10:23,801:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:10:23,801:INFO: ('seed', 1)
+2019-04-22 23:10:23,801:INFO: ('gpu', True)
+2019-04-22 23:10:23,801:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:10:23,801:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:10:23,801:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:10:23,801:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:10:23,801:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:10:23,801:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:10:23,801:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:10:23,801:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:10:23,801:INFO: Start training
+2019-04-22 23:10:23,814:INFO: Loaded model
+2019-04-22 23:10:23,815:INFO: Total number of parameters 798471
+2019-04-22 23:10:23,846:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:10:23,865:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:10:23,873:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:10:23,874:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:10:23,874:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:10:45,947:INFO: Loaded config
+2019-04-22 23:10:45,947:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:10:45,947:INFO: ('seed', 1)
+2019-04-22 23:10:45,947:INFO: ('gpu', True)
+2019-04-22 23:10:45,947:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:10:45,947:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:10:45,948:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:10:45,948:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:10:45,948:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:10:45,948:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:10:45,948:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:10:45,948:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:10:45,948:INFO: Start training
+2019-04-22 23:10:45,961:INFO: Loaded model
+2019-04-22 23:10:45,961:INFO: Total number of parameters 798471
+2019-04-22 23:10:45,994:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:10:46,014:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:10:46,022:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:10:46,022:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:10:46,022:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:28:07,077:INFO: Loaded config
+2019-04-22 23:28:07,078:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:28:07,078:INFO: ('seed', 1)
+2019-04-22 23:28:07,078:INFO: ('gpu', True)
+2019-04-22 23:28:07,078:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:28:07,078:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:28:07,078:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:28:07,078:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:28:07,078:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:28:07,078:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:28:07,078:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:28:07,078:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:28:07,078:INFO: Start training
+2019-04-22 23:28:07,092:INFO: Loaded model
+2019-04-22 23:28:07,093:INFO: Total number of parameters 798471
+2019-04-22 23:28:07,124:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:28:07,143:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:28:07,151:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:28:07,152:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:28:07,152:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:46:53,605:INFO: Loaded config
+2019-04-22 23:46:53,605:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:46:53,605:INFO: ('seed', 1)
+2019-04-22 23:46:53,605:INFO: ('gpu', True)
+2019-04-22 23:46:53,605:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:46:53,605:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:46:53,605:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:46:53,605:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:46:53,606:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:46:53,606:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:46:53,606:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:46:53,606:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:46:53,606:INFO: Start training
+2019-04-22 23:46:53,619:INFO: Loaded model
+2019-04-22 23:46:53,619:INFO: Total number of parameters 798471
+2019-04-22 23:46:53,650:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:46:53,668:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:46:53,676:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:46:53,677:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:46:53,677:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:47:06,233:INFO: Loaded config
+2019-04-22 23:47:06,233:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:47:06,233:INFO: ('seed', 1)
+2019-04-22 23:47:06,233:INFO: ('gpu', True)
+2019-04-22 23:47:06,233:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:47:06,234:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:47:06,234:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:47:06,234:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:47:06,234:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:47:06,234:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:47:06,234:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:47:06,234:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:47:06,234:INFO: Start training
+2019-04-22 23:47:06,247:INFO: Loaded model
+2019-04-22 23:47:06,248:INFO: Total number of parameters 798471
+2019-04-22 23:47:06,281:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:47:06,300:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:47:06,310:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:47:06,310:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:47:06,310:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:47:49,196:INFO: Loaded config
+2019-04-22 23:47:49,196:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:47:49,196:INFO: ('seed', 1)
+2019-04-22 23:47:49,196:INFO: ('gpu', True)
+2019-04-22 23:47:49,196:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:47:49,196:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:47:49,196:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:47:49,196:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:47:49,196:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:47:49,196:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:47:49,196:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:47:49,196:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:47:49,197:INFO: Start training
+2019-04-22 23:47:49,211:INFO: Loaded model
+2019-04-22 23:47:49,211:INFO: Total number of parameters 798471
+2019-04-22 23:47:49,242:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:47:49,261:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:47:49,269:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:47:49,270:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:47:49,270:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:48:29,676:INFO: Loaded config
+2019-04-22 23:48:29,676:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:48:29,676:INFO: ('seed', 1)
+2019-04-22 23:48:29,676:INFO: ('gpu', True)
+2019-04-22 23:48:29,676:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:48:29,676:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:48:29,676:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:48:29,676:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:48:29,676:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:48:29,676:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:48:29,676:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:48:29,677:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:48:29,677:INFO: Start training
+2019-04-22 23:48:29,690:INFO: Loaded model
+2019-04-22 23:48:29,690:INFO: Total number of parameters 798471
+2019-04-22 23:48:29,722:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:48:29,740:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:48:29,749:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:48:29,749:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:48:29,749:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:48:54,529:INFO: Loaded config
+2019-04-22 23:48:54,529:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:48:54,529:INFO: ('seed', 1)
+2019-04-22 23:48:54,530:INFO: ('gpu', True)
+2019-04-22 23:48:54,530:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:48:54,530:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:48:54,530:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:48:54,530:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:48:54,530:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:48:54,530:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:48:54,530:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:48:54,530:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:48:54,530:INFO: Start training
+2019-04-22 23:48:54,543:INFO: Loaded model
+2019-04-22 23:48:54,544:INFO: Total number of parameters 798471
+2019-04-22 23:48:54,575:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:48:54,594:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:48:54,602:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:48:54,602:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:48:54,602:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:49:14,669:INFO: Loaded config
+2019-04-22 23:49:14,669:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:49:14,669:INFO: ('seed', 1)
+2019-04-22 23:49:14,669:INFO: ('gpu', True)
+2019-04-22 23:49:14,669:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:49:14,670:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:49:14,670:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:49:14,670:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:49:14,670:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:49:14,670:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:49:14,670:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:49:14,670:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:49:14,670:INFO: Start training
+2019-04-22 23:49:14,684:INFO: Loaded model
+2019-04-22 23:49:14,684:INFO: Total number of parameters 798471
+2019-04-22 23:49:14,716:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:49:14,734:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:49:14,742:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:49:14,742:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:49:14,742:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:49:37,635:INFO: Loaded config
+2019-04-22 23:49:37,636:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:49:37,636:INFO: ('seed', 1)
+2019-04-22 23:49:37,636:INFO: ('gpu', True)
+2019-04-22 23:49:37,636:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:49:37,636:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:49:37,636:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:49:37,636:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:49:37,636:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:49:37,636:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:49:37,636:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:49:37,636:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:49:37,636:INFO: Start training
+2019-04-22 23:49:37,650:INFO: Loaded model
+2019-04-22 23:49:37,650:INFO: Total number of parameters 798471
+2019-04-22 23:49:37,681:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:49:37,699:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:49:37,707:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:49:37,707:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:49:37,707:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:49:45,011:INFO: Loaded config
+2019-04-22 23:49:45,011:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:49:45,011:INFO: ('seed', 1)
+2019-04-22 23:49:45,011:INFO: ('gpu', True)
+2019-04-22 23:49:45,011:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:49:45,011:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:49:45,011:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:49:45,011:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:49:45,011:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:49:45,011:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:49:45,011:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:49:45,011:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:49:45,011:INFO: Start training
+2019-04-22 23:49:45,024:INFO: Loaded model
+2019-04-22 23:49:45,025:INFO: Total number of parameters 798471
+2019-04-22 23:49:45,056:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:49:45,075:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:49:45,083:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:49:45,083:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:49:45,083:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:49:59,888:INFO: Loaded config
+2019-04-22 23:49:59,888:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:49:59,888:INFO: ('seed', 1)
+2019-04-22 23:49:59,888:INFO: ('gpu', True)
+2019-04-22 23:49:59,888:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:49:59,888:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:49:59,888:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:49:59,888:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:49:59,889:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:49:59,889:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:49:59,889:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:49:59,889:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:49:59,889:INFO: Start training
+2019-04-22 23:49:59,903:INFO: Loaded model
+2019-04-22 23:49:59,904:INFO: Total number of parameters 798471
+2019-04-22 23:49:59,935:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:49:59,954:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:49:59,962:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:49:59,963:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:49:59,963:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:51:50,147:INFO: Loaded config
+2019-04-22 23:51:50,147:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:51:50,147:INFO: ('seed', 1)
+2019-04-22 23:51:50,147:INFO: ('gpu', True)
+2019-04-22 23:51:50,147:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:51:50,147:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:51:50,147:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:51:50,148:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:51:50,148:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:51:50,148:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:51:50,148:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:51:50,148:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:51:50,148:INFO: Start training
+2019-04-22 23:51:50,161:INFO: Loaded model
+2019-04-22 23:51:50,161:INFO: Total number of parameters 798471
+2019-04-22 23:51:50,195:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:51:50,214:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:51:50,222:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:51:50,222:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:51:50,223:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:52:12,869:INFO: Loaded config
+2019-04-22 23:52:12,869:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:52:12,869:INFO: ('seed', 1)
+2019-04-22 23:52:12,869:INFO: ('gpu', True)
+2019-04-22 23:52:12,869:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:52:12,869:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:52:12,869:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:52:12,869:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:52:12,869:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:52:12,869:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:52:12,869:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:52:12,869:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:52:12,870:INFO: Start training
+2019-04-22 23:52:12,884:INFO: Loaded model
+2019-04-22 23:52:12,884:INFO: Total number of parameters 798471
+2019-04-22 23:52:12,915:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:52:12,934:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:52:12,942:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:52:12,942:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:52:12,942:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:53:45,251:INFO: Loaded config
+2019-04-22 23:53:45,251:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:53:45,251:INFO: ('seed', 1)
+2019-04-22 23:53:45,251:INFO: ('gpu', True)
+2019-04-22 23:53:45,251:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:53:45,251:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:53:45,251:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:53:45,251:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:53:45,251:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:53:45,252:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:53:45,252:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:53:45,252:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:53:45,252:INFO: Start training
+2019-04-22 23:53:45,266:INFO: Loaded model
+2019-04-22 23:53:45,266:INFO: Total number of parameters 798471
+2019-04-22 23:53:45,297:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:53:45,316:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:53:45,324:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:53:45,324:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:53:45,324:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:54:13,612:INFO: Loaded config
+2019-04-22 23:54:13,612:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:54:13,612:INFO: ('seed', 1)
+2019-04-22 23:54:13,612:INFO: ('gpu', True)
+2019-04-22 23:54:13,612:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:54:13,612:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:54:13,612:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:54:13,612:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:54:13,612:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:54:13,612:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:54:13,613:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:54:13,613:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:54:13,613:INFO: Start training
+2019-04-22 23:54:13,627:INFO: Loaded model
+2019-04-22 23:54:13,627:INFO: Total number of parameters 798471
+2019-04-22 23:54:13,658:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:54:13,677:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:54:13,685:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:54:13,685:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:54:13,685:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:54:25,244:INFO: Loaded config
+2019-04-22 23:54:25,244:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:54:25,244:INFO: ('seed', 1)
+2019-04-22 23:54:25,244:INFO: ('gpu', True)
+2019-04-22 23:54:25,244:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:54:25,244:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:54:25,244:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:54:25,244:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:54:25,244:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:54:25,245:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:54:25,245:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:54:25,245:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:54:25,245:INFO: Start training
+2019-04-22 23:54:25,258:INFO: Loaded model
+2019-04-22 23:54:25,258:INFO: Total number of parameters 798471
+2019-04-22 23:54:25,289:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:54:25,308:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:54:25,316:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:54:25,317:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:54:25,317:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:55:19,544:INFO: Loaded config
+2019-04-22 23:55:19,544:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:55:19,544:INFO: ('seed', 1)
+2019-04-22 23:55:19,544:INFO: ('gpu', True)
+2019-04-22 23:55:19,544:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:55:19,544:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:55:19,545:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:55:19,545:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:55:19,545:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:55:19,545:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:55:19,545:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:55:19,545:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:55:19,545:INFO: Start training
+2019-04-22 23:55:19,559:INFO: Loaded model
+2019-04-22 23:55:19,559:INFO: Total number of parameters 798471
+2019-04-22 23:55:19,591:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:55:19,609:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:55:19,617:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:55:19,618:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:55:19,618:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:55:39,508:INFO: Loaded config
+2019-04-22 23:55:39,508:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:55:39,508:INFO: ('seed', 1)
+2019-04-22 23:55:39,508:INFO: ('gpu', True)
+2019-04-22 23:55:39,508:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:55:39,509:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:55:39,509:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:55:39,509:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:55:39,509:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:55:39,509:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:55:39,509:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:55:39,509:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:55:39,509:INFO: Start training
+2019-04-22 23:55:39,522:INFO: Loaded model
+2019-04-22 23:55:39,522:INFO: Total number of parameters 798471
+2019-04-22 23:55:39,553:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:55:39,571:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:55:39,579:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:55:39,580:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:55:39,580:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:56:00,674:INFO: Loaded config
+2019-04-22 23:56:00,674:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:56:00,674:INFO: ('seed', 1)
+2019-04-22 23:56:00,674:INFO: ('gpu', True)
+2019-04-22 23:56:00,674:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:56:00,674:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:56:00,674:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:56:00,674:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:56:00,674:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:56:00,674:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:56:00,675:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:56:00,675:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:56:00,675:INFO: Start training
+2019-04-22 23:56:00,688:INFO: Loaded model
+2019-04-22 23:56:00,688:INFO: Total number of parameters 798471
+2019-04-22 23:56:00,721:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:56:00,742:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:56:00,751:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:56:00,752:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:56:00,752:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:56:26,849:INFO: Loaded config
+2019-04-22 23:56:26,849:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:56:26,849:INFO: ('seed', 1)
+2019-04-22 23:56:26,849:INFO: ('gpu', True)
+2019-04-22 23:56:26,849:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:56:26,849:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:56:26,849:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:56:26,849:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:56:26,849:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:56:26,849:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:56:26,849:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:56:26,849:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:56:26,850:INFO: Start training
+2019-04-22 23:56:26,864:INFO: Loaded model
+2019-04-22 23:56:26,864:INFO: Total number of parameters 798471
+2019-04-22 23:56:26,895:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:56:26,914:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:56:26,922:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:56:26,922:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:56:26,922:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:57:08,241:INFO: Loaded config
+2019-04-22 23:57:08,241:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:57:08,241:INFO: ('seed', 1)
+2019-04-22 23:57:08,241:INFO: ('gpu', True)
+2019-04-22 23:57:08,241:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:57:08,241:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:57:08,241:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:57:08,241:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:57:08,241:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:57:08,241:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:57:08,241:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:57:08,241:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:57:08,241:INFO: Start training
+2019-04-22 23:57:08,254:INFO: Loaded model
+2019-04-22 23:57:08,254:INFO: Total number of parameters 798471
+2019-04-22 23:57:08,286:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:57:08,304:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:57:08,312:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:57:08,313:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:57:08,313:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:57:22,580:INFO: Loaded config
+2019-04-22 23:57:22,581:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:57:22,581:INFO: ('seed', 1)
+2019-04-22 23:57:22,581:INFO: ('gpu', True)
+2019-04-22 23:57:22,581:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:57:22,581:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:57:22,581:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:57:22,581:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:57:22,581:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:57:22,581:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:57:22,581:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:57:22,581:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:57:22,581:INFO: Start training
+2019-04-22 23:57:22,595:INFO: Loaded model
+2019-04-22 23:57:22,595:INFO: Total number of parameters 798471
+2019-04-22 23:57:22,627:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:57:22,647:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:57:22,655:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:57:22,655:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:57:22,656:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:57:39,507:INFO: Loaded config
+2019-04-22 23:57:39,507:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:57:39,508:INFO: ('seed', 1)
+2019-04-22 23:57:39,508:INFO: ('gpu', True)
+2019-04-22 23:57:39,508:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:57:39,508:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:57:39,508:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:57:39,508:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:57:39,508:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:57:39,508:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:57:39,508:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:57:39,508:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:57:39,508:INFO: Start training
+2019-04-22 23:57:39,522:INFO: Loaded model
+2019-04-22 23:57:39,522:INFO: Total number of parameters 798471
+2019-04-22 23:57:39,554:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:57:39,573:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:57:39,581:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:57:39,581:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:57:39,582:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:58:10,206:INFO: Loaded config
+2019-04-22 23:58:10,206:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:58:10,206:INFO: ('seed', 1)
+2019-04-22 23:58:10,206:INFO: ('gpu', True)
+2019-04-22 23:58:10,206:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:58:10,207:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:58:10,207:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:58:10,207:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:58:10,207:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:58:10,207:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:58:10,207:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:58:10,207:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:58:10,207:INFO: Start training
+2019-04-22 23:58:10,220:INFO: Loaded model
+2019-04-22 23:58:10,221:INFO: Total number of parameters 798471
+2019-04-22 23:58:10,253:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:58:10,272:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:58:10,280:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:58:10,280:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:58:10,280:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:58:44,457:INFO: Loaded config
+2019-04-22 23:58:44,457:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:58:44,457:INFO: ('seed', 1)
+2019-04-22 23:58:44,457:INFO: ('gpu', True)
+2019-04-22 23:58:44,458:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:58:44,458:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:58:44,458:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:58:44,458:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:58:44,458:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:58:44,458:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:58:44,458:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:58:44,458:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:58:44,458:INFO: Start training
+2019-04-22 23:58:44,471:INFO: Loaded model
+2019-04-22 23:58:44,472:INFO: Total number of parameters 798471
+2019-04-22 23:58:44,503:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:58:44,522:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:58:44,530:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:58:44,530:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:58:44,530:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-22 23:59:13,529:INFO: Loaded config
+2019-04-22 23:59:13,529:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-22 23:59:13,529:INFO: ('seed', 1)
+2019-04-22 23:59:13,529:INFO: ('gpu', True)
+2019-04-22 23:59:13,529:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-22 23:59:13,529:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-22 23:59:13,529:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-22 23:59:13,529:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-22 23:59:13,530:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-22 23:59:13,530:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-22 23:59:13,530:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-22 23:59:13,530:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-22 23:59:13,530:INFO: Start training
+2019-04-22 23:59:13,543:INFO: Loaded model
+2019-04-22 23:59:13,543:INFO: Total number of parameters 798471
+2019-04-22 23:59:13,575:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-22 23:59:13,594:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-22 23:59:13,602:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-22 23:59:13,602:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-22 23:59:13,602:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:00:17,555:INFO: Loaded config
+2019-04-23 00:00:17,555:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:00:17,555:INFO: ('seed', 1)
+2019-04-23 00:00:17,555:INFO: ('gpu', True)
+2019-04-23 00:00:17,555:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:00:17,555:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:00:17,555:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:00:17,555:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:00:17,555:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:00:17,556:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:00:17,556:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:00:17,556:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:00:17,556:INFO: Start training
+2019-04-23 00:00:17,569:INFO: Loaded model
+2019-04-23 00:00:17,569:INFO: Total number of parameters 798471
+2019-04-23 00:00:17,601:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:00:17,620:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:00:17,628:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:00:17,628:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:00:17,628:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:00:56,389:INFO: Loaded config
+2019-04-23 00:00:56,389:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:00:56,389:INFO: ('seed', 1)
+2019-04-23 00:00:56,389:INFO: ('gpu', True)
+2019-04-23 00:00:56,389:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:00:56,389:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:00:56,389:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:00:56,389:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:00:56,389:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:00:56,389:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:00:56,389:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:00:56,389:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:00:56,390:INFO: Start training
+2019-04-23 00:00:56,404:INFO: Loaded model
+2019-04-23 00:00:56,404:INFO: Total number of parameters 798471
+2019-04-23 00:00:56,435:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:00:56,454:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:00:56,462:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:00:56,463:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:00:56,463:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:01:33,711:INFO: Loaded config
+2019-04-23 00:01:33,711:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:01:33,711:INFO: ('seed', 1)
+2019-04-23 00:01:33,711:INFO: ('gpu', True)
+2019-04-23 00:01:33,712:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:01:33,712:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:01:33,712:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:01:33,712:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:01:33,712:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:01:33,712:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:01:33,712:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:01:33,712:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:01:33,712:INFO: Start training
+2019-04-23 00:01:33,725:INFO: Loaded model
+2019-04-23 00:01:33,725:INFO: Total number of parameters 798471
+2019-04-23 00:01:33,760:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:01:33,780:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:01:33,790:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:01:33,790:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:01:33,790:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:02:06,078:INFO: Loaded config
+2019-04-23 00:02:06,078:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:02:06,078:INFO: ('seed', 1)
+2019-04-23 00:02:06,078:INFO: ('gpu', True)
+2019-04-23 00:02:06,078:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:02:06,078:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:02:06,078:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:02:06,078:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:02:06,078:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:02:06,078:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:02:06,078:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:02:06,078:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:02:06,078:INFO: Start training
+2019-04-23 00:02:06,092:INFO: Loaded model
+2019-04-23 00:02:06,092:INFO: Total number of parameters 798471
+2019-04-23 00:02:06,124:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:02:06,142:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:02:06,151:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:02:06,151:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:02:06,151:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:05:25,357:INFO: Loaded config
+2019-04-23 00:05:25,357:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:05:25,357:INFO: ('seed', 1)
+2019-04-23 00:05:25,357:INFO: ('gpu', True)
+2019-04-23 00:05:25,358:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:05:25,358:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:05:25,358:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:05:25,358:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:05:25,358:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:05:25,358:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:05:25,358:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:05:25,358:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:05:25,358:INFO: Start training
+2019-04-23 00:05:25,371:INFO: Loaded model
+2019-04-23 00:05:25,372:INFO: Total number of parameters 798471
+2019-04-23 00:05:25,406:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:05:25,426:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:05:25,435:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:05:25,435:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:05:25,435:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:06:07,360:INFO: Loaded config
+2019-04-23 00:06:07,360:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:06:07,360:INFO: ('seed', 1)
+2019-04-23 00:06:07,360:INFO: ('gpu', True)
+2019-04-23 00:06:07,360:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:06:07,360:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:06:07,360:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:06:07,360:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:06:07,361:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:06:07,361:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:06:07,361:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:06:07,361:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:06:07,361:INFO: Start training
+2019-04-23 00:06:07,375:INFO: Loaded model
+2019-04-23 00:06:07,375:INFO: Total number of parameters 798471
+2019-04-23 00:06:07,409:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:06:07,428:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:06:07,438:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:06:07,438:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:06:07,438:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:08:05,243:INFO: Loaded config
+2019-04-23 00:08:05,243:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:08:05,244:INFO: ('seed', 1)
+2019-04-23 00:08:05,244:INFO: ('gpu', True)
+2019-04-23 00:08:05,244:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:08:05,244:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:08:05,244:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:08:05,244:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:08:05,244:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:08:05,244:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:08:05,244:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:08:05,244:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:08:05,244:INFO: Start training
+2019-04-23 00:08:05,258:INFO: Loaded model
+2019-04-23 00:08:05,258:INFO: Total number of parameters 798471
+2019-04-23 00:08:05,290:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:08:05,307:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:08:05,316:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:08:05,316:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:08:05,316:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:09:07,394:INFO: Loaded config
+2019-04-23 00:09:07,394:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:09:07,394:INFO: ('seed', 1)
+2019-04-23 00:09:07,394:INFO: ('gpu', True)
+2019-04-23 00:09:07,394:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:09:07,394:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:09:07,394:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:09:07,394:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:09:07,394:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:09:07,394:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:09:07,394:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:09:07,394:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:09:07,394:INFO: Start training
+2019-04-23 00:09:07,409:INFO: Loaded model
+2019-04-23 00:09:07,409:INFO: Total number of parameters 798471
+2019-04-23 00:09:07,440:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:09:07,459:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:09:07,467:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:09:07,468:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:09:07,468:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:14:06,518:INFO: Loaded config
+2019-04-23 00:14:06,518:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:14:06,518:INFO: ('seed', 1)
+2019-04-23 00:14:06,518:INFO: ('gpu', True)
+2019-04-23 00:14:06,518:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:14:06,518:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:14:06,518:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:14:06,518:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:14:06,518:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:14:06,518:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:14:06,518:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:14:06,519:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:14:06,519:INFO: Start training
+2019-04-23 00:14:06,531:INFO: Loaded model
+2019-04-23 00:14:06,532:INFO: Total number of parameters 798471
+2019-04-23 00:14:06,563:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:14:06,581:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:14:06,589:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:14:06,589:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:14:06,589:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:14:32,460:INFO: Loaded config
+2019-04-23 00:14:32,460:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:14:32,460:INFO: ('seed', 1)
+2019-04-23 00:14:32,460:INFO: ('gpu', True)
+2019-04-23 00:14:32,460:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:14:32,460:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:14:32,460:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:14:32,460:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:14:32,460:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:14:32,461:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:14:32,461:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:14:32,461:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:14:32,461:INFO: Start training
+2019-04-23 00:14:32,474:INFO: Loaded model
+2019-04-23 00:14:32,474:INFO: Total number of parameters 798471
+2019-04-23 00:14:32,505:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:14:32,523:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:14:32,531:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:14:32,532:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:14:32,532:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:15:54,524:INFO: Loaded config
+2019-04-23 00:15:54,524:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:15:54,524:INFO: ('seed', 1)
+2019-04-23 00:15:54,524:INFO: ('gpu', True)
+2019-04-23 00:15:54,524:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:15:54,524:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:15:54,524:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:15:54,524:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:15:54,524:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:15:54,524:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:15:54,524:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:15:54,524:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:15:54,524:INFO: Start training
+2019-04-23 00:15:54,538:INFO: Loaded model
+2019-04-23 00:15:54,539:INFO: Total number of parameters 798471
+2019-04-23 00:15:54,570:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:15:54,588:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:15:54,597:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:15:54,597:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:15:54,597:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:16:31,217:INFO: Loaded config
+2019-04-23 00:16:31,217:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:16:31,217:INFO: ('seed', 1)
+2019-04-23 00:16:31,217:INFO: ('gpu', True)
+2019-04-23 00:16:31,217:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:16:31,217:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:16:31,217:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:16:31,217:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:16:31,217:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:16:31,217:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:16:31,218:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:16:31,218:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:16:31,218:INFO: Start training
+2019-04-23 00:16:31,235:INFO: Loaded model
+2019-04-23 00:16:31,235:INFO: Total number of parameters 798471
+2019-04-23 00:16:31,267:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:16:31,286:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:16:31,294:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:16:31,295:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:16:31,295:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:16:57,864:INFO: Loaded config
+2019-04-23 00:16:57,864:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:16:57,864:INFO: ('seed', 1)
+2019-04-23 00:16:57,864:INFO: ('gpu', True)
+2019-04-23 00:16:57,864:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:16:57,864:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:16:57,864:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:16:57,864:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:16:57,864:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:16:57,865:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:16:57,865:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:16:57,865:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:16:57,865:INFO: Start training
+2019-04-23 00:16:57,879:INFO: Loaded model
+2019-04-23 00:16:57,879:INFO: Total number of parameters 798471
+2019-04-23 00:16:57,911:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:16:57,930:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:16:57,938:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:16:57,938:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:16:57,938:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:18:00,628:INFO: Loaded config
+2019-04-23 00:18:00,628:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:18:00,628:INFO: ('seed', 1)
+2019-04-23 00:18:00,628:INFO: ('gpu', True)
+2019-04-23 00:18:00,628:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:18:00,628:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:18:00,628:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:18:00,628:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:18:00,628:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:18:00,628:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:18:00,629:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:18:00,629:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:18:00,629:INFO: Start training
+2019-04-23 00:18:00,643:INFO: Loaded model
+2019-04-23 00:18:00,643:INFO: Total number of parameters 798471
+2019-04-23 00:18:00,674:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:18:00,693:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:18:00,702:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:18:00,702:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:18:00,702:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:19:04,762:INFO: Loaded config
+2019-04-23 00:19:04,762:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:19:04,762:INFO: ('seed', 1)
+2019-04-23 00:19:04,762:INFO: ('gpu', True)
+2019-04-23 00:19:04,762:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:19:04,762:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:19:04,762:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:19:04,762:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:19:04,762:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:19:04,762:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:19:04,762:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:19:04,763:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:19:04,763:INFO: Start training
+2019-04-23 00:19:04,776:INFO: Loaded model
+2019-04-23 00:19:04,776:INFO: Total number of parameters 798471
+2019-04-23 00:19:04,808:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:19:04,835:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:19:04,844:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:19:04,844:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:19:04,844:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:19:28,840:INFO: Loaded config
+2019-04-23 00:19:28,840:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:19:28,840:INFO: ('seed', 1)
+2019-04-23 00:19:28,840:INFO: ('gpu', True)
+2019-04-23 00:19:28,840:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:19:28,840:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:19:28,840:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:19:28,840:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:19:28,840:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:19:28,840:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:19:28,840:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:19:28,840:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:19:28,841:INFO: Start training
+2019-04-23 00:19:28,856:INFO: Loaded model
+2019-04-23 00:19:28,857:INFO: Total number of parameters 798471
+2019-04-23 00:19:28,888:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:19:28,907:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:19:28,916:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:19:28,916:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:19:28,916:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:19:53,948:INFO: Loaded config
+2019-04-23 00:19:53,948:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:19:53,948:INFO: ('seed', 1)
+2019-04-23 00:19:53,948:INFO: ('gpu', True)
+2019-04-23 00:19:53,948:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:19:53,948:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:19:53,948:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:19:53,949:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:19:53,949:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:19:53,949:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:19:53,949:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:19:53,949:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:19:53,949:INFO: Start training
+2019-04-23 00:19:53,965:INFO: Loaded model
+2019-04-23 00:19:53,965:INFO: Total number of parameters 798471
+2019-04-23 00:19:53,997:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:19:54,016:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:19:54,025:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:19:54,025:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:19:54,025:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:19:54,122:INFO: Sequences: 0, Mean episode_total_rewards: 0.0 (9.40 ms/iter)
+2019-04-23 00:19:54,123:INFO: Validating model on longer sequences
+2019-04-23 00:23:14,681:INFO: Loaded config
+2019-04-23 00:23:14,681:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:23:14,681:INFO: ('seed', 1)
+2019-04-23 00:23:14,681:INFO: ('gpu', True)
+2019-04-23 00:23:14,681:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:23:14,681:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:23:14,681:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:23:14,681:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:23:14,681:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:23:14,681:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:23:14,682:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:23:14,682:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:23:14,682:INFO: Start training
+2019-04-23 00:23:14,699:INFO: Loaded model
+2019-04-23 00:23:14,700:INFO: Total number of parameters 798471
+2019-04-23 00:23:14,733:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:23:14,755:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:23:14,763:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:23:14,764:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:23:14,764:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:23:14,790:INFO: Sequences: 0, Mean episode_total_rewards: 0.0 (2.37 ms/iter)
+2019-04-23 00:23:14,791:INFO: Validating model on longer sequences
+2019-04-23 00:23:57,119:INFO: Loaded config
+2019-04-23 00:23:57,119:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:23:57,120:INFO: ('seed', 1)
+2019-04-23 00:23:57,120:INFO: ('gpu', True)
+2019-04-23 00:23:57,120:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:23:57,120:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:23:57,120:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:23:57,120:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:23:57,120:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:23:57,120:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:23:57,120:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:23:57,120:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:23:57,120:INFO: Start training
+2019-04-23 00:23:57,135:INFO: Loaded model
+2019-04-23 00:23:57,136:INFO: Total number of parameters 798471
+2019-04-23 00:23:57,169:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:23:57,190:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:23:57,198:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:23:57,199:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:23:57,199:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:23:57,233:INFO: Sequences: 0, Mean episode_total_rewards: 0.0 (2.97 ms/iter)
+2019-04-23 00:23:57,233:INFO: Validating model on longer sequences
+2019-04-23 00:24:21,901:INFO: Loaded config
+2019-04-23 00:24:21,901:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:24:21,901:INFO: ('seed', 1)
+2019-04-23 00:24:21,901:INFO: ('gpu', True)
+2019-04-23 00:24:21,901:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:24:21,901:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:24:21,902:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:24:21,902:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:24:21,902:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:24:21,902:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:24:21,902:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:24:21,902:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:24:21,902:INFO: Start training
+2019-04-23 00:24:21,917:INFO: Loaded model
+2019-04-23 00:24:21,917:INFO: Total number of parameters 798471
+2019-04-23 00:24:21,953:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:24:21,972:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:24:21,983:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:24:21,983:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:24:21,983:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:24:22,016:INFO: Sequences: 0, Mean episode_total_rewards: 0.0 (3.02 ms/iter)
+2019-04-23 00:24:22,017:INFO: Validating model on longer sequences
+2019-04-23 00:24:50,546:INFO: Loaded config
+2019-04-23 00:24:50,546:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:24:50,547:INFO: ('seed', 1)
+2019-04-23 00:24:50,547:INFO: ('gpu', True)
+2019-04-23 00:24:50,547:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:24:50,547:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:24:50,547:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:24:50,547:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:24:50,547:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:24:50,547:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:24:50,547:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:24:50,547:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:24:50,547:INFO: Start training
+2019-04-23 00:24:50,561:INFO: Loaded model
+2019-04-23 00:24:50,561:INFO: Total number of parameters 798471
+2019-04-23 00:24:50,599:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:24:50,620:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:24:50,629:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:24:50,629:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:24:50,629:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:24:50,659:INFO: Sequences: 0, Mean episode_total_rewards: 0.0 (2.67 ms/iter)
+2019-04-23 00:24:50,660:INFO: Validating model on longer sequences
+2019-04-23 00:25:00,669:INFO: Loaded config
+2019-04-23 00:25:00,669:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:25:00,669:INFO: ('seed', 1)
+2019-04-23 00:25:00,669:INFO: ('gpu', True)
+2019-04-23 00:25:00,670:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:25:00,670:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:25:00,670:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:25:00,670:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:25:00,670:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:25:00,670:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:25:00,670:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:25:00,670:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:25:00,670:INFO: Start training
+2019-04-23 00:25:00,684:INFO: Loaded model
+2019-04-23 00:25:00,685:INFO: Total number of parameters 798471
+2019-04-23 00:25:00,720:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:25:00,741:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:25:00,750:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:25:00,751:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:25:00,751:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:25:00,783:INFO: Sequences: 0, Mean episode_total_rewards: 0.0 (2.88 ms/iter)
+2019-04-23 00:25:00,783:INFO: Validating model on longer sequences
+2019-04-23 00:25:20,071:INFO: Loaded config
+2019-04-23 00:25:20,071:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:25:20,071:INFO: ('seed', 1)
+2019-04-23 00:25:20,071:INFO: ('gpu', True)
+2019-04-23 00:25:20,071:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:25:20,071:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:25:20,071:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:25:20,071:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:25:20,071:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:25:20,071:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:25:20,072:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:25:20,072:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:25:20,072:INFO: Start training
+2019-04-23 00:25:20,090:INFO: Loaded model
+2019-04-23 00:25:20,091:INFO: Total number of parameters 798471
+2019-04-23 00:25:20,126:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:25:20,147:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:25:20,156:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:25:20,156:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:25:20,156:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:25:20,190:INFO: Sequences: 0, Mean episode_total_rewards: 0.0 (3.03 ms/iter)
+2019-04-23 00:25:20,191:INFO: Validating model on longer sequences
+2019-04-23 00:25:48,007:INFO: Loaded config
+2019-04-23 00:25:48,008:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:25:48,008:INFO: ('seed', 1)
+2019-04-23 00:25:48,008:INFO: ('gpu', True)
+2019-04-23 00:25:48,008:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:25:48,008:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:25:48,008:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:25:48,008:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:25:48,008:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:25:48,008:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:25:48,008:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:25:48,008:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:25:48,008:INFO: Start training
+2019-04-23 00:25:48,023:INFO: Loaded model
+2019-04-23 00:25:48,023:INFO: Total number of parameters 798471
+2019-04-23 00:25:48,058:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:25:48,077:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:25:48,087:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:25:48,087:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:25:48,087:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:25:48,117:INFO: Sequences: 0, Mean episode_total_rewards: 0.0 (2.66 ms/iter)
+2019-04-23 00:25:48,117:INFO: Validating model on longer sequences
+2019-04-23 00:26:18,870:INFO: Loaded config
+2019-04-23 00:26:18,870:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:26:18,870:INFO: ('seed', 1)
+2019-04-23 00:26:18,870:INFO: ('gpu', True)
+2019-04-23 00:26:18,870:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:26:18,870:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:26:18,870:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:26:18,870:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:26:18,870:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:26:18,870:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:26:18,870:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:26:18,871:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:26:18,871:INFO: Start training
+2019-04-23 00:26:18,884:INFO: Loaded model
+2019-04-23 00:26:18,885:INFO: Total number of parameters 798471
+2019-04-23 00:26:18,921:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:26:18,944:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:26:18,953:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:26:18,953:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:26:18,953:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:26:18,986:INFO: Sequences: 0, Mean episode_total_rewards: 0.0 (2.95 ms/iter)
+2019-04-23 00:26:18,988:INFO: Validating model on longer sequences
+2019-04-23 00:29:00,726:INFO: Loaded config
+2019-04-23 00:29:00,727:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:29:00,727:INFO: ('seed', 1)
+2019-04-23 00:29:00,727:INFO: ('gpu', True)
+2019-04-23 00:29:00,727:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:29:00,727:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:29:00,727:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:29:00,727:INFO: ('validation', {'iterations': 10, 'len_val_seq': 25})
+2019-04-23 00:29:00,727:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:29:00,727:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:29:00,727:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:29:00,727:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:29:00,727:INFO: Start training
+2019-04-23 00:29:00,742:INFO: Loaded model
+2019-04-23 00:29:00,742:INFO: Total number of parameters 798471
+2019-04-23 00:29:00,778:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:29:00,799:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:29:00,808:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:29:00,809:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:29:00,809:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:29:00,839:INFO: Sequences: 0, Mean episode_total_rewards: 0.0 (2.64 ms/iter)
+2019-04-23 00:29:00,839:INFO: Validating model on longer sequences
+2019-04-23 00:33:48,123:INFO: Loaded config
+2019-04-23 00:33:48,123:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:33:48,123:INFO: ('seed', 1)
+2019-04-23 00:33:48,123:INFO: ('gpu', True)
+2019-04-23 00:33:48,123:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:33:48,123:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:33:48,123:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:33:48,123:INFO: ('validation', {'iterations': 5, 'len_val_seq': 25})
+2019-04-23 00:33:48,123:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:33:48,123:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:33:48,123:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:33:48,123:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:33:48,124:INFO: Start training
+2019-04-23 00:33:48,137:INFO: Loaded model
+2019-04-23 00:33:48,137:INFO: Total number of parameters 798471
+2019-04-23 00:33:48,174:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:33:48,195:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:33:48,205:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:33:48,205:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:33:48,205:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:34:10,088:INFO: Loaded config
+2019-04-23 00:34:10,088:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:34:10,088:INFO: ('seed', 1)
+2019-04-23 00:34:10,088:INFO: ('gpu', True)
+2019-04-23 00:34:10,089:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:34:10,089:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:34:10,089:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:34:10,089:INFO: ('validation', {'iterations': 5, 'len_val_seq': 25})
+2019-04-23 00:34:10,089:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:34:10,089:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:34:10,089:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:34:10,089:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:34:10,089:INFO: Start training
+2019-04-23 00:34:10,104:INFO: Loaded model
+2019-04-23 00:34:10,104:INFO: Total number of parameters 798471
+2019-04-23 00:34:10,140:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:34:10,160:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:34:10,170:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:34:10,171:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:34:10,171:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:34:10,202:INFO: Sequences: 0, Mean episode_total_rewards: 0.0, loss_avg: tensor([0.0580], grad_fn=<DivBackward0>)(2.60 ms/iter)
+2019-04-23 00:34:10,202:INFO: Validating model on longer sequences
+2019-04-23 00:34:48,739:INFO: Loaded config
+2019-04-23 00:34:48,739:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:34:48,740:INFO: ('seed', 1)
+2019-04-23 00:34:48,740:INFO: ('gpu', True)
+2019-04-23 00:34:48,740:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:34:48,740:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:34:48,740:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:34:48,740:INFO: ('validation', {'iterations': 5, 'len_val_seq': 25})
+2019-04-23 00:34:48,740:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:34:48,740:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:34:48,740:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:34:48,740:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:34:48,740:INFO: Start training
+2019-04-23 00:34:48,754:INFO: Loaded model
+2019-04-23 00:34:48,754:INFO: Total number of parameters 798471
+2019-04-23 00:34:48,789:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:34:48,808:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:34:48,818:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:34:48,818:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:34:48,818:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:34:48,852:INFO: Sequences: 0, Mean episode_total_rewards: 0.0, loss_avg: 0.0579550564289093(3.12 ms/iter)
+2019-04-23 00:34:48,853:INFO: Validating model on longer sequences
+2019-04-23 00:36:14,674:INFO: Loaded config
+2019-04-23 00:36:14,674:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 00:36:14,675:INFO: ('seed', 1)
+2019-04-23 00:36:14,675:INFO: ('gpu', True)
+2019-04-23 00:36:14,675:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 00:36:14,675:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 00:36:14,675:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 10, 'train_iterations': 1000000, 'batch_size': 1, 'loss': 'mse'})
+2019-04-23 00:36:14,675:INFO: ('validation', {'iterations': 5, 'len_val_seq': 25})
+2019-04-23 00:36:14,675:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 00:36:14,675:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 00:36:14,675:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 00:36:14,675:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 00:36:14,675:INFO: Start training
+2019-04-23 00:36:14,690:INFO: Loaded model
+2019-04-23 00:36:14,691:INFO: Total number of parameters 798471
+2019-04-23 00:36:14,726:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 00:36:14,747:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 00:36:14,756:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 00:36:14,756:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 00:36:14,756:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 00:36:14,798:INFO: Sequences: 0, Mean episode_total_rewards: 0.0, loss_avg: 0.0579550564289093(3.92 ms/iter)
+2019-04-23 00:36:14,799:INFO: Validating model on longer sequences
+2019-04-23 00:36:16,493:INFO: Sequences: 10, Mean episode_total_rewards: 0.0, loss_avg: 0.05196693539619446(169.49 ms/iter)
+2019-04-23 00:36:16,903:INFO: Sequences: 20, Mean episode_total_rewards: 0.0, loss_avg: 0.05741048455238342(40.96 ms/iter)
+2019-04-23 00:36:17,460:INFO: Sequences: 30, Mean episode_total_rewards: -0.55, loss_avg: 0.22255210876464843(55.76 ms/iter)
+2019-04-23 00:36:17,867:INFO: Sequences: 40, Mean episode_total_rewards: -0.55, loss_avg: 0.22147443294525146(40.70 ms/iter)
+2019-04-23 00:36:18,289:INFO: Sequences: 50, Mean episode_total_rewards: 0.05, loss_avg: 0.029526335000991822(42.13 ms/iter)
+2019-04-23 00:36:18,762:INFO: Sequences: 60, Mean episode_total_rewards: -0.5, loss_avg: 0.21675865650177(47.33 ms/iter)
+2019-04-23 00:36:19,608:INFO: Sequences: 70, Mean episode_total_rewards: -0.1, loss_avg: 0.026690077781677247(84.64 ms/iter)
+2019-04-23 00:36:20,146:INFO: Sequences: 80, Mean episode_total_rewards: -0.3, loss_avg: 0.14303659200668334(53.70 ms/iter)
+2019-04-23 00:36:20,708:INFO: Sequences: 90, Mean episode_total_rewards: -0.9, loss_avg: 0.17926706075668336(56.30 ms/iter)
+2019-04-23 00:36:21,287:INFO: Sequences: 100, Mean episode_total_rewards: -0.1, loss_avg: 0.2029862642288208(57.83 ms/iter)
+2019-04-23 00:36:21,287:INFO: Validating model on longer sequences
+2019-04-23 00:36:22,939:INFO: Sequences: 110, Mean episode_total_rewards: -0.3, loss_avg: 0.04062970876693726(165.28 ms/iter)
+2019-04-23 00:36:23,714:INFO: Sequences: 120, Mean episode_total_rewards: -0.1, loss_avg: 0.026157525181770325(77.41 ms/iter)
+2019-04-23 00:36:24,310:INFO: Sequences: 130, Mean episode_total_rewards: -0.1, loss_avg: 0.025988632440567018(59.64 ms/iter)
+2019-04-23 00:36:24,776:INFO: Sequences: 140, Mean episode_total_rewards: -0.15, loss_avg: 0.03435592949390411(46.62 ms/iter)
+2019-04-23 00:36:25,205:INFO: Sequences: 150, Mean episode_total_rewards: -0.45, loss_avg: 0.07682356238365173(42.89 ms/iter)
+2019-04-23 00:36:25,792:INFO: Sequences: 160, Mean episode_total_rewards: -0.2, loss_avg: 0.25048463344573973(58.74 ms/iter)
+2019-04-23 00:36:26,442:INFO: Sequences: 170, Mean episode_total_rewards: 0.0, loss_avg: 0.03163179457187652(64.99 ms/iter)
+2019-04-23 00:36:26,966:INFO: Sequences: 180, Mean episode_total_rewards: 0.0, loss_avg: 0.030413910746574402(52.39 ms/iter)
+2019-04-23 00:36:27,510:INFO: Sequences: 190, Mean episode_total_rewards: -0.1, loss_avg: 0.08844992518424988(54.43 ms/iter)
+2019-04-23 00:36:28,046:INFO: Sequences: 200, Mean episode_total_rewards: -0.2, loss_avg: 0.2267742156982422(53.51 ms/iter)
+2019-04-23 00:36:28,047:INFO: Validating model on longer sequences
+2019-04-23 00:36:29,968:INFO: Sequences: 210, Mean episode_total_rewards: -0.1, loss_avg: 0.027021142840385436(192.21 ms/iter)
+2019-04-23 00:36:30,431:INFO: Sequences: 220, Mean episode_total_rewards: -0.1, loss_avg: 0.026932895183563232(46.29 ms/iter)
+2019-04-23 00:36:30,924:INFO: Sequences: 230, Mean episode_total_rewards: -0.4, loss_avg: 0.050957667827606204(49.35 ms/iter)
+2019-04-23 00:36:31,399:INFO: Sequences: 240, Mean episode_total_rewards: 0.15, loss_avg: 0.03393757045269012(47.49 ms/iter)
+2019-04-23 00:36:31,842:INFO: Sequences: 250, Mean episode_total_rewards: -0.15, loss_avg: 0.03389122188091278(44.26 ms/iter)
+2019-04-23 00:36:32,138:INFO: Sequences: 260, Mean episode_total_rewards: -0.1, loss_avg: 0.025750961899757386(29.64 ms/iter)
+2019-04-23 00:36:32,698:INFO: Sequences: 270, Mean episode_total_rewards: 0.0, loss_avg: 0.0753118097782135(55.99 ms/iter)
+2019-04-23 00:36:33,203:INFO: Sequences: 280, Mean episode_total_rewards: -0.2, loss_avg: 0.06288515925407409(50.47 ms/iter)
+2019-04-23 00:36:33,629:INFO: Sequences: 290, Mean episode_total_rewards: 0.15, loss_avg: 0.054645591974258424(42.61 ms/iter)
+2019-04-23 00:36:34,087:INFO: Sequences: 300, Mean episode_total_rewards: -0.15, loss_avg: 0.02170899212360382(45.78 ms/iter)
+2019-04-23 00:36:34,087:INFO: Validating model on longer sequences
+2019-04-23 00:36:35,684:INFO: Sequences: 310, Mean episode_total_rewards: -0.05, loss_avg: 0.05659565329551697(159.72 ms/iter)
+2019-04-23 00:36:36,119:INFO: Sequences: 320, Mean episode_total_rewards: 0.0, loss_avg: 0.07531445026397705(43.52 ms/iter)
+2019-04-23 00:36:36,596:INFO: Sequences: 330, Mean episode_total_rewards: -0.25, loss_avg: 0.03187600970268249(47.72 ms/iter)
+2019-04-23 00:36:37,263:INFO: Sequences: 340, Mean episode_total_rewards: -0.1, loss_avg: 0.028362458944320677(66.65 ms/iter)
+2019-04-23 00:36:37,782:INFO: Sequences: 350, Mean episode_total_rewards: -0.05, loss_avg: 0.23167154788970948(51.91 ms/iter)
+2019-04-23 00:36:38,252:INFO: Sequences: 360, Mean episode_total_rewards: 0.2, loss_avg: 0.03121543526649475(47.04 ms/iter)
+2019-04-23 00:36:38,806:INFO: Sequences: 370, Mean episode_total_rewards: -0.1, loss_avg: 0.02583862543106079(55.38 ms/iter)
+2019-04-23 00:36:39,608:INFO: Sequences: 380, Mean episode_total_rewards: -0.6, loss_avg: 0.2256775140762329(80.21 ms/iter)
+2019-04-23 00:36:40,219:INFO: Sequences: 390, Mean episode_total_rewards: 0.0, loss_avg: 0.026915496587753295(61.08 ms/iter)
+2019-04-23 00:36:40,774:INFO: Sequences: 400, Mean episode_total_rewards: 0.0, loss_avg: 0.30080175399780273(55.46 ms/iter)
+2019-04-23 00:36:40,774:INFO: Validating model on longer sequences
+2019-04-23 00:36:42,635:INFO: Sequences: 410, Mean episode_total_rewards: -0.1, loss_avg: 0.025781863927841188(186.18 ms/iter)
+2019-04-23 00:36:43,158:INFO: Sequences: 420, Mean episode_total_rewards: 0.0, loss_avg: 0.02572568953037262(52.07 ms/iter)
+2019-04-23 00:36:44,027:INFO: Sequences: 430, Mean episode_total_rewards: -0.1, loss_avg: 0.02578672766685486(87.10 ms/iter)
+2019-04-23 00:36:44,453:INFO: Sequences: 440, Mean episode_total_rewards: -0.3, loss_avg: 0.05027294158935547(42.58 ms/iter)
+2019-04-23 00:36:45,063:INFO: Sequences: 450, Mean episode_total_rewards: -0.1, loss_avg: 0.025216516852378846(61.00 ms/iter)
+2019-04-23 00:36:45,395:INFO: Sequences: 460, Mean episode_total_rewards: 0.0, loss_avg: 0.1126242995262146(33.20 ms/iter)
+2019-04-23 00:36:45,969:INFO: Sequences: 470, Mean episode_total_rewards: -0.4, loss_avg: 0.23769667148590087(57.38 ms/iter)
+2019-04-23 00:36:46,635:INFO: Sequences: 480, Mean episode_total_rewards: -0.45, loss_avg: 0.21890761852264404(66.58 ms/iter)
+2019-04-23 00:36:47,485:INFO: Sequences: 490, Mean episode_total_rewards: -0.1, loss_avg: 0.025167351961135863(85.02 ms/iter)
+2019-04-23 00:36:48,364:INFO: Sequences: 500, Mean episode_total_rewards: -0.05, loss_avg: 0.26891188621520995(87.95 ms/iter)
+2019-04-23 00:36:48,365:INFO: Validating model on longer sequences
+2019-04-23 00:36:50,037:INFO: Sequences: 510, Mean episode_total_rewards: 0.0, loss_avg: 0.025083848834037782(167.29 ms/iter)
+2019-04-23 00:36:50,662:INFO: Sequences: 520, Mean episode_total_rewards: 0.0, loss_avg: 0.025092309713363646(62.46 ms/iter)
+2019-04-23 00:36:51,168:INFO: Sequences: 530, Mean episode_total_rewards: -0.15, loss_avg: 0.03131595551967621(50.62 ms/iter)
+2019-04-23 00:36:51,579:INFO: Sequences: 540, Mean episode_total_rewards: 0.0, loss_avg: 0.012577420473098755(41.11 ms/iter)
+2019-04-23 00:36:52,062:INFO: Sequences: 550, Mean episode_total_rewards: -0.55, loss_avg: 0.1938215136528015(48.34 ms/iter)
+2019-04-23 00:36:52,396:INFO: Sequences: 560, Mean episode_total_rewards: -0.15, loss_avg: 0.03435330986976624(33.35 ms/iter)
+2019-04-23 00:36:52,855:INFO: Sequences: 570, Mean episode_total_rewards: 0.05, loss_avg: 0.006417354196310043(45.94 ms/iter)
+2019-04-23 00:36:53,332:INFO: Sequences: 580, Mean episode_total_rewards: 0.0, loss_avg: 0.02763907015323639(47.61 ms/iter)
+2019-04-23 00:36:53,695:INFO: Sequences: 590, Mean episode_total_rewards: 0.0, loss_avg: 0.08772011399269104(36.41 ms/iter)
+2019-04-23 00:36:54,303:INFO: Sequences: 600, Mean episode_total_rewards: -0.1, loss_avg: 0.026084133982658388(60.79 ms/iter)
+2019-04-23 00:36:54,304:INFO: Validating model on longer sequences
+2019-04-23 00:36:56,355:INFO: Sequences: 610, Mean episode_total_rewards: -0.15, loss_avg: 0.03154798448085785(205.11 ms/iter)
+2019-04-23 00:36:56,848:INFO: Sequences: 620, Mean episode_total_rewards: 0.0, loss_avg: 0.016050787270069124(49.31 ms/iter)
+2019-04-23 00:36:57,324:INFO: Sequences: 630, Mean episode_total_rewards: -0.95, loss_avg: 0.1581299424171448(47.65 ms/iter)
+2019-04-23 00:36:57,720:INFO: Sequences: 640, Mean episode_total_rewards: 0.0, loss_avg: 0.03769402205944061(39.59 ms/iter)
+2019-04-23 00:36:58,167:INFO: Sequences: 650, Mean episode_total_rewards: 0.0, loss_avg: 0.012500807642936707(44.70 ms/iter)
+2019-04-23 00:36:58,581:INFO: Sequences: 660, Mean episode_total_rewards: 0.0, loss_avg: 0.02502930462360382(41.45 ms/iter)
+2019-04-23 00:36:58,972:INFO: Sequences: 670, Mean episode_total_rewards: -0.25, loss_avg: 0.031328096985816956(39.09 ms/iter)
+2019-04-23 00:36:59,421:INFO: Sequences: 680, Mean episode_total_rewards: 0.0, loss_avg: 0.012516136467456817(44.84 ms/iter)
+2019-04-23 00:36:59,870:INFO: Sequences: 690, Mean episode_total_rewards: 0.05, loss_avg: 0.04382205009460449(44.94 ms/iter)
+2019-04-23 00:37:00,458:INFO: Sequences: 700, Mean episode_total_rewards: -0.35, loss_avg: 0.23127505779266358(58.75 ms/iter)
+2019-04-23 00:37:00,458:INFO: Validating model on longer sequences
+2019-04-23 00:37:02,118:INFO: Sequences: 710, Mean episode_total_rewards: 0.0, loss_avg: 0.012534348666667939(166.02 ms/iter)
+2019-04-23 00:37:02,554:INFO: Sequences: 720, Mean episode_total_rewards: 0.15, loss_avg: 0.03131492137908935(43.63 ms/iter)
+2019-04-23 00:37:03,287:INFO: Sequences: 730, Mean episode_total_rewards: -0.35, loss_avg: 0.2437598466873169(73.28 ms/iter)
+2019-04-23 00:37:03,887:INFO: Sequences: 740, Mean episode_total_rewards: -0.2, loss_avg: 0.0268878310918808(60.01 ms/iter)
+2019-04-23 00:37:04,541:INFO: Sequences: 750, Mean episode_total_rewards: -0.5, loss_avg: 0.20341157913208008(65.39 ms/iter)
+2019-04-23 00:37:05,287:INFO: Sequences: 760, Mean episode_total_rewards: -0.8, loss_avg: 0.17863781452178956(74.54 ms/iter)
+2019-04-23 00:37:05,730:INFO: Sequences: 770, Mean episode_total_rewards: 0.0, loss_avg: 0.01251959204673767(44.33 ms/iter)
+2019-04-23 00:37:06,169:INFO: Sequences: 780, Mean episode_total_rewards: -0.4, loss_avg: 0.23477630615234374(43.94 ms/iter)
+2019-04-23 00:37:06,530:INFO: Sequences: 790, Mean episode_total_rewards: -0.05, loss_avg: 0.23554956912994385(36.10 ms/iter)
+2019-04-23 00:37:06,778:INFO: Sequences: 800, Mean episode_total_rewards: -0.2, loss_avg: 0.07527533769607545(24.74 ms/iter)
+2019-04-23 00:37:06,778:INFO: Validating model on longer sequences
+2019-04-23 00:37:08,361:INFO: Sequences: 810, Mean episode_total_rewards: -0.2, loss_avg: 0.06863152980804443(158.33 ms/iter)
+2019-04-23 00:37:08,545:INFO: Sequences: 820, Mean episode_total_rewards: 0.05, loss_avg: 0.006316829472780228(18.42 ms/iter)
+2019-04-23 00:37:08,775:INFO: Sequences: 830, Mean episode_total_rewards: -0.15, loss_avg: 0.03152168989181518(23.03 ms/iter)
+2019-04-23 00:37:09,088:INFO: Sequences: 840, Mean episode_total_rewards: 0.05, loss_avg: 0.006471061706542968(31.28 ms/iter)
+2019-04-23 00:37:09,511:INFO: Sequences: 850, Mean episode_total_rewards: 0.0, loss_avg: 0.0126779705286026(42.26 ms/iter)
+2019-04-23 00:37:09,824:INFO: Sequences: 860, Mean episode_total_rewards: -0.3, loss_avg: 0.12491047382354736(31.35 ms/iter)
+2019-04-23 00:37:10,143:INFO: Sequences: 870, Mean episode_total_rewards: 0.15, loss_avg: 0.03130548596382141(31.84 ms/iter)
+2019-04-23 00:37:10,479:INFO: Sequences: 880, Mean episode_total_rewards: 0.05, loss_avg: 0.006327696144580841(33.63 ms/iter)
+2019-04-23 00:37:10,735:INFO: Sequences: 890, Mean episode_total_rewards: 0.2, loss_avg: 0.02493750900030136(25.59 ms/iter)
+2019-04-23 00:37:11,187:INFO: Sequences: 900, Mean episode_total_rewards: 0.05, loss_avg: 0.00628848597407341(45.19 ms/iter)
+2019-04-23 00:37:11,187:INFO: Validating model on longer sequences
+2019-04-23 00:37:12,599:INFO: Sequences: 910, Mean episode_total_rewards: 0.2, loss_avg: 0.06244589686393738(141.19 ms/iter)
+2019-04-23 00:37:13,086:INFO: Sequences: 920, Mean episode_total_rewards: -0.5, loss_avg: 0.18759279251098632(48.76 ms/iter)
+2019-04-23 00:37:13,444:INFO: Sequences: 930, Mean episode_total_rewards: -0.55, loss_avg: 0.11883690357208251(35.81 ms/iter)
+2019-04-23 00:37:13,880:INFO: Sequences: 940, Mean episode_total_rewards: 0.05, loss_avg: 0.006276660412549972(43.53 ms/iter)
+2019-04-23 00:37:14,374:INFO: Sequences: 950, Mean episode_total_rewards: 0.0, loss_avg: 0.012524569034576416(49.41 ms/iter)
+2019-04-23 00:37:14,643:INFO: Sequences: 960, Mean episode_total_rewards: 0.0, loss_avg: 0.012521284818649291(26.91 ms/iter)
+2019-04-23 00:37:14,921:INFO: Sequences: 970, Mean episode_total_rewards: -0.05, loss_avg: 0.018768709897994996(27.84 ms/iter)
+2019-04-23 00:37:15,353:INFO: Sequences: 980, Mean episode_total_rewards: 0.1, loss_avg: 0.03749161958694458(43.20 ms/iter)
+2019-04-23 00:37:15,787:INFO: Sequences: 990, Mean episode_total_rewards: 0.05, loss_avg: 0.006264024972915649(43.33 ms/iter)
+2019-04-23 00:37:16,110:INFO: Sequences: 1000, Mean episode_total_rewards: -0.05, loss_avg: 0.01876433789730072(32.33 ms/iter)
+2019-04-23 00:37:16,110:INFO: Validating model on longer sequences
+2019-04-23 00:37:17,691:INFO: Sequences: 1010, Mean episode_total_rewards: 0.15, loss_avg: 0.14375087022781372(158.14 ms/iter)
+2019-04-23 00:37:18,116:INFO: Sequences: 1020, Mean episode_total_rewards: 0.0, loss_avg: 0.01250910758972168(42.47 ms/iter)
+2019-04-23 00:37:18,597:INFO: Sequences: 1030, Mean episode_total_rewards: -0.6, loss_avg: 0.20002553462982178(48.10 ms/iter)
+2019-04-23 00:37:18,988:INFO: Sequences: 1040, Mean episode_total_rewards: 0.05, loss_avg: 0.006299960613250733(39.06 ms/iter)
+2019-04-23 00:37:19,607:INFO: Sequences: 1050, Mean episode_total_rewards: 0.0, loss_avg: 0.012509685754776002(61.90 ms/iter)
+2019-04-23 00:37:19,943:INFO: Sequences: 1060, Mean episode_total_rewards: 0.05, loss_avg: 0.006271190941333771(33.61 ms/iter)
+2019-04-23 00:37:20,468:INFO: Sequences: 1070, Mean episode_total_rewards: -0.35, loss_avg: 0.2437605857849121(52.58 ms/iter)
+2019-04-23 00:37:20,949:INFO: Sequences: 1080, Mean episode_total_rewards: -0.05, loss_avg: 0.01875561773777008(48.08 ms/iter)
+2019-04-23 00:37:21,278:INFO: Sequences: 1090, Mean episode_total_rewards: -0.55, loss_avg: 0.19376146793365479(32.85 ms/iter)
+2019-04-23 00:37:21,669:INFO: Sequences: 1100, Mean episode_total_rewards: 0.1, loss_avg: 0.26248941421508787(39.09 ms/iter)
+2019-04-23 00:37:21,669:INFO: Validating model on longer sequences
+2019-04-23 00:37:23,163:INFO: Sequences: 1110, Mean episode_total_rewards: 0.15, loss_avg: 0.031243303418159486(149.40 ms/iter)
+2019-04-23 00:37:23,930:INFO: Sequences: 1120, Mean episode_total_rewards: 0.15, loss_avg: 0.031247639656066896(76.72 ms/iter)
+2019-04-23 00:37:24,515:INFO: Sequences: 1130, Mean episode_total_rewards: -0.5, loss_avg: 0.18751142024993897(58.49 ms/iter)
+2019-04-23 00:37:25,130:INFO: Sequences: 1140, Mean episode_total_rewards: 0.05, loss_avg: 0.006262104213237763(61.55 ms/iter)
+2019-04-23 00:37:25,717:INFO: Sequences: 1150, Mean episode_total_rewards: -0.5, loss_avg: 0.18751420974731445(58.69 ms/iter)
+2019-04-23 00:37:26,551:INFO: Sequences: 1160, Mean episode_total_rewards: -0.2, loss_avg: 0.03750462532043457(83.42 ms/iter)
+2019-04-23 00:37:27,070:INFO: Sequences: 1170, Mean episode_total_rewards: 0.0, loss_avg: 0.012504246830940247(51.86 ms/iter)
+2019-04-23 00:37:27,576:INFO: Sequences: 1180, Mean episode_total_rewards: 0.05, loss_avg: 0.006271438300609588(50.56 ms/iter)
+2019-04-23 00:37:28,151:INFO: Sequences: 1190, Mean episode_total_rewards: 0.0, loss_avg: 0.012503445148468018(57.57 ms/iter)
+2019-04-23 00:37:28,846:INFO: Sequences: 1200, Mean episode_total_rewards: 0.0, loss_avg: 0.012503409385681152(69.43 ms/iter)
+2019-04-23 00:37:28,846:INFO: Validating model on longer sequences
+2019-04-23 00:37:30,662:INFO: Sequences: 1210, Mean episode_total_rewards: 0.05, loss_avg: 0.043753549456596375(181.62 ms/iter)
+2019-04-23 00:37:31,245:INFO: Sequences: 1220, Mean episode_total_rewards: 0.15, loss_avg: 0.03124799132347107(58.33 ms/iter)
+2019-04-23 00:37:31,833:INFO: Sequences: 1230, Mean episode_total_rewards: 0.3, loss_avg: 0.049947184324264524(58.80 ms/iter)
+2019-04-23 00:37:32,374:INFO: Sequences: 1240, Mean episode_total_rewards: -0.35, loss_avg: 0.20625452995300292(54.13 ms/iter)
+2019-04-23 00:37:32,879:INFO: Sequences: 1250, Mean episode_total_rewards: -0.2, loss_avg: 0.07500553727149964(50.44 ms/iter)
+2019-04-23 00:37:33,546:INFO: Sequences: 1260, Mean episode_total_rewards: -0.8, loss_avg: 0.15000330209732055(66.74 ms/iter)
+2019-04-23 00:37:34,371:INFO: Sequences: 1270, Mean episode_total_rewards: 0.0, loss_avg: 0.025003817677497864(82.52 ms/iter)
+2019-04-23 00:37:35,119:INFO: Sequences: 1280, Mean episode_total_rewards: -0.4, loss_avg: 0.21252076625823973(74.80 ms/iter)
+2019-04-23 00:37:35,662:INFO: Sequences: 1290, Mean episode_total_rewards: -0.35, loss_avg: 0.20625250339508056(54.28 ms/iter)
+2019-04-23 00:37:36,100:INFO: Sequences: 1300, Mean episode_total_rewards: 0.0, loss_avg: 0.012518054246902466(43.78 ms/iter)
+2019-04-23 00:37:36,100:INFO: Validating model on longer sequences
+2019-04-23 00:37:37,849:INFO: Sequences: 1310, Mean episode_total_rewards: 0.0, loss_avg: 0.025003522634506226(174.86 ms/iter)
+2019-04-23 00:37:38,311:INFO: Sequences: 1320, Mean episode_total_rewards: -0.05, loss_avg: 0.018751917779445647(46.26 ms/iter)
+2019-04-23 00:37:38,687:INFO: Sequences: 1330, Mean episode_total_rewards: 0.05, loss_avg: 0.006251922249794007(37.61 ms/iter)
+2019-04-23 00:37:39,246:INFO: Sequences: 1340, Mean episode_total_rewards: -0.65, loss_avg: 0.3187521457672119(55.83 ms/iter)
+2019-04-23 00:37:39,766:INFO: Sequences: 1350, Mean episode_total_rewards: 0.2, loss_avg: 0.02499799579381943(52.05 ms/iter)
+2019-04-23 00:37:40,273:INFO: Sequences: 1360, Mean episode_total_rewards: 0.05, loss_avg: 0.006251569092273712(50.67 ms/iter)
+2019-04-23 00:37:40,989:INFO: Sequences: 1370, Mean episode_total_rewards: 0.0, loss_avg: 0.012501510977745055(71.66 ms/iter)
+2019-04-23 00:37:41,898:INFO: Sequences: 1380, Mean episode_total_rewards: 0.0, loss_avg: 0.025003263354301454(90.88 ms/iter)
+2019-04-23 00:37:42,544:INFO: Sequences: 1390, Mean episode_total_rewards: 0.0, loss_avg: 0.012502677738666534(64.61 ms/iter)
+2019-04-23 00:37:43,378:INFO: Sequences: 1400, Mean episode_total_rewards: -0.8, loss_avg: 0.18750202655792236(83.33 ms/iter)
+2019-04-23 00:37:43,378:INFO: Validating model on longer sequences
+2019-04-23 00:37:45,280:INFO: Sequences: 1410, Mean episode_total_rewards: 0.0, loss_avg: 0.025002938508987427(190.23 ms/iter)
+2019-04-23 00:37:45,957:INFO: Sequences: 1420, Mean episode_total_rewards: 0.0, loss_avg: 0.02500320374965668(67.73 ms/iter)
+2019-04-23 00:37:47,115:INFO: Sequences: 1430, Mean episode_total_rewards: 0.0, loss_avg: 0.025002351403236388(115.79 ms/iter)
+2019-04-23 00:37:47,979:INFO: Sequences: 1440, Mean episode_total_rewards: 0.1, loss_avg: 0.2625011682510376(86.40 ms/iter)
+2019-04-23 00:37:48,557:INFO: Sequences: 1450, Mean episode_total_rewards: 0.25, loss_avg: 0.05624838471412659(57.78 ms/iter)
+2019-04-23 00:37:49,440:INFO: Sequences: 1460, Mean episode_total_rewards: 0.0, loss_avg: 0.025002333521842956(88.31 ms/iter)
+2019-04-23 00:37:50,395:INFO: Sequences: 1470, Mean episode_total_rewards: 0.25, loss_avg: 0.056254005432128905(95.45 ms/iter)
+2019-04-23 00:37:51,194:INFO: Sequences: 1480, Mean episode_total_rewards: 0.1, loss_avg: 0.05000162124633789(79.95 ms/iter)
+2019-04-23 00:37:51,789:INFO: Sequences: 1490, Mean episode_total_rewards: -0.05, loss_avg: 0.16876912117004395(59.50 ms/iter)
+2019-04-23 00:37:52,235:INFO: Sequences: 1500, Mean episode_total_rewards: 0.0, loss_avg: 0.025001612305641175(44.62 ms/iter)
+2019-04-23 00:37:52,236:INFO: Validating model on longer sequences
+2019-04-23 00:37:53,905:INFO: Sequences: 1510, Mean episode_total_rewards: 0.0, loss_avg: 0.012500855326652526(166.97 ms/iter)
+2019-04-23 00:37:54,597:INFO: Sequences: 1520, Mean episode_total_rewards: 0.1, loss_avg: 0.03750088214874268(69.22 ms/iter)
+2019-04-23 00:37:55,341:INFO: Sequences: 1530, Mean episode_total_rewards: 0.0, loss_avg: 0.025001734495162964(74.34 ms/iter)
+2019-04-23 00:37:56,138:INFO: Sequences: 1540, Mean episode_total_rewards: 0.0, loss_avg: 0.02500135898590088(79.78 ms/iter)
+2019-04-23 00:37:56,607:INFO: Sequences: 1550, Mean episode_total_rewards: 0.15, loss_avg: 0.03125078678131103(46.89 ms/iter)
+2019-04-23 00:37:57,100:INFO: Sequences: 1560, Mean episode_total_rewards: 0.0, loss_avg: 0.012500709295272827(49.23 ms/iter)
+2019-04-23 00:37:57,533:INFO: Sequences: 1570, Mean episode_total_rewards: 0.05, loss_avg: 0.006251151114702225(43.32 ms/iter)
+2019-04-23 00:37:58,165:INFO: Sequences: 1580, Mean episode_total_rewards: 0.2, loss_avg: 0.024999062716960906(63.18 ms/iter)
+2019-04-23 00:37:58,914:INFO: Sequences: 1590, Mean episode_total_rewards: 0.05, loss_avg: 0.2687506914138794(74.99 ms/iter)
+2019-04-23 00:37:59,617:INFO: Sequences: 1600, Mean episode_total_rewards: -0.35, loss_avg: 0.2062506914138794(70.25 ms/iter)
+2019-04-23 00:37:59,617:INFO: Validating model on longer sequences
+2019-04-23 00:38:01,741:INFO: Sequences: 1610, Mean episode_total_rewards: 0.0, loss_avg: 0.025001195073127747(212.40 ms/iter)
+2019-04-23 00:38:02,962:INFO: Sequences: 1620, Mean episode_total_rewards: -0.05, loss_avg: 0.018750567734241486(122.11 ms/iter)
+2019-04-23 00:38:03,583:INFO: Sequences: 1630, Mean episode_total_rewards: -0.05, loss_avg: 0.24375059604644775(62.13 ms/iter)
+2019-04-23 00:38:03,957:INFO: Sequences: 1640, Mean episode_total_rewards: 0.0, loss_avg: 0.02500118613243103(37.35 ms/iter)
+2019-04-23 00:38:04,426:INFO: Sequences: 1650, Mean episode_total_rewards: 0.35, loss_avg: 0.08124499320983887(46.89 ms/iter)
+2019-04-23 00:38:04,728:INFO: Sequences: 1660, Mean episode_total_rewards: 0.15, loss_avg: 0.0312504917383194(30.22 ms/iter)
+2019-04-23 00:38:05,243:INFO: Sequences: 1670, Mean episode_total_rewards: 0.0, loss_avg: 0.02500079572200775(51.52 ms/iter)
+2019-04-23 00:38:05,897:INFO: Sequences: 1680, Mean episode_total_rewards: 0.15, loss_avg: 0.03125035762786865(65.38 ms/iter)
+2019-04-23 00:38:06,372:INFO: Sequences: 1690, Mean episode_total_rewards: 0.0, loss_avg: 0.02500065863132477(47.51 ms/iter)
+2019-04-23 00:38:06,788:INFO: Sequences: 1700, Mean episode_total_rewards: -0.4, loss_avg: 0.21250059604644775(41.54 ms/iter)
+2019-04-23 00:38:06,788:INFO: Validating model on longer sequences
+2019-04-23 00:38:08,313:INFO: Sequences: 1710, Mean episode_total_rewards: -0.4, loss_avg: 0.2125004291534424(152.52 ms/iter)
+2019-04-23 00:38:08,791:INFO: Sequences: 1720, Mean episode_total_rewards: -0.25, loss_avg: 0.23125035762786866(47.87 ms/iter)
+2019-04-23 00:38:09,340:INFO: Sequences: 1730, Mean episode_total_rewards: 0.25, loss_avg: 0.28124973773956297(54.86 ms/iter)
+2019-04-23 00:38:09,840:INFO: Sequences: 1740, Mean episode_total_rewards: -0.25, loss_avg: 0.23125045299530028(50.00 ms/iter)
+2019-04-23 00:38:10,208:INFO: Sequences: 1750, Mean episode_total_rewards: 0.0, loss_avg: 0.012500302493572235(36.71 ms/iter)
+2019-04-23 00:38:10,626:INFO: Sequences: 1760, Mean episode_total_rewards: 0.0, loss_avg: 0.012500351667404175(41.89 ms/iter)
+2019-04-23 00:38:11,032:INFO: Sequences: 1770, Mean episode_total_rewards: -0.1, loss_avg: 0.025000256299972535(40.62 ms/iter)
+2019-04-23 00:38:11,584:INFO: Sequences: 1780, Mean episode_total_rewards: 0.1, loss_avg: 0.03750033974647522(55.19 ms/iter)
+2019-04-23 00:38:12,202:INFO: Sequences: 1790, Mean episode_total_rewards: 0.0, loss_avg: 0.012500250339508056(61.78 ms/iter)
+2019-04-23 00:38:13,061:INFO: Sequences: 1800, Mean episode_total_rewards: 0.0, loss_avg: 0.025000414252281188(85.90 ms/iter)
+2019-04-23 00:38:13,061:INFO: Validating model on longer sequences
+2019-04-23 00:38:14,813:INFO: Sequences: 1810, Mean episode_total_rewards: -0.05, loss_avg: 0.2437497615814209(175.20 ms/iter)
+2019-04-23 00:38:15,226:INFO: Sequences: 1820, Mean episode_total_rewards: -0.15, loss_avg: 0.1062502384185791(41.28 ms/iter)
+2019-04-23 00:38:15,735:INFO: Sequences: 1830, Mean episode_total_rewards: 0.05, loss_avg: 0.006250197440385819(50.94 ms/iter)
+2019-04-23 00:38:16,270:INFO: Sequences: 1840, Mean episode_total_rewards: 0.05, loss_avg: 0.006250205636024475(53.52 ms/iter)
+2019-04-23 00:38:16,773:INFO: Sequences: 1850, Mean episode_total_rewards: 0.0, loss_avg: 0.012500207126140594(50.28 ms/iter)
+2019-04-23 00:38:17,335:INFO: Sequences: 1860, Mean episode_total_rewards: 0.0, loss_avg: 0.012500199675559997(56.16 ms/iter)
+2019-04-23 00:38:17,867:INFO: Sequences: 1870, Mean episode_total_rewards: -0.05, loss_avg: 0.01875026524066925(53.19 ms/iter)
+2019-04-23 00:38:18,424:INFO: Sequences: 1880, Mean episode_total_rewards: 0.15, loss_avg: 0.031250154972076415(55.68 ms/iter)
+2019-04-23 00:38:18,811:INFO: Sequences: 1890, Mean episode_total_rewards: 0.3, loss_avg: 0.04999975562095642(38.77 ms/iter)
+2019-04-23 00:38:19,499:INFO: Sequences: 1900, Mean episode_total_rewards: 0.0, loss_avg: 0.04999985694885254(68.79 ms/iter)
+2019-04-23 00:38:19,499:INFO: Validating model on longer sequences
+2019-04-23 00:38:21,338:INFO: Sequences: 1910, Mean episode_total_rewards: 0.05, loss_avg: 0.006250157207250595(183.90 ms/iter)
+2019-04-23 00:38:21,853:INFO: Sequences: 1920, Mean episode_total_rewards: -0.25, loss_avg: 0.23125016689300537(51.51 ms/iter)
+2019-04-23 00:38:22,275:INFO: Sequences: 1930, Mean episode_total_rewards: 0.0, loss_avg: 0.025000253319740297(42.15 ms/iter)
+2019-04-23 00:38:22,782:INFO: Sequences: 1940, Mean episode_total_rewards: -0.2, loss_avg: 0.03750016987323761(50.68 ms/iter)
+2019-04-23 00:38:23,188:INFO: Sequences: 1950, Mean episode_total_rewards: 0.15, loss_avg: 0.031249818205833436(40.65 ms/iter)
+2019-04-23 00:38:23,849:INFO: Sequences: 1960, Mean episode_total_rewards: 0.15, loss_avg: 0.031249809265136718(66.12 ms/iter)
+2019-04-23 00:38:24,292:INFO: Sequences: 1970, Mean episode_total_rewards: -0.05, loss_avg: 0.018750140070915224(44.30 ms/iter)
+2019-04-23 00:38:24,764:INFO: Sequences: 1980, Mean episode_total_rewards: 0.15, loss_avg: 0.031249874830245973(47.20 ms/iter)
+2019-04-23 00:38:25,218:INFO: Sequences: 1990, Mean episode_total_rewards: 0.0, loss_avg: 0.02500021755695343(45.33 ms/iter)
+2019-04-23 00:38:25,814:INFO: Sequences: 2000, Mean episode_total_rewards: 0.0, loss_avg: 0.025000211596488953(59.69 ms/iter)
+2019-04-23 00:38:25,815:INFO: Validating model on longer sequences
+2019-04-23 00:38:27,536:INFO: Sequences: 2010, Mean episode_total_rewards: 0.1, loss_avg: 0.18750010728836058(172.18 ms/iter)
+2019-04-23 00:38:28,181:INFO: Sequences: 2020, Mean episode_total_rewards: 0.0, loss_avg: 0.02500019073486328(64.50 ms/iter)
+2019-04-23 00:38:28,596:INFO: Sequences: 2030, Mean episode_total_rewards: 0.05, loss_avg: 0.006250104308128357(41.51 ms/iter)
+2019-04-23 00:38:29,077:INFO: Sequences: 2040, Mean episode_total_rewards: 0.15, loss_avg: 0.03124985992908478(48.09 ms/iter)
+2019-04-23 00:38:29,749:INFO: Sequences: 2050, Mean episode_total_rewards: 0.05, loss_avg: 0.00625009685754776(67.16 ms/iter)
+2019-04-23 00:38:30,248:INFO: Sequences: 2060, Mean episode_total_rewards: -0.4, loss_avg: 0.21250009536743164(49.87 ms/iter)
+2019-04-23 00:38:30,743:INFO: Sequences: 2070, Mean episode_total_rewards: 0.0, loss_avg: 0.02500014901161194(49.56 ms/iter)
+2019-04-23 00:38:31,167:INFO: Sequences: 2080, Mean episode_total_rewards: 0.0, loss_avg: 0.025000151991844178(42.39 ms/iter)
+2019-04-23 00:38:31,689:INFO: Sequences: 2090, Mean episode_total_rewards: -0.8, loss_avg: 0.18750009536743165(52.21 ms/iter)
+2019-04-23 00:38:32,127:INFO: Sequences: 2100, Mean episode_total_rewards: 0.0, loss_avg: 0.01250007450580597(43.76 ms/iter)
+2019-04-23 00:38:32,127:INFO: Validating model on longer sequences
+2019-04-23 00:38:33,848:INFO: Sequences: 2110, Mean episode_total_rewards: 0.15, loss_avg: 0.03124990463256836(172.13 ms/iter)
+2019-04-23 00:38:34,248:INFO: Sequences: 2120, Mean episode_total_rewards: -0.1, loss_avg: 0.24999988079071045(39.96 ms/iter)
+2019-04-23 00:38:34,709:INFO: Sequences: 2130, Mean episode_total_rewards: -0.15, loss_avg: 0.03125007152557373(46.09 ms/iter)
+2019-04-23 00:38:35,288:INFO: Sequences: 2140, Mean episode_total_rewards: 0.1, loss_avg: 0.037500059604644774(57.89 ms/iter)
+2019-04-23 00:38:35,780:INFO: Sequences: 2150, Mean episode_total_rewards: 0.2, loss_avg: 0.024999916553497314(49.26 ms/iter)
+2019-04-23 00:38:36,213:INFO: Sequences: 2160, Mean episode_total_rewards: 0.05, loss_avg: 0.006251237541437149(43.31 ms/iter)
+2019-04-23 00:38:36,649:INFO: Sequences: 2170, Mean episode_total_rewards: 0.05, loss_avg: 0.006250061839818954(43.62 ms/iter)
+2019-04-23 00:38:37,118:INFO: Sequences: 2180, Mean episode_total_rewards: 0.1, loss_avg: 0.037500062584877016(46.90 ms/iter)
+2019-04-23 00:38:37,635:INFO: Sequences: 2190, Mean episode_total_rewards: 0.0, loss_avg: 0.012500061094760895(51.61 ms/iter)
+2019-04-23 00:38:38,220:INFO: Sequences: 2200, Mean episode_total_rewards: 0.0, loss_avg: 0.012500068545341492(58.50 ms/iter)
+2019-04-23 00:38:38,220:INFO: Validating model on longer sequences
+2019-04-23 00:38:40,185:INFO: Sequences: 2210, Mean episode_total_rewards: -0.35, loss_avg: 0.20625007152557373(196.52 ms/iter)
+2019-04-23 00:38:40,883:INFO: Sequences: 2220, Mean episode_total_rewards: -0.6, loss_avg: 0.1250000476837158(69.86 ms/iter)
+2019-04-23 00:38:41,471:INFO: Sequences: 2230, Mean episode_total_rewards: -0.65, loss_avg: 0.16875003576278685(58.79 ms/iter)
+2019-04-23 00:38:42,472:INFO: Sequences: 2240, Mean episode_total_rewards: -0.15, loss_avg: 0.2562499284744263(100.07 ms/iter)
+2019-04-23 00:38:43,319:INFO: Sequences: 2250, Mean episode_total_rewards: 0.0, loss_avg: 0.12500003576278687(84.66 ms/iter)
+2019-04-23 00:38:44,035:INFO: Sequences: 2260, Mean episode_total_rewards: -0.35, loss_avg: 0.20625002384185792(71.69 ms/iter)
+2019-04-23 00:38:44,615:INFO: Sequences: 2270, Mean episode_total_rewards: -0.45, loss_avg: 0.2187500238418579(57.94 ms/iter)
+2019-04-23 00:38:45,146:INFO: Sequences: 2280, Mean episode_total_rewards: 0.25, loss_avg: 0.16874995231628417(53.14 ms/iter)
+2019-04-23 00:38:45,432:INFO: Sequences: 2290, Mean episode_total_rewards: 0.15, loss_avg: 0.031250038743019105(28.54 ms/iter)
+2019-04-23 00:38:45,905:INFO: Sequences: 2300, Mean episode_total_rewards: -0.1, loss_avg: 0.025000035762786865(47.32 ms/iter)
+2019-04-23 00:38:45,905:INFO: Validating model on longer sequences
+2019-04-23 00:38:47,720:INFO: Sequences: 2310, Mean episode_total_rewards: 0.0, loss_avg: 0.02500005066394806(181.56 ms/iter)
+2019-04-23 00:38:48,725:INFO: Sequences: 2320, Mean episode_total_rewards: 0.1, loss_avg: 0.03749995827674866(100.41 ms/iter)
+2019-04-23 00:38:49,314:INFO: Sequences: 2330, Mean episode_total_rewards: -0.8, loss_avg: 0.1500000238418579(58.98 ms/iter)
+2019-04-23 00:38:49,922:INFO: Sequences: 2340, Mean episode_total_rewards: 0.05, loss_avg: 0.00625002458691597(60.72 ms/iter)
+2019-04-23 00:38:50,538:INFO: Sequences: 2350, Mean episode_total_rewards: 0.35, loss_avg: 0.3062500238418579(61.65 ms/iter)
+2019-04-23 00:38:51,257:INFO: Sequences: 2360, Mean episode_total_rewards: -0.5, loss_avg: 0.18750003576278687(71.86 ms/iter)
+2019-04-23 00:38:51,598:INFO: Sequences: 2370, Mean episode_total_rewards: 0.0, loss_avg: 0.01250002533197403(34.15 ms/iter)
+2019-04-23 00:38:52,122:INFO: Sequences: 2380, Mean episode_total_rewards: -0.1, loss_avg: 0.025000026822090148(52.34 ms/iter)
+2019-04-23 00:38:52,757:INFO: Sequences: 2390, Mean episode_total_rewards: 0.05, loss_avg: 0.04375001788139343(63.51 ms/iter)
+2019-04-23 00:38:53,322:INFO: Sequences: 2400, Mean episode_total_rewards: 0.0, loss_avg: 0.012500016391277314(56.54 ms/iter)
+2019-04-23 00:38:53,323:INFO: Validating model on longer sequences
+2019-04-23 00:38:55,014:INFO: Sequences: 2410, Mean episode_total_rewards: 0.15, loss_avg: 0.03124997615814209(169.22 ms/iter)
+2019-04-23 00:38:55,427:INFO: Sequences: 2420, Mean episode_total_rewards: 0.15, loss_avg: 0.031249970197677612(41.25 ms/iter)
+2019-04-23 00:38:55,836:INFO: Sequences: 2430, Mean episode_total_rewards: 0.05, loss_avg: 0.04375002384185791(40.96 ms/iter)
+2019-04-23 00:38:56,421:INFO: Sequences: 2440, Mean episode_total_rewards: 0.0, loss_avg: 0.02500002384185791(58.49 ms/iter)
+2019-04-23 00:38:56,897:INFO: Sequences: 2450, Mean episode_total_rewards: -0.3, loss_avg: 0.23750002384185792(47.54 ms/iter)
+2019-04-23 00:38:57,461:INFO: Sequences: 2460, Mean episode_total_rewards: 0.15, loss_avg: 0.03124997913837433(56.42 ms/iter)
+2019-04-23 00:38:57,998:INFO: Sequences: 2470, Mean episode_total_rewards: 0.0, loss_avg: 0.025000026822090148(53.70 ms/iter)
+2019-04-23 00:38:58,927:INFO: Sequences: 2480, Mean episode_total_rewards: 0.0, loss_avg: 0.025000032782554627(92.96 ms/iter)
+2019-04-23 00:38:59,546:INFO: Sequences: 2490, Mean episode_total_rewards: 0.0, loss_avg: 0.025000026822090148(61.82 ms/iter)
+2019-04-23 00:39:00,090:INFO: Sequences: 2500, Mean episode_total_rewards: -0.2, loss_avg: 0.22500004768371581(54.41 ms/iter)
+2019-04-23 00:39:00,090:INFO: Validating model on longer sequences
+2019-04-23 00:39:01,686:INFO: Sequences: 2510, Mean episode_total_rewards: 0.05, loss_avg: 0.006250016391277313(159.61 ms/iter)
+2019-04-23 00:39:02,012:INFO: Sequences: 2520, Mean episode_total_rewards: -0.05, loss_avg: 0.018750011920928955(32.67 ms/iter)
+2019-04-23 00:39:02,640:INFO: Sequences: 2530, Mean episode_total_rewards: 0.0, loss_avg: 0.025000017881393433(62.74 ms/iter)
+2019-04-23 00:39:03,203:INFO: Sequences: 2540, Mean episode_total_rewards: 0.0, loss_avg: 0.012500008940696717(56.35 ms/iter)
+2019-04-23 00:39:03,711:INFO: Sequences: 2550, Mean episode_total_rewards: -0.4, loss_avg: 0.2125000238418579(50.80 ms/iter)
+2019-04-23 00:39:04,250:INFO: Sequences: 2560, Mean episode_total_rewards: 0.2, loss_avg: 0.024999986588954925(53.87 ms/iter)
+2019-04-23 00:39:04,657:INFO: Sequences: 2570, Mean episode_total_rewards: 0.0, loss_avg: 0.012500010430812836(40.70 ms/iter)
+2019-04-23 00:39:05,240:INFO: Sequences: 2580, Mean episode_total_rewards: 0.05, loss_avg: 0.04375000298023224(58.29 ms/iter)
+2019-04-23 00:39:05,700:INFO: Sequences: 2590, Mean episode_total_rewards: -0.35, loss_avg: 0.20625(46.03 ms/iter)
+2019-04-23 00:39:06,193:INFO: Sequences: 2600, Mean episode_total_rewards: 0.0, loss_avg: 0.025000011920928954(49.23 ms/iter)
+2019-04-23 00:39:06,194:INFO: Validating model on longer sequences
+2019-04-23 00:39:07,724:INFO: Sequences: 2610, Mean episode_total_rewards: -0.7, loss_avg: 0.175(153.08 ms/iter)
+2019-04-23 00:39:08,169:INFO: Sequences: 2620, Mean episode_total_rewards: -0.05, loss_avg: 0.16875(44.56 ms/iter)
+2019-04-23 00:39:08,614:INFO: Sequences: 2630, Mean episode_total_rewards: 0.0, loss_avg: 0.012500005960464477(44.52 ms/iter)
+2019-04-23 00:39:09,108:INFO: Sequences: 2640, Mean episode_total_rewards: 0.15, loss_avg: 0.06875001788139343(49.32 ms/iter)
+2019-04-23 00:39:09,607:INFO: Sequences: 2650, Mean episode_total_rewards: 0.0, loss_avg: 0.012500005960464477(49.94 ms/iter)
+2019-04-23 00:39:10,021:INFO: Sequences: 2660, Mean episode_total_rewards: 0.0, loss_avg: 0.012500005960464477(41.45 ms/iter)
+2019-04-23 00:39:10,439:INFO: Sequences: 2670, Mean episode_total_rewards: 0.0, loss_avg: 0.012500005960464477(41.80 ms/iter)
+2019-04-23 00:39:10,929:INFO: Sequences: 2680, Mean episode_total_rewards: 0.0, loss_avg: 0.012500005960464477(48.99 ms/iter)
+2019-04-23 00:39:11,640:INFO: Sequences: 2690, Mean episode_total_rewards: 0.0, loss_avg: 0.025000005960464478(71.12 ms/iter)
+2019-04-23 00:39:12,260:INFO: Sequences: 2700, Mean episode_total_rewards: -0.5, loss_avg: 0.1875(61.99 ms/iter)
+2019-04-23 00:39:12,261:INFO: Validating model on longer sequences
+2019-04-23 00:39:14,467:INFO: Sequences: 2710, Mean episode_total_rewards: 0.0, loss_avg: 0.025000008940696716(220.62 ms/iter)
+2019-04-23 00:39:15,166:INFO: Sequences: 2720, Mean episode_total_rewards: 0.0, loss_avg: 0.025000005960464478(69.90 ms/iter)
+2019-04-23 00:39:15,740:INFO: Sequences: 2730, Mean episode_total_rewards: -0.1, loss_avg: 0.25(57.48 ms/iter)
+2019-04-23 00:39:16,249:INFO: Sequences: 2740, Mean episode_total_rewards: 0.0, loss_avg: 0.025000005960464478(50.82 ms/iter)
+2019-04-23 00:39:17,025:INFO: Sequences: 2750, Mean episode_total_rewards: -0.5, loss_avg: 0.1875(77.65 ms/iter)
+2019-04-23 00:39:17,432:INFO: Sequences: 2760, Mean episode_total_rewards: -0.15, loss_avg: 0.03125000298023224(40.64 ms/iter)
