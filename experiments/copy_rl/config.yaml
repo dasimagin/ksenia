@@ -1,0 +1,36 @@
+name: Copy Q-learning LSTM
+
+seed: 1
+gpu: true
+
+task:
+  name: copy
+  len_alphabet: 5
+  # min_rep: 1
+  # max_rep: 1
+  min_len: 1
+  max_len: 20
+  n_copies: 1
+  batch_size: 16
+
+model:
+  name: lstm
+  n_hidden: 256
+  n_layers: 2
+
+train:
+  checkpoint_interval: 1000
+  report_interval: 100
+  verbose_interval: 10
+  train_iterations: 1000000
+  batch_size: 1
+
+validation:
+  iterations: 10
+  task_len: 25
+
+optim:
+  optimizer: rmsprop
+  learning_rate: 0.0001
+  momentum: 0.9
+  gradient_clipping: 10.0

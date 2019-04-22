@@ -228,7 +228,7 @@ class NTM(nn.Module):
             count += p.data.view(-1).size(0)
         return count
 
-    def step(self, inp, debug):
+    def step(self, inp, debug=None):
         """Perform one NTM time step on a batch of vectors."""
         batch_size = inp.size(0)
         prev_read_data = self.read_head.get_prev_data(self.memory).view(batch_size, -1)
@@ -247,6 +247,12 @@ class NTM(nn.Module):
 
     def mem_init(self, batch_size, device):
         self.memory = self.mem_bias.clone().repeat(batch_size, 1, 1).to(device)
+
+    def init_sequence(self, batch_size, device):
+        self.read_head.new_sequence()
+        self.write_head.new_sequence()
+        self.controller.new_sequence()
+        self.mem_init(batch_size, device)
 
     def forward(self, x, debug=None):
         """Run ntm on a batch of sequences.

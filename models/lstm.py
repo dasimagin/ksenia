@@ -38,6 +38,14 @@ class LSTM(nn.Module):
                 stdev = 5 / (np.sqrt(self.n_inputs + self.n_hidden))
                 nn.init.uniform_(p, -stdev, stdev)
 
+    def init_sequence(self, batch_size, device):
+        self.h = self.lstm_h_bias.clone().repeat(1, batch_size, 1)
+        self.c = self.lstm_c_bias.clone().repeat(1, batch_size, 1)
+
+    def step(self, x):
+        out, (self.h, self.c) = self.lstm(x.unsqueeze(0).unsqueeze(0), (self.h, self.c))
+        return torch.sigmoid(self.fc(out))
+
     def calculate_num_params(self):
         count = 0
         for p in self.parameters():
