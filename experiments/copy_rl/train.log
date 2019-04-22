@@ -378,3 +378,82 @@
 2019-04-23 01:09:51,932:INFO: Sequences: 10960, Mean episode_total_rewards: -0.1375, loss_avg: 0.1680280089378357, epsilon: 0.07766688884073791 (772.65 ms/iter)
 2019-04-23 01:09:54,180:INFO: Sequences: 11040, Mean episode_total_rewards: -0.225, loss_avg: 0.09137817621231079, epsilon: 0.07698379092135775 (449.58 ms/iter)
 2019-04-23 01:09:54,181:INFO: Validating model on longer sequences
+2019-04-23 01:13:17,837:INFO: Loaded config
+2019-04-23 01:13:17,837:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 01:13:17,837:INFO: ('seed', 1)
+2019-04-23 01:13:17,837:INFO: ('gpu', True)
+2019-04-23 01:13:17,837:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 01:13:17,837:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 01:13:17,837:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 10, 'verbose_interval': 5, 'train_iterations': 50000, 'batch_size': 16, 'loss': 'mse'})
+2019-04-23 01:13:17,837:INFO: ('q_learning', {'gamma': 0.999, 'alpha': 0.5, 'eps_start': 0.9, 'eps_end': 0.05, 'eps_decay': 10})
+2019-04-23 01:13:17,837:INFO: ('validation', {'iterations': 5, 'len_val_seq': 25})
+2019-04-23 01:13:17,837:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 01:13:17,837:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 01:13:17,837:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 01:13:17,837:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 01:13:17,838:INFO: Start training
+2019-04-23 01:13:17,851:INFO: Loaded model
+2019-04-23 01:13:17,852:INFO: Total number of parameters 798471
+2019-04-23 01:13:17,883:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 01:13:17,902:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 01:13:17,911:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 01:13:17,911:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 01:13:17,911:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 01:13:18,282:INFO: Sequences: 0, Mean episode_total_rewards: -0.2875, loss_avg: 0.14856868982315063, epsilon: 0.9 curr_temp_size: 1 (73.64 ms/iter)
+2019-04-23 01:13:18,284:INFO: Validating model on longer sequences
+2019-04-23 01:13:22,159:INFO: Sequences: 80, Mean episode_total_rewards: -0.55625, loss_avg: 0.2627709150314331, epsilon: 0.5655510607557385 curr_temp_size: 1 (775.30 ms/iter)
+2019-04-23 01:13:25,957:INFO: Sequences: 160, Mean episode_total_rewards: -0.50625, loss_avg: 0.2530571222305298, epsilon: 0.36269752499572594 curr_temp_size: 1 (759.54 ms/iter)
+2019-04-23 01:13:25,957:INFO: Validating model on longer sequences
+2019-04-23 01:13:29,440:INFO: Sequences: 240, Mean episode_total_rewards: -0.1875, loss_avg: 0.11564902067184449, epsilon: 0.23966063612616534 curr_temp_size: 1 (696.74 ms/iter)
+2019-04-23 01:13:32,525:INFO: Sequences: 320, Mean episode_total_rewards: -0.2125, loss_avg: 0.17928526401519776, epsilon: 0.1650349907511208 curr_temp_size: 1 (617.01 ms/iter)
+2019-04-23 01:13:32,526:INFO: Validating model on longer sequences
+2019-04-23 01:13:37,485:INFO: Sequences: 400, Mean episode_total_rewards: -0.2, loss_avg: 0.12003507614135742, epsilon: 0.11977224883031398 curr_temp_size: 1 (991.88 ms/iter)
+2019-04-23 01:13:40,912:INFO: Sequences: 480, Mean episode_total_rewards: -0.29375, loss_avg: 0.2551753044128418, epsilon: 0.09231900811268436 curr_temp_size: 1 (685.51 ms/iter)
+2019-04-23 01:13:40,913:INFO: Validating model on longer sequences
+2019-04-23 01:14:26,924:INFO: Loaded config
+2019-04-23 01:14:26,924:INFO: ('name', 'Copy Q-learning LSTM')
+2019-04-23 01:14:26,925:INFO: ('seed', 1)
+2019-04-23 01:14:26,925:INFO: ('gpu', True)
+2019-04-23 01:14:26,925:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.9})
+2019-04-23 01:14:26,925:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 2})
+2019-04-23 01:14:26,925:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 10, 'verbose_interval': 5, 'train_iterations': 50000, 'batch_size': 16, 'loss': 'mse'})
+2019-04-23 01:14:26,925:INFO: ('q_learning', {'gamma': 0.999, 'alpha': 0.9, 'eps_start': 0.9, 'eps_end': 0.05, 'eps_decay': 10})
+2019-04-23 01:14:26,925:INFO: ('validation', {'iterations': 5, 'len_val_seq': 25})
+2019-04-23 01:14:26,925:INFO: ('optim', {'optimizer': 'rmsprop', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 10.0})
+2019-04-23 01:14:26,925:INFO: ('path', PosixPath('experiments/copy_rl'))
+2019-04-23 01:14:26,925:INFO: ('tensorboard', PosixPath('experiments/copy_rl/tensorboard'))
+2019-04-23 01:14:26,925:INFO: ('checkpoints', PosixPath('experiments/copy_rl/checkpoints'))
+2019-04-23 01:14:26,925:INFO: Start training
+2019-04-23 01:14:26,939:INFO: Loaded model
+2019-04-23 01:14:26,939:INFO: Total number of parameters 798471
+2019-04-23 01:14:26,971:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/Grammar.txt
+2019-04-23 01:14:26,990:INFO: Generating grammar tables from /usr/lib/python3.6/lib2to3/PatternGrammar.txt
+2019-04-23 01:14:26,999:INFO: Failed to import cuda module: No module named 'caffe2.python.caffe2_pybind11_state_gpu'
+2019-04-23 01:14:26,999:INFO: Failed to import AMD hip module: No module named 'caffe2.python.caffe2_pybind11_state_hip'
+2019-04-23 01:14:26,999:WARNING: This caffe2 python run does not have GPU support. Will run in CPU only mode.
+2019-04-23 01:14:27,381:INFO: Sequences: 0, Mean episode_total_rewards: -0.15625, loss_avg: 0.4922481060028076, epsilon: 0.9 curr_temp_size: 1 (75.76 ms/iter)
+2019-04-23 01:14:27,382:INFO: Validating model on longer sequences
+2019-04-23 01:14:31,642:INFO: Sequences: 80, Mean episode_total_rewards: -0.6125, loss_avg: 0.8203948974609375, epsilon: 0.5655510607557385 curr_temp_size: 1 (852.27 ms/iter)
+2019-04-23 01:14:35,163:INFO: Sequences: 160, Mean episode_total_rewards: -0.46875, loss_avg: 0.8848063468933105, epsilon: 0.36269752499572594 curr_temp_size: 1 (704.11 ms/iter)
+2019-04-23 01:14:35,166:INFO: Validating model on longer sequences
+2019-04-23 01:14:39,822:INFO: Sequences: 240, Mean episode_total_rewards: -0.0375, loss_avg: 0.4274916172027588, epsilon: 0.23966063612616534 curr_temp_size: 1 (931.87 ms/iter)
+2019-04-23 01:14:43,354:INFO: Sequences: 320, Mean episode_total_rewards: -0.18125, loss_avg: 0.6004509925842285, epsilon: 0.1650349907511208 curr_temp_size: 1 (706.46 ms/iter)
+2019-04-23 01:14:43,355:INFO: Validating model on longer sequences
+2019-04-23 01:14:47,065:INFO: Sequences: 400, Mean episode_total_rewards: -0.21875, loss_avg: 0.6514240741729737, epsilon: 0.11977224883031398 curr_temp_size: 1 (742.12 ms/iter)
+2019-04-23 01:14:50,886:INFO: Sequences: 480, Mean episode_total_rewards: -0.19375, loss_avg: 0.7996001243591309, epsilon: 0.09231900811268436 curr_temp_size: 1 (764.17 ms/iter)
+2019-04-23 01:14:50,887:INFO: Validating model on longer sequences
+2019-04-23 01:14:54,426:INFO: Sequences: 560, Mean episode_total_rewards: 0.00625, loss_avg: 0.5688750743865967, epsilon: 0.07566777590897072 curr_temp_size: 1 (707.93 ms/iter)
+2019-04-23 01:14:58,073:INFO: Sequences: 640, Mean episode_total_rewards: -0.10625, loss_avg: 0.33027288913726804, epsilon: 0.06556829305542405 curr_temp_size: 1 (729.57 ms/iter)
+2019-04-23 01:14:58,077:INFO: Validating model on longer sequences
+2019-04-23 01:15:04,521:INFO: Sequences: 720, Mean episode_total_rewards: -0.25, loss_avg: 0.5361890316009521, epsilon: 0.05944264705750596 curr_temp_size: 1 (1289.47 ms/iter)
+2019-04-23 01:15:07,918:INFO: Sequences: 800, Mean episode_total_rewards: -0.25625, loss_avg: 0.5659810066223144, epsilon: 0.05572725494922265 curr_temp_size: 1 (679.51 ms/iter)
+2019-04-23 01:15:07,920:INFO: Validating model on longer sequences
+2019-04-23 01:15:11,152:INFO: Sequences: 880, Mean episode_total_rewards: -0.1375, loss_avg: 0.38063976764678953, epsilon: 0.05347375572269446 curr_temp_size: 1 (646.76 ms/iter)
+2019-04-23 01:15:13,670:INFO: Sequences: 960, Mean episode_total_rewards: -0.09375, loss_avg: 0.41086587905883787, epsilon: 0.05210693935016641 curr_temp_size: 1 (503.65 ms/iter)
+2019-04-23 01:15:13,671:INFO: Validating model on longer sequences
+2019-04-23 01:15:18,108:INFO: Sequences: 1040, Mean episode_total_rewards: -0.2375, loss_avg: 0.8457886695861816, epsilon: 0.051277923314030936 curr_temp_size: 1 (887.48 ms/iter)
+2019-04-23 01:15:20,636:INFO: Sequences: 1120, Mean episode_total_rewards: -0.125, loss_avg: 0.48035454750061035, epsilon: 0.050775099670721344 curr_temp_size: 1 (505.61 ms/iter)
+2019-04-23 01:15:20,638:INFO: Validating model on longer sequences
+2019-04-23 01:15:23,516:INFO: Sequences: 1200, Mean episode_total_rewards: -0.20625, loss_avg: 0.5894116878509521, epsilon: 0.050470121714625664 curr_temp_size: 1 (576.03 ms/iter)
+2019-04-23 01:15:26,149:INFO: Sequences: 1280, Mean episode_total_rewards: -0.1, loss_avg: 0.5816653728485107, epsilon: 0.05028514323371714 curr_temp_size: 1 (526.50 ms/iter)
+2019-04-23 01:15:26,149:INFO: Validating model on longer sequences

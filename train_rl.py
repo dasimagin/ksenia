@@ -153,7 +153,7 @@ def train(config):
             episode_total_rewards_avg = episode_total_rewards / config.train.verbose_interval
 
             message = f"Sequences: {i * config.train.batch_size}, Mean episode_total_rewards: {episode_total_rewards_avg}, loss_avg: {loss_avg}"
-            message += f", epsilon: {temp_epsilon(i, config)} ({time_per_iter:.2f} ms/iter)"
+            message += f", epsilon: {temp_epsilon(i, config)} curr_temp_size: {curricua.temp_size} ({time_per_iter:.2f} ms/iter)"
             logging.info(message)
 
             iter_start_time = time_now
