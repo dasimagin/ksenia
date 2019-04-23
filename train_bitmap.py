@@ -13,7 +13,7 @@ import torch
 import torch.utils.data
 
 import utils
-from tasks.bitmap import CopyTask, RepeatCopyTask
+from tasks.bitmap import CopyTask, RepeatCopyTask, AssociativeRecallTask
 from models.lstm import LSTM
 from models.ntm import NTM
 
@@ -69,10 +69,15 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
 
         if i % config.checkpoint_interval == 0:
             logging.info('Saving checkpoint')
-            utils.save_checkpoint(model, config.checkpoints, loss.item(), cost.item())
+            utils.save_checkpoint(
+                model, optimizer, i,
+                train_data, validation_data,
+                config.checkpoints,
+            )
 
-            logging.info('Validating model on longer sequences')
-            evaluate(i, model, validation_data, writer, config)
+            if config.task.name != 'recall':
+                logging.info('Validating model on longer sequences')
+                evaluate(i, model, validation_data, writer, config)
 
         if config.scheduler is not None and i % config.scheduler.interval == 0:
             logging.info('Learning rate scheduler')
@@ -165,6 +170,19 @@ def setup_model(config):
 
             validation_data.append((example, length, num_rep))
         loss = RepeatCopyTask.loss
+    elif config.task.name == 'recall':
+        train_data = AssociativeRecallTask(
+            batch_size=config.task.batch_size,
+            bit_width=config.task.bit_width,
+            item_len=config.task.item_len,
+            min_cnt=config.task.min_cnt,
+            max_cnt=config.task.max_cnt,
+            seed=config.task.seed,
+        )
+        loss = AssociativeRecallTask.loss
+
+        # TODO add validation
+        validation_data = None
     else:
         logging.info('Unknown task')
         exit(0)
@@ -230,7 +248,13 @@ def setup_model(config):
         )
         optimizer = (optimizer, scheduler)
 
-    return model, optimizer, loss, train_data, validation_data
+    step = 1
+    if config.load:
+        model, optimizer, train_data, validation_data, step = utils.load_checkpoint(
+            model, optimizer, train_data, config.load,
+        )
+
+    return model, optimizer, loss, train_data, validation_data, step
 
 
 def read_config():
@@ -247,10 +271,14 @@ def read_config():
         help='Name of the current experiment. Can also provide name/with/path for grouping'
     )
     parser.add_argument(
-        '-k',
-        '--keep',
+        '-k', '--keep',
         action='store_true',
         help='Keep logs from previous run.'
+    )
+    parser.add_argument(
+        '-l', '--load',
+        help='Path to checkpoint file to load from',
+        default=None,
     )
 
     args = parser.parse_args()
@@ -273,6 +301,7 @@ def read_config():
     config.path = path
     config.tensorboard = path/'tensorboard'
     config.checkpoints = path/'checkpoints'
+    config.load = args.load
 
     return config
 

@@ -52,10 +52,42 @@ def set_logger(log_path):
         logger.addHandler(stream_handler)
 
 
-def save_checkpoint(model, path, loss, cost):
+def save_checkpoint(
+        model, optimizer, step,
+        train_data, validation_data,
+        path,
+):
     name = type(model).__name__
-    filename = f"{name}-loss-{loss:.2f}-cost-{cost:.2f}.pth.tar"
-    torch.save(model.state_dict(), path/filename)
+    filename = f"{name}-{step}.pth"
+    torch.save(
+        {
+            'model_state_dict': model.state_dict(),
+            'optimizer_state_dict': optimizer.state_dict(),
+            'model_random_state': model.rand.get_state(),
+            'task_random_state': train_data.rand.get_state(),
+            'validation_data': validation_data,
+            'step': step,
+        },
+        path/filename
+    )
+
+
+def load_checkpoint(
+        model, optimizer,
+        train_data,
+        path,
+):
+    checkpoint = torch.load(path)
+    model.load_state_dict(checkpoint['model_state_dict'])
+    optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+
+    train_data.rand.set_state(checkpoint['task_random_state'])
+    model.rand.set_state(checkpoint['model_random_state'])
+
+    validation_data = checkpoint['validation_data']
+    step = checkpoint['step']
+
+    return model, optimizer, train_data, validation_data, step
 
 
 def input_output_img(target, output):
