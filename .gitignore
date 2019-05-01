@@ -1,4 +1,5 @@
 *checkpoints/*
+*.out
 
 # MacOS
 .DS_Store

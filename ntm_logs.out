@@ -6610,3 +6610,9 @@ Validating model on same-size sequences
 Validating model on same-size sequences
 Validating model on same-size sequences
 Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1097600, Mean episode_total_rewards: 0.018831740421414337, loss_avg: 0.008747029900550842, epsilon: 0.2181401538034728 curr_temp_size: 18 (14130.15 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
