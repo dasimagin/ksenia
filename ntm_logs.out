@@ -6618,3 +6618,323 @@ Validating model on same-size sequences
 Validating model on same-size sequences
 Validating model on same-size sequences
 Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1099200, Mean episode_total_rewards: 0.013738192740230786, loss_avg: 0.009582115411758423, epsilon: 0.20940761643380568 curr_temp_size: 18 (14438.83 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1100800, Mean episode_total_rewards: 0.019216833513708516, loss_avg: 0.007833485603332519, epsilon: 0.20012443954055986 curr_temp_size: 18 (15224.72 ms/iter)
+Validating model on longer sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1102400, Mean episode_total_rewards: 0.020007254219210742, loss_avg: 0.00631938636302948, epsilon: 0.19232756741493678 curr_temp_size: 18 (15547.14 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1104000, Mean episode_total_rewards: 0.017873180171277998, loss_avg: 0.008285179138183593, epsilon: 0.18493563411958924 curr_temp_size: 18 (15235.65 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1105600, Mean episode_total_rewards: 0.01953867018398268, loss_avg: 0.009030657410621644, epsilon: 0.1770775945305298 curr_temp_size: 18 (14940.63 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1107200, Mean episode_total_rewards: 0.023540230527322917, loss_avg: 0.007945988774299622, epsilon: 0.17047768476488084 curr_temp_size: 18 (15069.02 ms/iter)
+Validating model on longer sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1108800, Mean episode_total_rewards: 0.02024136122251931, loss_avg: 0.0072553128004074095, epsilon: 0.16422054831875868 curr_temp_size: 18 (15737.23 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1110400, Mean episode_total_rewards: 0.02373173554253717, loss_avg: 0.007176282405853271, epsilon: 0.1575688614131529 curr_temp_size: 18 (15671.83 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1112000, Mean episode_total_rewards: 0.01967170902014652, loss_avg: 0.009295856952667237, epsilon: 0.15198215841060397 curr_temp_size: 18 (14470.26 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1113600, Mean episode_total_rewards: 0.02315124458874459, loss_avg: 0.008300184607505798, epsilon: 0.1466856067588146 curr_temp_size: 18 (14648.82 ms/iter)
+Validating model on same-size sequences
+Validating model on longer sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1115200, Mean episode_total_rewards: 0.021457611832611835, loss_avg: 0.008098817467689513, epsilon: 0.1410550753535251 curr_temp_size: 18 (15944.85 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1116800, Mean episode_total_rewards: 0.021791273294719984, loss_avg: 0.006145750880241394, epsilon: 0.1363260333594759 curr_temp_size: 18 (14846.93 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1118400, Mean episode_total_rewards: 0.02424121645011591, loss_avg: 0.006729821562767029, epsilon: 0.13184259918129698 curr_temp_size: 18 (14694.29 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1120000, Mean episode_total_rewards: 0.023410342261904766, loss_avg: 0.007502421736717224, epsilon: 0.12707645724529676 curr_temp_size: 18 (14978.66 ms/iter)
+Validating model on longer sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1121600, Mean episode_total_rewards: 0.019920605436230435, loss_avg: 0.008042502999305725, epsilon: 0.12307340962109387 curr_temp_size: 18 (15556.20 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1123200, Mean episode_total_rewards: 0.027661017786561267, loss_avg: 0.00761003315448761, epsilon: 0.11927826452451543 curr_temp_size: 18 (13361.46 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1124800, Mean episode_total_rewards: 0.02572202007551273, loss_avg: 0.00796233892440796, epsilon: 0.11524381247745648 curr_temp_size: 18 (13195.06 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1126400, Mean episode_total_rewards: 0.025658305688876344, loss_avg: 0.00764349102973938, epsilon: 0.11185530581970193 curr_temp_size: 18 (13567.50 ms/iter)
+Validating model on longer sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1128000, Mean episode_total_rewards: 0.02523510726405947, loss_avg: 0.008563180565834045, epsilon: 0.10864278485214007 curr_temp_size: 18 (12852.78 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1129600, Mean episode_total_rewards: 0.025394439346885008, loss_avg: 0.008987460732460022, epsilon: 0.10522769492435713 curr_temp_size: 18 (11922.29 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1131200, Mean episode_total_rewards: 0.02971672161757679, loss_avg: 0.006993853449821472, epsilon: 0.10235938596389774 curr_temp_size: 18 (11756.87 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1132800, Mean episode_total_rewards: 0.025701458330938023, loss_avg: 0.007823290824890137, epsilon: 0.0996400456740287 curr_temp_size: 18 (10598.93 ms/iter)
+Validating model on same-size sequences
+Validating model on longer sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1134400, Mean episode_total_rewards: 0.024598376035196688, loss_avg: 0.008338874578475952, epsilon: 0.09674923446130244 curr_temp_size: 18 (11062.60 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1136000, Mean episode_total_rewards: 0.024011576616878284, loss_avg: 0.008969575762748719, epsilon: 0.09432126334493356 curr_temp_size: 18 (11602.51 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1137600, Mean episode_total_rewards: 0.0287152041133419, loss_avg: 0.006302025318145752, epsilon: 0.09201939148580067 curr_temp_size: 18 (10992.86 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1139200, Mean episode_total_rewards: 0.026266094661678906, loss_avg: 0.008772394061088562, epsilon: 0.08957237262411902 curr_temp_size: 18 (10830.93 ms/iter)
+Validating model on longer sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1140800, Mean episode_total_rewards: 0.028172635957792208, loss_avg: 0.009006931185722352, epsilon: 0.08751713944555051 curr_temp_size: 18 (10466.82 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1142400, Mean episode_total_rewards: 0.029145129766333412, loss_avg: 0.0064317363500595096, epsilon: 0.08556864698375455 curr_temp_size: 18 (11423.15 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1144000, Mean episode_total_rewards: 0.027134435876623376, loss_avg: 0.008055773973464965, epsilon: 0.08349729023687838 curr_temp_size: 18 (12259.97 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1145600, Mean episode_total_rewards: 0.00906190334562939, loss_avg: 0.011530948877334595, epsilon: 0.43431577566092927 curr_temp_size: 19 (12902.48 ms/iter)
+Validating model on longer sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1147200, Mean episode_total_rewards: 0.004954832192264256, loss_avg: 0.010310280323028564, epsilon: 0.4143559278982449 curr_temp_size: 19 (15459.56 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1148800, Mean episode_total_rewards: 0.007752268904103143, loss_avg: 0.010866212844848632, epsilon: 0.3931374904957467 curr_temp_size: 19 (15533.74 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Sequences: 1150400, Mean episode_total_rewards: 0.00733008762071262, loss_avg: 0.011279408931732177, epsilon: 0.3753162806841377 curr_temp_size: 19 (15796.31 ms/iter)
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
+Validating model on same-size sequences
