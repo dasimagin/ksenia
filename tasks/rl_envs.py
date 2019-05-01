@@ -6,24 +6,29 @@ def arr_to_str(arr):
 
 class Curriculum(object):
     """Curriculum as in """
-    def __init__(self, seed, min_rep, max_rep, update_limit):
+    def __init__(self, config):
         super(Curriculum, self).__init__()
-        self.rand = np.random.RandomState(seed)
-        self.max_rep = max_rep
-        self.temp_size = min_rep
-        self.update_limit = update_limit
+        self.rand = np.random.RandomState(config.seed)
+        self.max_rep = config.task.max_len
+        self.temp_size = config.task.min_len
+        self.update_limit = config.task.update_limit
 
-    def update(self, val_acc):
-        if self.temp_size < self.max_rep and val_acc > self.update_limit:
+
+    def update(self, config, val_acc):
+        config.iteration += 1
+        if self.temp_size <= self.max_rep and val_acc >= self.update_limit and config.iteration > config.task.min_update_iters:
             self.temp_size += 1
+            config.q_learning.eps_start = config.q_learning.eps_restart
+            config.iteration = 0
+        return config
 
     def sample(self):
         type = self.rand.choice(3, p = [0.1, 0.25, 0.65])
         if type == 0:
-            return self.rand.choice(self.max_rep) + 1
+            return self.rand.choice(self.temp_size) + 1
         e = np.array(np.around(self.rand.geometric(p=0.5, size=1)), dtype='int')
         if type == 1:
-            return self.rand.choice(self.max_rep + e) + 1
+            return self.rand.choice(self.temp_size + e) + 1
         if type == 2:
             return self.rand.choice(e) + 1
 

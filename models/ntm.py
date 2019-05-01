@@ -231,8 +231,12 @@ class NTM(nn.Module):
     def step(self, inp, debug=None):
         """Perform one NTM time step on a batch of vectors."""
         batch_size = inp.size(0)
+        if len(inp.shape) == 1:
+            batch_size = 1
+            inp = inp.view(batch_size, -1)
         prev_read_data = self.read_head.get_prev_data(self.memory).view(batch_size, -1)
-        controller_output = self.controller(torch.cat([inp, prev_read_data], -1))
+        stacked_controller_input = torch.cat([inp, prev_read_data], -1)
+        controller_output = self.controller(stacked_controller_input)
         controls_vector = self.controller_to_controls(controller_output)
         if self.controller_clip:
             controls_vector = controls_vector.clamp(-self.controller_clip, self.controller_clip)
@@ -273,7 +277,7 @@ class NTM(nn.Module):
         for t in range(x.size(1)):
             out.append(self.step(x[:, t], debug))
 
-        return torch.sigmoid(torch.stack(out, dim=1))
+        return torch.stack(out, dim=1)
 
 
 class LSTMController(nn.Module):

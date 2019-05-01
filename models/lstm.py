@@ -44,7 +44,7 @@ class LSTM(nn.Module):
 
     def step(self, x):
         out, (self.h, self.c) = self.lstm(x.unsqueeze(0).unsqueeze(0), (self.h, self.c))
-        return torch.sigmoid(self.fc(out))
+        return self.fc(out)
 
     def calculate_num_params(self):
         count = 0
@@ -62,4 +62,4 @@ class LSTM(nn.Module):
         c_0 = self.lstm_c_bias.clone().repeat(1, batch_size, 1)
 
         out, (h_n, c_n) = self.lstm(x, (h_0, c_0))
-        return torch.sigmoid(self.fc(out))
+        return self.fc(out)

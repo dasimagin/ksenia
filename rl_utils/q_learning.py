@@ -19,19 +19,18 @@ def validate(model, env, device):
     model.init_sequence(1, device)
     temp_env = env.reset()
     while not temp_env.finished:
-        readed = torch.eye(temp_env.len_alphabet)[temp_env.read()]
+        readed = torch.eye(temp_env.len_alphabet, device=device)[temp_env.read()]
         action_probas = model.step(readed)
         _ = temp_env.step(action_probas.argmax())
     return temp_env.episode_total_reward
 
-def temp_epsilon(iteration, config):
+def temp_epsilon(config):
     return config.q_learning.eps_end + (config.q_learning.eps_start - config.q_learning.eps_end) * \
-            math.exp(-1. * iteration / config.q_learning.eps_decay)
+            math.exp(-1. * config.iteration / config.q_learning.eps_decay)
 
-def select_action(action_probas, iteration, device, config):
+def select_action(action_probas, device, config):
     sample = random.random()
-    eps_threshold = config.q_learning.eps_end + (config.q_learning.eps_start - config.q_learning.eps_end) * \
-        math.exp(-1. * iteration / config.q_learning.eps_decay)
+    eps_threshold = temp_epsilon(config)
     if sample > eps_threshold:
         with torch.no_grad():
             return action_probas.argmax(1)
@@ -46,28 +45,28 @@ def learn_episode(
          loss,
          device,
          config,
-         iteration,
          q_learning=q_learning
     ):
     task_len = curricua.sample()
     temp_env = env.reset(task_len)
     model.init_sequence(1, device)
-    readed = torch.eye(temp_env.len_alphabet)[temp_env.read()]
+    readed = torch.eye(temp_env.len_alphabet, device=device)[temp_env.read()]
     action_probas = model.step(readed)
     acc_loss = torch.zeros(1, device=device)
     while not temp_env.finished:
-        action = select_action(action_probas.view(1, -1), iteration, device, config)
+        action = select_action(action_probas.view(1, -1), device, config)
         reward = temp_env.step(action)
-        new_readed = torch.eye(temp_env.len_alphabet)[temp_env.read()] if not temp_env.finished else None
+        new_readed = torch.eye(temp_env.len_alphabet, device=device)[temp_env.read()] if not temp_env.finished else None
         new_action_probas = model.step(new_readed) if new_readed is not None else torch.zeros(1, device=device)
-        acc_loss += loss(*q_learning(action_probas.view(1, -1), action_probas.argmax().view(1, -1), torch.Tensor([reward]).view(1, -1), new_action_probas.view(1, -1), device, config))
+        reward_tensored = torch.tensor([reward], device=device, dtype=torch.float32).view(1, -1)
+        acc_loss += loss(*q_learning(action_probas.view(1, -1), action_probas.argmax().view(1, -1), reward_tensored, new_action_probas.view(1, -1), device, config))
         action_probas = new_action_probas
     optimizer.zero_grad()
     acc_loss.backward()
     torch.nn.utils.clip_grad_norm_(model.parameters(),
                                    config.optim.gradient_clipping)
     optimizer.step()
-    return acc_loss, temp_env.episode_total_reward
+    return acc_loss / len(temp_env.output_panel), temp_env.episode_total_reward / len(temp_env.output_panel)
 
 def optimize_model(model, memory, optimizer, loss, device, config, q_learning=q_learning, **q_params):
     # TODO: fix it

@@ -9,6 +9,7 @@ import signal
 import yaml
 import tensorboardX
 import torch
+import torch.nn as nn
 import torch.utils.data
 
 import utils
@@ -18,6 +19,7 @@ from models.ntm import NTM
 from rl_utils.q_learning import *
 from rl_utils.memory import *
 from copy import copy
+from sklearn.metrics import accuracy_score
 
 def setup():
     parser = argparse.ArgumentParser(
@@ -110,16 +112,12 @@ def train(config):
     loss_sum = 0.0
     cost_sum = 0.0
 
-    curricua = Curriculum(
-        seed=config.seed,
-        min_rep=config.task.min_len,
-        max_rep=config.task.max_len,
-        update_limit=config.task.update_limit)
+    curricua = Curriculum(config)
 
     # fix 3 different (input, target) pairs for testing
     # also test generalization on longer sequences
     if config.train.report_interval:
-        valid_env = copy(env).reset(len_input_seq=config.validation.len_val_seq)
+        valid_env = copy(env)
 
     if config.train.loss == 'mse':
         loss = nn.MSELoss()
@@ -129,6 +127,7 @@ def train(config):
         raise ValueError('Unknown loss')
 
     iter_start_time = time.time()
+    config.iteration = 0
 
     for i in range(config.train.train_iterations):
         model.train()
@@ -136,14 +135,12 @@ def train(config):
         episode_total_rewards = 0.
         total_loss = 0.
         for _ in range(config.train.batch_size):
-            acc_loss, episode_total_reward = learn_episode(curricua, env, model, optimizer, loss, device, config, i)
+            acc_loss, episode_total_reward = learn_episode(curricua, env, model, optimizer, loss, device, config)
             episode_total_rewards += episode_total_reward
             total_loss += acc_loss
         episode_total_rewards /= config.train.batch_size
         total_loss /= config.train.batch_size
         total_loss = float(total_loss)
-
-        curricua.update(episode_total_rewards)
 
         if i % config.train.verbose_interval == 0:
             time_now = time.time()
@@ -153,32 +150,52 @@ def train(config):
             episode_total_rewards_avg = episode_total_rewards / config.train.verbose_interval
 
             message = f"Sequences: {i * config.train.batch_size}, Mean episode_total_rewards: {episode_total_rewards_avg}, loss_avg: {loss_avg}"
-            message += f", epsilon: {temp_epsilon(i, config)} curr_temp_size: {curricua.temp_size} ({time_per_iter:.2f} ms/iter)"
+            message += f", epsilon: {temp_epsilon(config)} curr_temp_size: {curricua.temp_size} ({time_per_iter:.2f} ms/iter)"
             logging.info(message)
 
             iter_start_time = time_now
 
+        if i % config.train.update_interval == 0:
+            logging.info('Validating model on same-size sequences')
+            model.eval()
+            validation_rewards = 0.
+            acc = 0.
+            for _ in range(config.train.batch_size):
+                env = valid_env.reset(len_input_seq=curricua.temp_size)
+                validation_rewards += validate(model, env, device)
+                acc += accuracy_score(env.true_output, env.output_panel)
+            config = curricua.update(config, acc / config.train.batch_size)
+            writer.add_scalar(
+                'validation/reward', validation_rewards / config.train.batch_size, global_step=i)
+            writer.add_scalar(
+                'validation/accuracy', acc / config.train.batch_size, global_step=i)
+
         if i % config.train.report_interval == 0:
             logging.info('Validating model on longer sequences')
             model.eval()
-            validation_rewards = []
-            for _ in range(config.validation.iterations):
-                # Store io plots in tensorboard
-                env = valid_env.reset(len_input_seq=config.validation.len_val_seq)
-                validation_rewards.append(validate(model, env, device))
-                ex_output = env.output_panel
-                ex_target = env.true_output
+            for len_val_seq in config.validation.len_val_seqs:
+                validation_rewards = 0.
+                acc = 0.
+                for _ in range(config.validation.iterations):
+                    # Store io plots in tensorboard
+                    env = valid_env.reset(len_input_seq=len_val_seq)
+                    validation_rewards += validate(model, env, device)
+                    acc += accuracy_score(env.true_output, env.output_panel)
+                    ex_output = env.output_panel
+                    ex_target = env.true_output
 
-                fig = utils.plot_input_output(
-                    np.array(ex_target).reshape(1, -1),
-                    np.array(ex_output).reshape(1, -1),
-                )
-                writer.add_figure(
-                    f"io/{config.validation.len_val_seq}",
-                    fig,
-                    global_step=i)
-            writer.add_scalar(
-                'validation/reward', np.array(validation_rewards).mean(), global_step=i)
+                    fig = utils.plot_input_output(
+                        np.array(ex_target).reshape(1, -1),
+                        np.array(ex_output).reshape(1, -1),
+                    )
+                    writer.add_figure(
+                        f"io/{len_val_seq}",
+                        fig,
+                        global_step=i)
+                writer.add_scalar(
+                    f'big_validation/{len_val_seq}/reward', validation_rewards / config.validation.iterations, global_step=i)
+                writer.add_scalar(
+                    f'big_validation/{len_val_seq}/accuracy', acc / config.validation.iterations, global_step=i)
 
         if i % config.train.checkpoint_interval == 0:
             utils.save_checkpoint(model, config.checkpoints, total_loss,
@@ -189,6 +206,8 @@ def train(config):
             'train/loss', total_loss, global_step=i)
         writer.add_scalar(
             'train/reward', episode_total_rewards, global_step=i)
+        writer.add_scalar(
+            'train/size', curricua.temp_size, global_step=i)
 
         global running
         if not running:

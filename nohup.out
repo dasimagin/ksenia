@@ -1,0 +1,92 @@
+Loaded config
+('name', 'Copy Q-learning LSTM')
+('seed', 1)
+('gpu', True)
+('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 0.85, 'min_update_iters': 120})
+('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 3})
+('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 25, 'train_iterations': 18000, 'batch_size': 32, 'loss': 'mse'})
+('q_learning', {'gamma': 0.999, 'alpha': 0.9, 'eps_start': 0.9, 'eps_restart': 0.45, 'eps_end': 0.05, 'eps_decay': 200})
+('validation', {'iterations': 5, 'len_val_seqs': [25, 50, 75, 100, 150]})
+('optim', {'optimizer': 'adam', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 15.0})
+('path', PosixPath('experiments/copy_lstm_rl'))
+('tensorboard', PosixPath('experiments/copy_lstm_rl/tensorboard'))
+('checkpoints', PosixPath('experiments/copy_lstm_rl/checkpoints'))
+Start training
+Loaded model
+Total number of parameters 1325319
+Sequences: 0, Mean episode_total_rewards: -0.007703125, loss_avg: 0.020786521434783937, epsilon: 0.89576060731378 curr_temp_size: 1 (22.64 ms/iter)
+Validating model on longer sequences
+Sequences: 800, Mean episode_total_rewards: -0.012078125000000002, loss_avg: 0.014213210344314576, epsilon: 0.7963811162824771 curr_temp_size: 1 (789.94 ms/iter)
+Sequences: 1600, Mean episode_total_rewards: -0.007633928571428572, loss_avg: 0.014767049551010132, epsilon: 0.7086790232669189 curr_temp_size: 1 (491.08 ms/iter)
+Sequences: 2400, Mean episode_total_rewards: -0.0011874999999999998, loss_avg: 0.016079784631729127, epsilon: 0.6312821978305024 curr_temp_size: 1 (532.92 ms/iter)
+Sequences: 3200, Mean episode_total_rewards: -0.0044687500000000005, loss_avg: 0.014405784606933593, epsilon: 0.5629797391129845 curr_temp_size: 1 (495.62 ms/iter)
+Validating model on longer sequences
+Sequences: 4000, Mean episode_total_rewards: 0.0026294642857142858, loss_avg: 0.014349254369735718, epsilon: 0.5027030308558627 curr_temp_size: 1 (722.27 ms/iter)
+Sequences: 4800, Mean episode_total_rewards: -0.0036354166666666666, loss_avg: 0.015684295892715455, epsilon: 0.44950902252095726 curr_temp_size: 1 (622.33 ms/iter)
+Sequences: 5600, Mean episode_total_rewards: -0.00053125, loss_avg: 0.013424164056777954, epsilon: 0.40256547492934414 curr_temp_size: 1 (636.44 ms/iter)
+Sequences: 6400, Mean episode_total_rewards: -0.00578125, loss_avg: 0.017042983770370484, epsilon: 0.36113793958341306 curr_temp_size: 1 (605.36 ms/iter)
+Validating model on longer sequences
+Sequences: 7200, Mean episode_total_rewards: 0.0002812500000000001, loss_avg: 0.011710553169250489, epsilon: 0.324578267958915 curr_temp_size: 1 (854.62 ms/iter)
+Sequences: 8000, Mean episode_total_rewards: 0.0006770833333333337, loss_avg: 0.012867715358734131, epsilon: 0.29231447099078556 curr_temp_size: 1 (622.39 ms/iter)
+Sequences: 8800, Mean episode_total_rewards: 0.0035208333333333337, loss_avg: 0.016041033267974854, epsilon: 0.263841770100793 curr_temp_size: 1 (661.60 ms/iter)
+Sequences: 9600, Mean episode_total_rewards: 0.00171875, loss_avg: 0.013590704202651977, epsilon: 0.23871469975715703 curr_temp_size: 1 (689.07 ms/iter)
+Validating model on longer sequences
+Sequences: 10400, Mean episode_total_rewards: 0.004125, loss_avg: 0.015622971057891845, epsilon: 0.21654013800787297 curr_temp_size: 1 (892.66 ms/iter)
+Sequences: 11200, Mean episode_total_rewards: 0.009327380952380952, loss_avg: 0.014904779195785523, epsilon: 0.19697115594795894 curr_temp_size: 1 (638.81 ms/iter)
+Sequences: 12000, Mean episode_total_rewards: 0.005218749999999999, loss_avg: 0.013168258666992188, epsilon: 0.17970158989335133 curr_temp_size: 1 (696.11 ms/iter)
+Sequences: 12800, Mean episode_total_rewards: 0.009437500000000001, loss_avg: 0.010664057731628419, epsilon: 0.16446125134117998 curr_temp_size: 1 (678.61 ms/iter)
+Validating model on longer sequences
+Sequences: 13600, Mean episode_total_rewards: -0.00532514880952381, loss_avg: 0.015428918600082397, epsilon: 0.1510116997745482 curr_temp_size: 1 (924.65 ms/iter)
+Sequences: 14400, Mean episode_total_rewards: -0.0010461309523809522, loss_avg: 0.013472189903259277, epsilon: 0.1391425121758439 curr_temp_size: 1 (693.00 ms/iter)
+Sequences: 15200, Mean episode_total_rewards: 0.004546875000000001, loss_avg: 0.011210854053497315, epsilon: 0.1286679908837918 curr_temp_size: 1 (637.82 ms/iter)
+Sequences: 16000, Mean episode_total_rewards: 0.003333333333333333, loss_avg: 0.011991283893585204, epsilon: 0.11942425828749945 curr_temp_size: 1 (657.51 ms/iter)
+Validating model on longer sequences
+Sequences: 16800, Mean episode_total_rewards: -0.0008124999999999999, loss_avg: 0.014454123973846435, epsilon: 0.11126669290295119 curr_temp_size: 1 (1030.62 ms/iter)
+Sequences: 17600, Mean episode_total_rewards: 0.0071875, loss_avg: 0.010765709877014161, epsilon: 0.10406766671845603 curr_temp_size: 1 (762.69 ms/iter)
+Sequences: 18400, Mean episode_total_rewards: 0.005218749999999999, loss_avg: 0.01513918399810791, epsilon: 0.09771454840901367 curr_temp_size: 1 (642.53 ms/iter)
+Sequences: 19200, Mean episode_total_rewards: -0.0013958333333333333, loss_avg: 0.01276774525642395, epsilon: 0.0921079411791773 curr_temp_size: 1 (743.72 ms/iter)
+Validating model on longer sequences
+Sequences: 20000, Mean episode_total_rewards: 0.002109375, loss_avg: 0.008426541686058045, epsilon: 0.0871601276648383 curr_temp_size: 1 (854.14 ms/iter)
+Sequences: 20800, Mean episode_total_rewards: 0.0012857142857142856, loss_avg: 0.012281007766723633, epsilon: 0.08279369756386792 curr_temp_size: 1 (625.51 ms/iter)
+Sequences: 21600, Mean episode_total_rewards: -0.0024715735653235648, loss_avg: 0.011627669334411622, epsilon: 0.07894033652440945 curr_temp_size: 1 (693.23 ms/iter)
+Sequences: 22400, Mean episode_total_rewards: 0.0023125000000000003, loss_avg: 0.011400833129882812, epsilon: 0.07553975734254717 curr_temp_size: 1 (706.74 ms/iter)
+Validating model on longer sequences
+Sequences: 23200, Mean episode_total_rewards: 0.002604166666666667, loss_avg: 0.010291361808776855, epsilon: 0.07253875674756005 curr_temp_size: 1 (920.77 ms/iter)
+Sequences: 24000, Mean episode_total_rewards: 0.0036220238095238094, loss_avg: 0.012684884071350098, epsilon: 0.0698903830178294 curr_temp_size: 1 (690.95 ms/iter)
+Sequences: 24800, Mean episode_total_rewards: 0.010691964285714286, loss_avg: 0.009272602796554565, epsilon: 0.06755320140445568 curr_temp_size: 1 (693.13 ms/iter)
+Sequences: 25600, Mean episode_total_rewards: 0.004410714285714285, loss_avg: 0.011917989253997802, epsilon: 0.06549064586987571 curr_temp_size: 1 (690.43 ms/iter)
+Validating model on longer sequences
+/home/desheulin/anaconda3/lib/python3.7/site-packages/mpl_toolkits/axes_grid1/colorbar.py:473: UserWarning: Attempting to set identical bottom==top results
+in singular transformations; automatically expanding.
+bottom=2, top=2
+  ax.set_ylim(vmin, vmax)
+Sequences: 26400, Mean episode_total_rewards: 0.00409375, loss_avg: 0.01011937141418457, epsilon: 0.06367044699920017 curr_temp_size: 1 (943.33 ms/iter)
+Sequences: 27200, Mean episode_total_rewards: 0.010437499999999999, loss_avg: 0.011245284080505371, epsilon: 0.06206412713374103 curr_temp_size: 1 (654.34 ms/iter)
+Sequences: 28000, Mean episode_total_rewards: 0.010187499999999999, loss_avg: 0.008952684998512268, epsilon: 0.06064655482791323 curr_temp_size: 1 (728.24 ms/iter)
+Sequences: 28800, Mean episode_total_rewards: 0.00692857142857143, loss_avg: 0.011859918832778931, epsilon: 0.059395551658830495 curr_temp_size: 1 (655.52 ms/iter)
+Validating model on longer sequences
+/home/desheulin/anaconda3/lib/python3.7/site-packages/mpl_toolkits/axes_grid1/colorbar.py:473: UserWarning: Attempting to set identical bottom==top results
+in singular transformations; automatically expanding.
+bottom=4, top=4
+  ax.set_ylim(vmin, vmax)
+Sequences: 29600, Mean episode_total_rewards: -0.0015401785714285715, loss_avg: 0.010279316902160645, epsilon: 0.05829154523699147 curr_temp_size: 1 (836.60 ms/iter)
+Sequences: 30400, Mean episode_total_rewards: 0.005187499999999999, loss_avg: 0.010688086748123169, epsilon: 0.05731726298928503 curr_temp_size: 1 (597.50 ms/iter)
+Sequences: 31200, Mean episode_total_rewards: 0.003754464285714286, loss_avg: 0.01494882583618164, epsilon: 0.056457461923440935 curr_temp_size: 1 (638.13 ms/iter)
+Sequences: 32000, Mean episode_total_rewards: -0.0032500000000000007, loss_avg: 0.014887168407440185, epsilon: 0.05569869014599459 curr_temp_size: 1 (791.74 ms/iter)
+Validating model on longer sequences
+Sequences: 32800, Mean episode_total_rewards: 0.008004464285714285, loss_avg: 0.007651679515838623, epsilon: 0.05502907640262958 curr_temp_size: 1 (898.41 ms/iter)
+Sequences: 33600, Mean episode_total_rewards: 0.00534077380952381, loss_avg: 0.008370506167411805, epsilon: 0.05443814434818189 curr_temp_size: 1 (626.88 ms/iter)
+Sequences: 34400, Mean episode_total_rewards: 0.009508522727272728, loss_avg: 0.010452635288238525, epsilon: 0.05391664864049384 curr_temp_size: 1 (616.59 ms/iter)
+Sequences: 35200, Mean episode_total_rewards: 0.010437500000000002, loss_avg: 0.011400959491729735, epsilon: 0.053456430293747983 curr_temp_size: 1 (614.84 ms/iter)
+Validating model on longer sequences
+Sequences: 36000, Mean episode_total_rewards: 0.008392857142857143, loss_avg: 0.009921324849128723, epsilon: 0.05305028902823216 curr_temp_size: 1 (823.45 ms/iter)
+Sequences: 36800, Mean episode_total_rewards: 0.0004345238095238098, loss_avg: 0.012227672338485717, epsilon: 0.052691870619402656 curr_temp_size: 1 (732.19 ms/iter)
+Sequences: 37600, Mean episode_total_rewards: 0.006642857142857144, loss_avg: 0.007440098524093628, epsilon: 0.05237556748378132 curr_temp_size: 1 (669.71 ms/iter)
+Sequences: 38400, Mean episode_total_rewards: 0.00665625, loss_avg: 0.01056894063949585, epsilon: 0.0520964309463177 curr_temp_size: 1 (593.03 ms/iter)
+Validating model on longer sequences
+Sequences: 39200, Mean episode_total_rewards: -0.00035416666666666653, loss_avg: 0.014977023601531983, epsilon: 0.05185009381660786 curr_temp_size: 1 (869.96 ms/iter)
+Sequences: 40000, Mean episode_total_rewards: 0.00853125, loss_avg: 0.009898229837417602, epsilon: 0.05163270206264735 curr_temp_size: 1 (677.90 ms/iter)
+Sequences: 40800, Mean episode_total_rewards: 0.0008571428571428569, loss_avg: 0.010402261018753052, epsilon: 0.05144085451312977 curr_temp_size: 1 (799.10 ms/iter)
+Sequences: 41600, Mean episode_total_rewards: 0.006230925324675325, loss_avg: 0.011137895584106446, epsilon: 0.051271549644912054 curr_temp_size: 1 (756.79 ms/iter)
+Validating model on longer sequences
+You pressed Ctrl+C!
