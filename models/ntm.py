@@ -101,7 +101,9 @@ class WriteHead(nn.Module):
     def mem_update(self, memory, write_dist, erase_vector, write_vector):
         """"""
         if self.discreet:
-            item = write_dist.argmax(-1)
+            item = write_dist.argmax(dim=-1)
+            print(item)
+            print(memory[item], erase_vector.shape, write_vector.shape)
             memory[item] *= erase_vector
             memory[item] += write_vector
             return memory
@@ -182,8 +184,10 @@ class ReadHead(nn.Module):
         self.read_dist = address_memory(
             memory, keys, betas, gates, shifts, gammas, self.get_prev_dist(memory))
         if self.discreet:
-            item = self.read_dist.argmax(axis=-1)
-            return self.memory[item]
+            item = self.read_dist.argmax(dim=-1)
+            print(item)
+            print(memory[item])
+            return memory[item]
         self.read_data = (memory.unsqueeze(1) * self.read_dist.unsqueeze(-1)).sum(-2)
         return self.read_data
 
