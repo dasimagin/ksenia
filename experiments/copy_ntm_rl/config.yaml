@@ -37,7 +37,7 @@ q_learning:
   gamma: 0.999
   alpha: 0.75
   eps_start: 0.9
-  eps_restart: 0.45
+  eps_restart: 0.15
   eps_end: 0.05
   eps_decay: 150
 

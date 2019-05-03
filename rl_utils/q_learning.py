@@ -12,8 +12,14 @@ def q_learning(state_values, action_batch, reward_batch, next_state_values, devi
     true_state_values = (1 - config.q_learning.alpha) * state_action_values + config.q_learning.alpha * expected_state_action_values
     return state_action_values, true_state_values
 
-def mse_and_penalty(input, target):
-    pass
+def mse_l1(input, target):
+    return ((input - target) ** 2 + torch.abs(input)).sum()
+
+def mse_l2(input, target):
+    return ((input - target) ** 2 + (input ** 2)).sum()
+
+def mse_lsize(input, target, size):
+    return ((input - target) ** 2 + (input - size) ** 2).sum()
 
 def validate(model, env, device):
     model.init_sequence(1, device)

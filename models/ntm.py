@@ -81,7 +81,7 @@ def address_memory(memory, keys, betas, gates, shifts, gammas, prev_weights):
 
 
 class WriteHead(nn.Module):
-    def __init__(self, n_heads, mem_word_length):
+    def __init__(self, n_heads, mem_word_length, discreet=False):
         super().__init__()
         self.n_heads = n_heads
         self.mem_word_length = mem_word_length
@@ -91,6 +91,7 @@ class WriteHead(nn.Module):
         self.write_dist = None
         self.write_data = None
         self.erase_data = None
+        self.discreet = discreet
 
     def new_sequence(self):
         self.write_dist = None
@@ -100,6 +101,11 @@ class WriteHead(nn.Module):
     @staticmethod
     def mem_update(memory, write_dist, erase_vector, write_vector):
         """"""
+        if self.discreet:
+            item = write_dist.argmax(-1)
+            memory[item] *= erase_vector
+            memory[item] += write_vector
+            return memory
         erase_matrix = torch.prod(1.0 - write_dist.unsqueeze(-1) * erase_vector.unsqueeze(-2), dim=1)
         update_matrix = write_dist.transpose(1, 2) @ write_vector
         return memory * erase_matrix + update_matrix
@@ -138,7 +144,7 @@ class WriteHead(nn.Module):
 
 
 class ReadHead(nn.Module):
-    def __init__(self, n_heads, mem_word_length):
+    def __init__(self, n_heads, mem_word_length, discreet=False):
         super().__init__()
         self.n_heads = n_heads
         self.mem_word_length = mem_word_length
@@ -147,6 +153,7 @@ class ReadHead(nn.Module):
         self.shapes = [[self.n_heads, size] for size in self.input_partition]
         self.read_dist = None
         self.read_data = None
+        self.discreet = discreet
 
     def new_sequence(self):
         self.read_dist = None
@@ -175,6 +182,9 @@ class ReadHead(nn.Module):
 
         self.read_dist = address_memory(
             memory, keys, betas, gates, shifts, gammas, self.get_prev_dist(memory))
+        if self.discreet:
+            item = self.read_dist.argmax(axis=-1)
+            return self.memory[item]
         self.read_data = (memory.unsqueeze(1) * self.read_dist.unsqueeze(-1)).sum(-2)
         return self.read_data
 
@@ -191,13 +201,14 @@ class NTM(nn.Module):
             controller_n_hidden,
             controller_n_layers,
             controller_clip,
+            **head_params
     ):
         super().__init__()
         self.input_size = input_size
         self.output_size = output_size
 
-        self.write_head = WriteHead(n_writes, mem_word_length)
-        self.read_head = ReadHead(n_reads, mem_word_length)
+        self.write_head = WriteHead(n_writes, mem_word_length, **head_params)
+        self.read_head = ReadHead(n_reads, mem_word_length, **head_params)
 
         controller_input = input_size + n_reads * mem_word_length
         controls_size = self.read_head.input_size + self.write_head.input_size

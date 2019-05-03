@@ -63,7 +63,7 @@ def train(config):
             n_hidden=config.model.n_hidden,
             n_layers=config.model.n_layers,
         )
-    elif config.model.name == 'ntm':
+    elif config.model.name == 'ntm' or config.model.name == 'ntm_dntm':
         model = NTM(
             input_size=config.task.len_alphabet,
             output_size=config.task.len_alphabet + 2,
@@ -74,6 +74,19 @@ def train(config):
             controller_n_hidden=config.model.controller_n_hidden,
             controller_n_layers=config.model.controller_n_layers,
             controller_clip=config.model.controller_clip,
+        )
+    elif config.model.name == 'dntm':
+        model = NTM(
+            input_size=config.task.len_alphabet,
+            output_size=config.task.len_alphabet + 2,
+            mem_word_length=config.model.mem_word_length,
+            mem_cells_count=config.model.mem_cells_count,
+            n_writes=config.model.n_writes,
+            n_reads=config.model.n_reads,
+            controller_n_hidden=config.model.controller_n_hidden,
+            controller_n_layers=config.model.controller_n_layers,
+            controller_clip=config.model.controller_clip,
+            discreet=True
         )
     else:
         raise Exception('Unknown task')
@@ -102,8 +115,8 @@ def train(config):
     # Load data
     if config.task.name == 'copy':
         env = CopyEnv(seed=config.seed, len_alphabet=config.task.len_alphabet, n_copies=config.task.n_copies)
-    # elif config.task.name == 'repeat':
-    #     dataset = RepeatCopyTask(bit_width=config.task.bit_width, seed=config.seed)
+    elif config.task.name == 'sort':
+        env = SortEnv(seed=config.seed, len_alphabet=config.task.len_alphabet)
     else:
         raise Exception('Unknown task')
 
@@ -121,8 +134,12 @@ def train(config):
 
     if config.train.loss == 'mse':
         loss = nn.MSELoss()
-    elif config.train.loss == 'mse_penalty':
-        loss = mse_and_penalty
+    elif config.train.loss == 'mse_l1':
+        loss = mse_l1
+    elif config.train.loss == 'mse_l2':
+        loss = mse_l2
+    elif config.train.loss == 'mse_lsize':
+        loss = mse_lsize
     else:
         raise ValueError('Unknown loss')
 
@@ -134,8 +151,12 @@ def train(config):
 
         episode_total_rewards = 0.
         total_loss = 0.
+        if config.train.loss == 'mse_lsize':
+            temp_loss = partial(loss, size=curricua.temp_size)
+        else:
+            temp_loss = loss
         for _ in range(config.train.batch_size):
-            acc_loss, episode_total_reward = learn_episode(curricua, env, model, optimizer, loss, device, config)
+            acc_loss, episode_total_reward = learn_episode(curricua, env, model, optimizer, temp_loss, device, config)
             episode_total_rewards += episode_total_reward
             total_loss += acc_loss
         episode_total_rewards /= config.train.batch_size
@@ -201,6 +222,10 @@ def train(config):
             utils.save_checkpoint(model, config.checkpoints, total_loss,
                                   episode_total_rewards)
 
+        if config.model.name == 'ntm_dntm' and i % congig.model.reset_interval == 0:
+            model.read_head.discreet = not model.read_head.discreet
+            model.write_head.discreet = not model.write_head.discreet
+
         # Write scalars to tensorboard
         writer.add_scalar(
             'train/loss', total_loss, global_step=i)
@@ -208,6 +233,7 @@ def train(config):
             'train/reward', episode_total_rewards, global_step=i)
         writer.add_scalar(
             'train/size', curricua.temp_size, global_step=i)
+
 
         global running
         if not running:
