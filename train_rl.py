@@ -20,6 +20,7 @@ from rl_utils.q_learning import *
 from rl_utils.memory import *
 from copy import copy
 from sklearn.metrics import accuracy_score
+from functools import partial
 
 def setup():
     parser = argparse.ArgumentParser(
