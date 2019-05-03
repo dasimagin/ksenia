@@ -140,7 +140,7 @@ class WriteHead(nn.Module):
         self.write_data = write_vectors
         self.erase_data = erase_vectors
 
-        return WriteHead.mem_update(memory, self.write_dist, self.erase_data, self.write_data)
+        return self.mem_update(memory, self.write_dist, self.erase_data, self.write_data)
 
 
 class ReadHead(nn.Module):
