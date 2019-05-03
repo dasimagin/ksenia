@@ -103,9 +103,9 @@ class WriteHead(nn.Module):
         if self.discreet:
             item = write_dist.argmax(dim=-1)
             print(item)
-            print(memory[item], erase_vector.shape, write_vector.shape)
-            memory[item] *= erase_vector
-            memory[item] += write_vector
+            print(memory[:, item], erase_vector.shape, write_vector.shape)
+            memory[:, item] *= erase_vector
+            memory[:, item] += write_vector
             return memory
         erase_matrix = torch.prod(1.0 - write_dist.unsqueeze(-1) * erase_vector.unsqueeze(-2), dim=1)
         update_matrix = write_dist.transpose(1, 2) @ write_vector
@@ -186,8 +186,8 @@ class ReadHead(nn.Module):
         if self.discreet:
             item = self.read_dist.argmax(dim=-1)
             print(item)
-            print(memory[item])
-            return memory[item]
+            print(memory[:, item])
+            return memory[:, item]
         self.read_data = (memory.unsqueeze(1) * self.read_dist.unsqueeze(-1)).sum(-2)
         return self.read_data
 
