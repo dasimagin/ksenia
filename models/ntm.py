@@ -98,7 +98,6 @@ class WriteHead(nn.Module):
         self.write_data = None
         self.erase_data = None
 
-    @staticmethod
     def mem_update(self, memory, write_dist, erase_vector, write_vector):
         """"""
         if self.discreet:
