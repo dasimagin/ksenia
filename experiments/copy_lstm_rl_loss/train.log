@@ -1,0 +1,26 @@
+2019-05-05 17:34:38,353:INFO: Loaded config
+2019-05-05 17:34:38,353:INFO: ('name', 'Copy Q-learning LSTM')
+2019-05-05 17:34:38,353:INFO: ('seed', 1)
+2019-05-05 17:34:38,354:INFO: ('gpu', True)
+2019-05-05 17:34:38,354:INFO: ('task', {'name': 'copy', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'n_copies': 1, 'update_limit': 1.0, 'min_update_iters': 75})
+2019-05-05 17:34:38,354:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 3})
+2019-05-05 17:34:38,354:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 25, 'train_iterations': 18000, 'update_interval': 3, 'batch_size': 64, 'loss': 'mse_lsize'})
+2019-05-05 17:34:38,354:INFO: ('q_learning', {'gamma': 0.999, 'alpha': 0.75, 'eps_start': 0.9, 'eps_restart': 0.15, 'eps_end': 0.05, 'eps_decay': 150})
+2019-05-05 17:34:38,354:INFO: ('validation', {'iterations': 5, 'len_val_seqs': [25, 50, 75, 100, 150]})
+2019-05-05 17:34:38,354:INFO: ('optim', {'optimizer': 'adam', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 15.0})
+2019-05-05 17:34:38,354:INFO: ('path', PosixPath('experiments/copy_lstm_rl_loss'))
+2019-05-05 17:34:38,354:INFO: ('tensorboard', PosixPath('experiments/copy_lstm_rl_loss/tensorboard'))
+2019-05-05 17:34:38,354:INFO: ('checkpoints', PosixPath('experiments/copy_lstm_rl_loss/checkpoints'))
+2019-05-05 17:34:38,354:INFO: Start training
+2019-05-05 17:34:41,409:INFO: Loaded model
+2019-05-05 17:34:41,409:INFO: Total number of parameters 1325319
+2019-05-05 17:34:48,315:INFO: Sequences: 0, Mean episode_total_rewards: -0.009125, loss_avg: 0.03290622234344483, epsilon: 0.9 curr_temp_size: 1 (275.70 ms/iter)
+2019-05-05 17:34:48,315:INFO: Validating model on same-size sequences
+2019-05-05 17:34:48,485:INFO: Validating model on longer sequences
+2019-05-05 17:35:18,953:INFO: Validating model on same-size sequences
+2019-05-05 17:35:40,937:INFO: Validating model on same-size sequences
+2019-05-05 17:36:07,908:INFO: Validating model on same-size sequences
+2019-05-05 17:36:34,072:INFO: Validating model on same-size sequences
+2019-05-05 17:36:58,570:INFO: Validating model on same-size sequences
+2019-05-05 17:37:22,488:INFO: Validating model on same-size sequences
+2019-05-05 17:37:47,629:INFO: Validating model on same-size sequences

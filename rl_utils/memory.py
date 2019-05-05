@@ -3,17 +3,23 @@ import numpy as np
 import torch
 
 Transition = namedtuple('Transition',
-                        ('state', 'action', 'next_state', 'reward'))
+                        ('state', 'reward'))
 
 class ReplayMemory(object):
-    def __init__(self, capacity):
-        self.capacity = capacity
+    def __init__(self, config):
+        self.capacity = config.memory_net.capacity
+        self.gamma = config.memory_net.gamma
         self.memory = []
+        self.episode = []
         self.position = 0
 
     def reset(self):
         self.memory = []
+        self.episode = []
         self.position = 0
+
+    def episode_save(self, state):
+        self.episode.append(state)
 
     def push(self, *args):
         """Saves a transition."""
@@ -22,30 +28,19 @@ class ReplayMemory(object):
         self.memory[self.position] = Transition(*args)
         self.position = (self.position + 1) % self.capacity
 
+    def episode_push(self, reward):
+        discouted_reward = reward
+        for item in self.episode[::-1]:
+            self.push(item, discouted_reward)
+            discouted_reward *= self.gamma
+        self.episode = []
+
     def random_sample(self, batch_size):
         return random.sample(self.memory, batch_size)
-
-    def reverse_sample(self):
-        return self.memory[::-1]
 
     def __len__(self):
         return len(self.memory)
 
 
-def save_episode(
-         memory,
-         curricua,
-         env,
-         model,
-         device
-    ):
-    task_len = curricua.sample()
-    temp_env = env.reset(task_len)
-    model.init_sequence(1, device)
-    while not temp_env.finished:
-        readed = torch.eye(temp_env.len_alphabet)[temp_env.read()]
-        action_probas = model.step(readed)
-        reward = temp_env.step(action_probas.argmax())
-        new_readed = torch.eye(temp_env.len_alphabet)[temp_env.read()] if not temp_env.finished else None
-        memory.push(readed, action_probas.argmax().view(1, -1), new_readed, torch.Tensor([reward]))
-    return temp_env.episode_total_reward
+def train_memory_critic(critic, memory, critic_loss, critic_optimizer):
+    pass

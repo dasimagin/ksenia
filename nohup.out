@@ -90,3 +90,15 @@ Sequences: 40800, Mean episode_total_rewards: 0.0008571428571428569, loss_avg: 0
 Sequences: 41600, Mean episode_total_rewards: 0.006230925324675325, loss_avg: 0.011137895584106446, epsilon: 0.051271549644912054 curr_temp_size: 1 (756.79 ms/iter)
 Validating model on longer sequences
 You pressed Ctrl+C!
+usage: tensorboard [-h] [--helpfull] [--logdir PATH] [--host ADDR]
+                   [--port PORT] [--purge_orphaned_data BOOL]
+                   [--reload_interval SECONDS] [--db URI] [--db_import]
+                   [--db_import_use_op] [--inspect] [--tag TAG]
+                   [--event_file PATH] [--path_prefix PATH]
+                   [--window_title TEXT] [--max_reload_threads COUNT]
+                   [--reload_task TYPE]
+                   [--samples_per_plugin SAMPLES_PER_PLUGIN]
+                   [--master_tpu_unsecure_channel ADDR]
+                   [--debugger_data_server_grpc_port PORT]
+                   [--debugger_port PORT]
+tensorboard: error: unrecognized arguments: --log-dir /home/desheulin/ksenia/experiments

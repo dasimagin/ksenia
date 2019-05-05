@@ -43,6 +43,7 @@ def select_action(action_probas, device, config):
     else:
         return torch.tensor([random.randrange(config.task.len_alphabet + 2)], device=device, dtype=torch.long)
 
+
 def learn_episode(
          curricua,
          env,
@@ -51,7 +52,8 @@ def learn_episode(
          loss,
          device,
          config,
-         q_learning=q_learning
+         q_learning=q_learning,
+         memory=None
     ):
     task_len = curricua.sample()
     temp_env = env.reset(task_len)
@@ -65,6 +67,8 @@ def learn_episode(
         new_readed = torch.eye(temp_env.len_alphabet, device=device)[temp_env.read()] if not temp_env.finished else None
         new_action_probas = model.step(new_readed) if new_readed is not None else torch.zeros(1, device=device)
         reward_tensored = torch.tensor([reward], device=device, dtype=torch.float32).view(1, -1)
+        if memory is not None:
+            memory.episode_save(model.memory)
         acc_loss += loss(*q_learning(action_probas.view(1, -1), action_probas.argmax().view(1, -1), reward_tensored, new_action_probas.view(1, -1), device, config))
         action_probas = new_action_probas
     optimizer.zero_grad()
@@ -72,6 +76,8 @@ def learn_episode(
     torch.nn.utils.clip_grad_norm_(model.parameters(),
                                    config.optim.gradient_clipping)
     optimizer.step()
+    if memory is not None:
+        memory.episode_push(temp_env.episode_total_reward / len(temp_env.output_panel))
     return acc_loss / len(temp_env.output_panel), temp_env.episode_total_reward / len(temp_env.output_panel)
 
 def optimize_model(model, memory, optimizer, loss, device, config, q_learning=q_learning, **q_params):

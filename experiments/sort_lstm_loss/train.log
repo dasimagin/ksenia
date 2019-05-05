@@ -1,0 +1,21 @@
+2019-05-05 17:36:49,629:INFO: Loaded config
+2019-05-05 17:36:49,629:INFO: ('name', 'Sort LSTM custom loss')
+2019-05-05 17:36:49,629:INFO: ('seed', 1)
+2019-05-05 17:36:49,629:INFO: ('gpu', True)
+2019-05-05 17:36:49,629:INFO: ('task', {'name': 'sort', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'update_limit': 1.0, 'min_update_iters': 75})
+2019-05-05 17:36:49,629:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 3})
+2019-05-05 17:36:49,629:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 25, 'train_iterations': 18000, 'update_interval': 3, 'batch_size': 64, 'loss': 'mse_lsize'})
+2019-05-05 17:36:49,629:INFO: ('q_learning', {'gamma': 0.999, 'alpha': 0.75, 'eps_start': 0.9, 'eps_restart': 0.15, 'eps_end': 0.05, 'eps_decay': 150})
+2019-05-05 17:36:49,630:INFO: ('validation', {'iterations': 5, 'len_val_seqs': [25, 50, 75, 100, 150]})
+2019-05-05 17:36:49,630:INFO: ('optim', {'optimizer': 'adam', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 15.0})
+2019-05-05 17:36:49,630:INFO: ('path', PosixPath('experiments/sort_lstm_loss'))
+2019-05-05 17:36:49,630:INFO: ('tensorboard', PosixPath('experiments/sort_lstm_loss/tensorboard'))
+2019-05-05 17:36:49,630:INFO: ('checkpoints', PosixPath('experiments/sort_lstm_loss/checkpoints'))
+2019-05-05 17:36:49,630:INFO: Start training
+2019-05-05 17:36:53,745:INFO: Loaded model
+2019-05-05 17:36:53,746:INFO: Total number of parameters 1325319
+2019-05-05 17:37:01,367:INFO: Sequences: 0, Mean episode_total_rewards: -0.0087421875, loss_avg: 0.030863516330718994, epsilon: 0.9 curr_temp_size: 1 (304.19 ms/iter)
+2019-05-05 17:37:01,368:INFO: Validating model on same-size sequences
+2019-05-05 17:37:01,563:INFO: Validating model on longer sequences
+2019-05-05 17:37:38,673:INFO: Validating model on same-size sequences
+2019-05-05 17:38:02,233:INFO: Validating model on same-size sequences
