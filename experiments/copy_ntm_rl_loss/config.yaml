@@ -31,7 +31,10 @@ train:
   train_iterations: 18000
   update_interval: 3
   batch_size: 64
-  loss: mse
+  loss: mse_lsize
+  loss_k_start: 0
+  loss_k_end: 0.25
+  loss_k_decay: 1000
 
 q_learning:
   gamma: 0.999

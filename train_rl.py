@@ -152,8 +152,8 @@ def train(config):
 
         episode_total_rewards = 0.
         total_loss = 0.
-        if config.train.loss == 'mse_lsize':
-            temp_loss = partial(loss, size=curricua.temp_size)
+        if config.train.loss.startswith('mse_l'):
+            temp_loss = partial(loss, size=curricua.temp_size, config=config, iteration=i)
         else:
             temp_loss = loss
         for _ in range(config.train.batch_size):
@@ -173,6 +173,8 @@ def train(config):
 
             message = f"Sequences: {i * config.train.batch_size}, Mean episode_total_rewards: {episode_total_rewards_avg}, loss_avg: {loss_avg}"
             message += f", epsilon: {temp_epsilon(config)} curr_temp_size: {curricua.temp_size} ({time_per_iter:.2f} ms/iter)"
+            if config.train.loss.startswith('mse_l'):
+                message += f", temp_k in loss: {temp_k(config, i)}" 
             logging.info(message)
 
             iter_start_time = time_now

@@ -1,0 +1,32 @@
+2019-05-05 22:56:58,725:INFO: Loaded config
+2019-05-05 22:56:58,725:INFO: ('name', 'Sort Q-learning NTM')
+2019-05-05 22:56:58,725:INFO: ('seed', 1)
+2019-05-05 22:56:58,725:INFO: ('gpu', True)
+2019-05-05 22:56:58,725:INFO: ('task', {'name': 'sort', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'update_limit': 1.0, 'min_update_iters': 75})
+2019-05-05 22:56:58,725:INFO: ('model', {'name': 'dntm', 'mem_word_length': 5, 'mem_cells_count': 128, 'n_writes': 1, 'n_reads': 1, 'controller_n_hidden': 256, 'controller_n_layers': 1, 'controller_clip': 20})
+2019-05-05 22:56:58,725:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 25, 'train_iterations': 18000, 'update_interval': 3, 'batch_size': 64, 'loss': 'mse_lsize', 'loss_k_start': 0, 'loss_k_end': 0.25, 'loss_k_decay': 1000})
+2019-05-05 22:56:58,725:INFO: ('q_learning', {'gamma': 0.999, 'alpha': 0.75, 'eps_start': 0.9, 'eps_restart': 0.15, 'eps_end': 0.05, 'eps_decay': 150})
+2019-05-05 22:56:58,725:INFO: ('validation', {'iterations': 5, 'len_val_seqs': [25, 50, 75, 100, 150]})
+2019-05-05 22:56:58,725:INFO: ('optim', {'optimizer': 'adam', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 15.0})
+2019-05-05 22:56:58,725:INFO: ('path', PosixPath('experiments/sort_dntm_loss'))
+2019-05-05 22:56:58,725:INFO: ('tensorboard', PosixPath('experiments/sort_dntm_loss/tensorboard'))
+2019-05-05 22:56:58,725:INFO: ('checkpoints', PosixPath('experiments/sort_dntm_loss/checkpoints'))
+2019-05-05 22:56:58,725:INFO: Start training
+2019-05-05 22:57:04,063:INFO: Loaded model
+2019-05-05 22:57:04,063:INFO: Total number of parameters 285009
+2019-05-05 22:57:20,816:INFO: Sequences: 0, Mean episode_total_rewards: -0.0099765625, loss_avg: 0.009060376286506654, epsilon: 0.9 curr_temp_size: 1 (669.66 ms/iter), temp_k in loss: 0.0
+2019-05-05 22:57:20,817:INFO: Validating model on same-size sequences
+2019-05-05 22:57:23,475:INFO: Validating model on longer sequences
+2019-05-05 23:00:16,449:INFO: Validating model on same-size sequences
+2019-05-05 23:01:24,642:INFO: Validating model on same-size sequences
+2019-05-05 23:02:43,011:INFO: Validating model on same-size sequences
+2019-05-05 23:03:50,252:INFO: Validating model on same-size sequences
+2019-05-05 23:05:02,890:INFO: Validating model on same-size sequences
+2019-05-05 23:06:13,333:INFO: Validating model on same-size sequences
+2019-05-05 23:07:23,724:INFO: Validating model on same-size sequences
+2019-05-05 23:08:35,735:INFO: Validating model on same-size sequences
+2019-05-05 23:09:02,106:INFO: Sequences: 1600, Mean episode_total_rewards: -0.0057857142857142855, loss_avg: 0.009937077760696411, epsilon: 0.8504998535466114 curr_temp_size: 1 (28051.61 ms/iter), temp_k in loss: 0.006172521992916846
+2019-05-05 23:09:47,409:INFO: Validating model on same-size sequences
+2019-05-05 23:10:54,476:INFO: Validating model on same-size sequences
+2019-05-05 23:12:10,469:INFO: Validating model on same-size sequences
+2019-05-05 23:13:20,945:INFO: Validating model on same-size sequences

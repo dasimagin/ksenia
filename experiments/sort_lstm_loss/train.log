@@ -1,21 +1,61 @@
-2019-05-05 17:36:49,629:INFO: Loaded config
-2019-05-05 17:36:49,629:INFO: ('name', 'Sort LSTM custom loss')
-2019-05-05 17:36:49,629:INFO: ('seed', 1)
-2019-05-05 17:36:49,629:INFO: ('gpu', True)
-2019-05-05 17:36:49,629:INFO: ('task', {'name': 'sort', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'update_limit': 1.0, 'min_update_iters': 75})
-2019-05-05 17:36:49,629:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 3})
-2019-05-05 17:36:49,629:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 25, 'train_iterations': 18000, 'update_interval': 3, 'batch_size': 64, 'loss': 'mse_lsize'})
-2019-05-05 17:36:49,629:INFO: ('q_learning', {'gamma': 0.999, 'alpha': 0.75, 'eps_start': 0.9, 'eps_restart': 0.15, 'eps_end': 0.05, 'eps_decay': 150})
-2019-05-05 17:36:49,630:INFO: ('validation', {'iterations': 5, 'len_val_seqs': [25, 50, 75, 100, 150]})
-2019-05-05 17:36:49,630:INFO: ('optim', {'optimizer': 'adam', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 15.0})
-2019-05-05 17:36:49,630:INFO: ('path', PosixPath('experiments/sort_lstm_loss'))
-2019-05-05 17:36:49,630:INFO: ('tensorboard', PosixPath('experiments/sort_lstm_loss/tensorboard'))
-2019-05-05 17:36:49,630:INFO: ('checkpoints', PosixPath('experiments/sort_lstm_loss/checkpoints'))
-2019-05-05 17:36:49,630:INFO: Start training
-2019-05-05 17:36:53,745:INFO: Loaded model
-2019-05-05 17:36:53,746:INFO: Total number of parameters 1325319
-2019-05-05 17:37:01,367:INFO: Sequences: 0, Mean episode_total_rewards: -0.0087421875, loss_avg: 0.030863516330718994, epsilon: 0.9 curr_temp_size: 1 (304.19 ms/iter)
-2019-05-05 17:37:01,368:INFO: Validating model on same-size sequences
-2019-05-05 17:37:01,563:INFO: Validating model on longer sequences
-2019-05-05 17:37:38,673:INFO: Validating model on same-size sequences
-2019-05-05 17:38:02,233:INFO: Validating model on same-size sequences
+2019-05-05 22:56:44,710:INFO: Loaded config
+2019-05-05 22:56:44,710:INFO: ('name', 'Sort LSTM custom loss')
+2019-05-05 22:56:44,710:INFO: ('seed', 1)
+2019-05-05 22:56:44,710:INFO: ('gpu', True)
+2019-05-05 22:56:44,713:INFO: ('task', {'name': 'sort', 'len_alphabet': 5, 'min_len': 1, 'max_len': 20, 'update_limit': 1.0, 'min_update_iters': 75})
+2019-05-05 22:56:44,713:INFO: ('model', {'name': 'lstm', 'n_hidden': 256, 'n_layers': 3})
+2019-05-05 22:56:44,713:INFO: ('train', {'checkpoint_interval': 1000, 'report_interval': 100, 'verbose_interval': 25, 'train_iterations': 18000, 'update_interval': 3, 'batch_size': 64, 'loss': 'mse_lsize', 'loss_k_start': 0, 'loss_k_end': 0.25, 'loss_k_decay': 1000})
+2019-05-05 22:56:44,713:INFO: ('q_learning', {'gamma': 0.999, 'alpha': 0.75, 'eps_start': 0.9, 'eps_restart': 0.15, 'eps_end': 0.05, 'eps_decay': 150})
+2019-05-05 22:56:44,713:INFO: ('validation', {'iterations': 5, 'len_val_seqs': [25, 50, 75, 100, 150]})
+2019-05-05 22:56:44,713:INFO: ('optim', {'optimizer': 'adam', 'learning_rate': 0.0001, 'momentum': 0.9, 'gradient_clipping': 15.0})
+2019-05-05 22:56:44,714:INFO: ('path', PosixPath('experiments/sort_lstm_loss'))
+2019-05-05 22:56:44,715:INFO: ('tensorboard', PosixPath('experiments/sort_lstm_loss/tensorboard'))
+2019-05-05 22:56:44,715:INFO: ('checkpoints', PosixPath('experiments/sort_lstm_loss/checkpoints'))
+2019-05-05 22:56:44,715:INFO: Start training
+2019-05-05 22:56:48,330:INFO: Loaded model
+2019-05-05 22:56:48,330:INFO: Total number of parameters 1325319
+2019-05-05 22:56:58,864:INFO: Sequences: 0, Mean episode_total_rewards: -0.0103046875, loss_avg: 0.009655235409736633, epsilon: 0.9 curr_temp_size: 1 (421.31 ms/iter), temp_k in loss: 0.0
+2019-05-05 22:56:58,865:INFO: Validating model on same-size sequences
+2019-05-05 22:56:59,115:INFO: Validating model on longer sequences
+2019-05-05 22:57:33,379:INFO: Validating model on same-size sequences
+2019-05-05 22:57:56,973:INFO: Validating model on same-size sequences
+2019-05-05 22:58:22,459:INFO: Validating model on same-size sequences
+2019-05-05 22:58:50,433:INFO: Validating model on same-size sequences
+2019-05-05 22:59:15,021:INFO: Validating model on same-size sequences
+2019-05-05 22:59:41,710:INFO: Validating model on same-size sequences
+2019-05-05 23:00:09,065:INFO: Validating model on same-size sequences
+2019-05-05 23:00:35,060:INFO: Validating model on same-size sequences
+2019-05-05 23:00:43,984:INFO: Sequences: 1600, Mean episode_total_rewards: -0.005584821428571429, loss_avg: 0.010548837184906006, epsilon: 0.8504998535466114 curr_temp_size: 1 (9004.77 ms/iter), temp_k in loss: 0.006172521992916846
+2019-05-05 23:01:02,307:INFO: Validating model on same-size sequences
+2019-05-05 23:01:28,032:INFO: Validating model on same-size sequences
+2019-05-05 23:01:53,142:INFO: Validating model on same-size sequences
+2019-05-05 23:02:19,958:INFO: Validating model on same-size sequences
+2019-05-05 23:02:47,160:INFO: Validating model on same-size sequences
+2019-05-05 23:03:14,764:INFO: Validating model on same-size sequences
+2019-05-05 23:03:39,484:INFO: Validating model on same-size sequences
+2019-05-05 23:04:05,447:INFO: Validating model on same-size sequences
+2019-05-05 23:04:23,532:INFO: Sequences: 3200, Mean episode_total_rewards: -0.006421874999999999, loss_avg: 0.009878687262535095, epsilon: 0.8089250439167868 curr_temp_size: 1 (8781.94 ms/iter), temp_k in loss: 0.012192643874821496
+2019-05-05 23:04:31,836:INFO: Validating model on same-size sequences
+2019-05-05 23:04:57,467:INFO: Validating model on same-size sequences
+2019-05-05 23:05:24,999:INFO: Validating model on same-size sequences
+2019-05-05 23:05:53,897:INFO: Validating model on same-size sequences
+2019-05-05 23:06:20,731:INFO: Validating model on same-size sequences
+2019-05-05 23:06:47,449:INFO: Validating model on same-size sequences
+2019-05-05 23:07:14,085:INFO: Validating model on same-size sequences
+2019-05-05 23:07:38,847:INFO: Validating model on same-size sequences
+2019-05-05 23:08:07,164:INFO: Sequences: 4800, Mean episode_total_rewards: -0.0043125, loss_avg: 0.011178655624389649, epsilon: 0.769509466157022 curr_temp_size: 1 (8945.27 ms/iter), temp_k in loss: 0.018064128417861786
+2019-05-05 23:08:07,164:INFO: Validating model on same-size sequences
+2019-05-05 23:08:32,599:INFO: Validating model on same-size sequences
+2019-05-05 23:08:56,659:INFO: Validating model on same-size sequences
+2019-05-05 23:09:21,895:INFO: Validating model on same-size sequences
+2019-05-05 23:09:50,765:INFO: Validating model on same-size sequences
+2019-05-05 23:10:16,974:INFO: Validating model on same-size sequences
+2019-05-05 23:10:44,854:INFO: Validating model on same-size sequences
+2019-05-05 23:11:10,022:INFO: Validating model on same-size sequences
+2019-05-05 23:11:37,256:INFO: Validating model on same-size sequences
+2019-05-05 23:11:46,380:INFO: Sequences: 6400, Mean episode_total_rewards: -0.005232142857142856, loss_avg: 0.010518437623977661, epsilon: 0.7276084968048195 curr_temp_size: 1 (8768.66 ms/iter), temp_k in loss: 0.02379064549101012
+2019-05-05 23:11:46,381:INFO: Validating model on longer sequences
+2019-05-05 23:12:19,598:INFO: Validating model on same-size sequences
+2019-05-05 23:12:45,926:INFO: Validating model on same-size sequences
+2019-05-05 23:13:13,050:INFO: Validating model on same-size sequences
+2019-05-05 23:13:39,813:INFO: Validating model on same-size sequences
