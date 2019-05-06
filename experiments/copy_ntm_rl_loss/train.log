@@ -367,3 +367,7 @@
 2019-05-06 05:35:54,141:INFO: Validating model on same-size sequences
 2019-05-06 05:37:26,946:INFO: Validating model on same-size sequences
 2019-05-06 05:38:56,494:INFO: Validating model on same-size sequences
+2019-05-06 05:40:23,590:INFO: Validating model on same-size sequences
+2019-05-06 05:42:01,827:INFO: Validating model on same-size sequences
+2019-05-06 05:43:37,193:INFO: Validating model on same-size sequences
+2019-05-06 05:44:12,263:INFO: Sequences: 59200, Mean episode_total_rewards: 0.0013333333333333335, loss_avg: 0.020432982444763183, epsilon: 0.15833587441059763 curr_temp_size: 1 (31900.48 ms/iter), temp_k in loss: 0.15086714523125178
