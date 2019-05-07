@@ -6,7 +6,25 @@ import numpy as np
 import torch.nn.functional as F
 
 
-class CopyTask:
+class BitmapTask:
+    @staticmethod
+    def loss(prediction, target, mask):
+        """Compute scalar NLL of target sequence.
+
+        Irrelevant time steps are masked out by mask tensor.
+
+        Args:
+          prediction: batch first 3D tensor with predictions
+          target: batch first 3D tensor with targets
+          mask: batch first 2D tensor of {1, 0} to mask time steps
+        """
+        xent = F.binary_cross_entropy_with_logits(prediction, target, reduction='none')
+        loss_time_batch = xent.sum(-1)
+        loss_batch = torch.sum(loss_time_batch * mask, dim=-1)
+        return loss_batch.sum() / loss_batch.size(0)
+
+
+class CopyTask(BitmapTask):
     """Data generator for copy and repeat copy tasks.
     """
     def __init__(self, batch_size, min_len, max_len, bit_width=8, seed=1):
@@ -64,24 +82,8 @@ class CopyTask:
                 self.min_len, self.max_len,
             )
 
-    @staticmethod
-    def loss(prediction, target, mask):
-        """Compute scalar NLL of target sequence.
 
-        Irrelevant time steps are masked out by mask tensor.
-
-        Args:
-          prediction: batch first 3D tensor with predictions
-          target: batch first 3D tensor with targets
-          mask: batch first 2D tensor of {1, 0} to mask time steps
-        """
-        xent = F.binary_cross_entropy(prediction, target, reduction='none')
-        loss_time_batch = xent.sum(-1)
-        loss_batch = torch.sum(loss_time_batch * mask, dim=-1)
-        return loss_batch.sum() / loss_batch.size(0)
-
-
-class RepeatCopyTask:
+class RepeatCopyTask(BitmapTask):
     def __init__(
             self,
             batch_size,
@@ -158,24 +160,38 @@ class RepeatCopyTask:
                 self.min_rep, self.max_rep,
             )
 
-    @staticmethod
-    def loss(prediction, target, mask):
-        """Compute scalar NLL of target sequence.
 
-        Irrelevant time steps are masked out by mask tensor.
+class RepeatedCopyTask(BitmapTask):
+    def __init__(
+            self,
+            batch_size,
+            bit_width,
+            min_len,
+            max_len,
+            min_rep,
+            max_rep,
+            seed,
+    ):
+        self.batch_size = batch_size
+        self.bit_width = bit_width
+        self.full_input_width = bit_width + 2
+        self.full_output_width = bit_width + 1
+        self.min_len = min_len
+        self.max_len = max_len
+        self.min_rep = min_rep
+        self.max_rep = max_rep
+        self.rand = np.random.RandomState(seed)
 
-        Args:
-          prediction: batch first 3D tensor with predictions
-          target: batch first 3D tensor with targets
-          mask: batch first 2D tensor of {1, 0} to mask time steps
-        """
-        xent = F.binary_cross_entropy(prediction, target, reduction='none')
-        loss_time_batch = xent.sum(-1)
-        loss_batch = torch.sum(loss_time_batch * mask, dim=-1)
-        return loss_batch.sum() / loss_batch.size(0)
+    def gen_batch(
+            self,
+            batch_size,
+            min_len, max_len,
+            min_rep, max_rep,
+    ):
+        return
 
 
-class AssociativeRecallTask:
+class AssociativeRecallTask(BitmapTask):
     def __init__(
             self,
             batch_size,
@@ -249,19 +265,3 @@ class AssociativeRecallTask:
                 self.batch_size,
                 self.min_cnt, self.max_cnt,
             )
-
-    @staticmethod
-    def loss(prediction, target, mask):
-        """Compute scalar NLL of target sequence.
-
-        Irrelevant time steps are masked out by mask tensor.
-
-        Args:
-          prediction: batch first 3D tensor with predictions
-          target: batch first 3D tensor with targets
-          mask: batch first 2D tensor of {1, 0} to mask time steps
-        """
-        xent = F.binary_cross_entropy(prediction, target, reduction='none')
-        loss_time_batch = xent.sum(-1)
-        loss_batch = torch.sum(loss_time_batch * mask, dim=-1)
-        return loss_batch.sum() / loss_batch.size(0)

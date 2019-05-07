@@ -63,7 +63,6 @@ def save_checkpoint(
         {
             'model_state_dict': model.state_dict(),
             'optimizer_state_dict': optimizer.state_dict(),
-            'model_random_state': model.rand.get_state(),
             'task_random_state': train_data.rand.get_state(),
             'validation_data': validation_data,
             'step': step,
@@ -77,13 +76,15 @@ def load_checkpoint(
         train_data,
         path,
 ):
-    checkpoint = torch.load(path)
+    try:
+        checkpoint = torch.load(path)
+    except RuntimeError:
+        checkpoint = torch.load(path, map_location='cpu')
+
     model.load_state_dict(checkpoint['model_state_dict'])
     optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
 
     train_data.rand.set_state(checkpoint['task_random_state'])
-    model.rand.set_state(checkpoint['model_random_state'])
-
     validation_data = checkpoint['validation_data']
     step = checkpoint['step']
 

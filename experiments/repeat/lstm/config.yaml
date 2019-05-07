@@ -1,0 +1,30 @@
+name: Repeat Copy LSTM
+
+task:
+  name: repeat
+  bit_width: 8
+  min_rep: 1
+  max_rep: 10
+  min_len: 1
+  max_len: 10
+  batch_size: 64
+  seed: 10
+
+model:
+  name: lstm
+  n_hidden: 512
+  n_layers: 3
+  seed: 20
+
+optimizer: rmsprop
+learning_rate: 0.00003
+momentum: 0.9
+gradient_clipping: 10.0
+
+checkpoint_interval: 500
+report_interval: 1000
+verbose_interval: 10
+exit_after: null
+
+gpu: true
+scheduler: null

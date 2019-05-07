@@ -18,16 +18,13 @@ from models.lstm import LSTM
 from models.ntm import NTM
 
 
-def train(model, optimizer, criterion, train_data, validation_data, config):
-    if config.scheduler is not None:
-        optimizer, scheduler = optimizer
-
+def train(model, optimizer, criterion, train_data, validation_data, step, config):
     writer = tensorboardX.SummaryWriter(log_dir=str(config.tensorboard))
     iter_start_time = time.time()
     loss_sum = 0
     cost_sum = 0
 
-    for i, (x, y, m) in enumerate(train_data, 1):
+    for i, (x, y, m) in enumerate(train_data, step + 1):
         model.train()
         batch_size, seq_len, seq_width = x.shape
         if config.gpu and torch.cuda.is_available():
@@ -41,7 +38,7 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
         loss.backward()
 
         # clip gradients
-        torch.nn.utils.clip_grad_norm_(model.parameters(), config.gradient_clipping)
+        torch.nn.utils.clip_grad_value_(model.parameters(), config.gradient_clipping)
         optimizer.step()
 
         pred_binarized = (pred.clone().data > 0.5).float()
@@ -79,10 +76,6 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
                 logging.info('Validating model on longer sequences')
                 evaluate(i, model, validation_data, writer, config)
 
-        if config.scheduler is not None and i % config.scheduler.interval == 0:
-            logging.info('Learning rate scheduler')
-            scheduler.step(cost.item())
-
         # Write scalars to tensorboard
         writer.add_scalar('train/loss', loss.item(), global_step=i * config.task.batch_size)
         writer.add_scalar('train/cost', cost.item(), global_step=i * config.task.batch_size)
@@ -110,7 +103,7 @@ def evaluate(step, model, data, writer, config):
                 name = f"io/len_{length}_rep_{num_rep}"
 
             inp, target, mask = example
-            output = model(inp.to(device))
+            output = torch.sigmoid(model(inp.to(device)))
             output = output.data.to('cpu').numpy()[0].T
             target = target.data.numpy()[0].T
 
@@ -206,7 +199,7 @@ def setup_model(config):
             n_reads=config.model.n_reads,
             controller_n_hidden=config.model.controller_n_hidden,
             controller_n_layers=config.model.controller_n_layers,
-            controller_clip=config.model.controller_clip,
+            clip_value=config.model.clip_value,
         )
     else:
         logging.info('Unknown model')
@@ -237,18 +230,7 @@ def setup_model(config):
             lr=config.learning_rate
         )
 
-    if config.scheduler is not None:
-        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-            optimizer,
-            mode='min',
-            factor=config.scheduler.factor,
-            patience=config.scheduler.patience,
-            verbose=config.scheduler.verbose,
-            threshold=config.scheduler.threshold,
-        )
-        optimizer = (optimizer, scheduler)
-
-    step = 1
+    step = 0
     if config.load:
         model, optimizer, train_data, validation_data, step = utils.load_checkpoint(
             model, optimizer, train_data, config.load,
@@ -292,7 +274,8 @@ def read_config():
 
     if not args.keep:
         (path/'tensorboard').exists() and shutil.rmtree(path/'tensorboard')
-        (path/'checkpoints').exists() and shutil.rmtree(path/'checkpoints')
+        if args.load is None:
+            (path/'checkpoints').exists() and shutil.rmtree(path/'checkpoints')
         open(path/'train.log', 'w').close()
 
     (path/'tensorboard').mkdir(exist_ok=True)
@@ -327,8 +310,8 @@ def main():
     logging.info('=' * 30 + '\n')
     logging.info('Start training')
 
-    model, optimizer, loss, train_data, validation_data = setup_model(config)
-    train(model, optimizer, loss, train_data, validation_data, config)
+    model, optimizer, loss, train_data, validation_data, step = setup_model(config)
+    train(model, optimizer, loss, train_data, validation_data, step, config)
 
 
 if __name__ == "__main__":

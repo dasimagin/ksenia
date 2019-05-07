@@ -6,7 +6,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
-EPS = 1e-16
+EPS = 1e-8
 
 
 def get_next_tensor_part(src, dims, prev_pos=0):
@@ -35,7 +35,6 @@ def linear_reset(module, gain=1.0):
 
 def circular_convolution(weights, shifts):
     """Perform circular convolution for each head's weightings.
-
     Args:
       weights: tensor of shape `[batch size, num heads, num cells]` weight distributions
       shifts: tensor of shape `[batch size, num heads, 3]` shift vectors
@@ -131,8 +130,9 @@ class WriteHead(nn.Module):
         self.write_dist = address_memory(
             memory, keys, betas, gates, shifts, gammas, self.get_prev_dist(memory),
         )
-        self.write_data = write_vectors
-        self.erase_data = erase_vectors
+
+        self.write_data = torch.tanh(write_vectors)
+        self.erase_data = torch.sigmoid(erase_vectors)
 
         return WriteHead.mem_update(memory, self.write_dist, self.erase_data, self.write_data)
 
@@ -190,7 +190,7 @@ class NTM(nn.Module):
             n_reads,
             controller_n_hidden,
             controller_n_layers,
-            controller_clip,
+            clip_value,
     ):
         super().__init__()
         self.input_size = input_size
@@ -203,10 +203,10 @@ class NTM(nn.Module):
         controls_size = self.read_head.input_size + self.write_head.input_size
 
         self.controller = LSTMController(controller_input, controller_n_hidden, controller_n_layers)
-        self.controller_clip = controller_clip
+        self.clip_value = clip_value
         self.controller_to_controls = nn.Linear(controller_n_hidden, controls_size)
+        self.reads_to_output = nn.Linear(n_reads * mem_word_length, output_size)
         self.controller_to_output = nn.Linear(controller_n_hidden, output_size)
-        self.reads_to_output = nn.Linear(mem_word_length * n_reads, output_size)
 
         self.register_buffer('mem_bias', torch.Tensor(mem_cells_count, mem_word_length))
         self.mem_word_length = mem_word_length
@@ -234,16 +234,17 @@ class NTM(nn.Module):
         prev_read_data = self.read_head.get_prev_data(self.memory).view(batch_size, -1)
         controller_output = self.controller(torch.cat([inp, prev_read_data], -1))
         controls_vector = self.controller_to_controls(controller_output)
-        if self.controller_clip:
-            controls_vector = controls_vector.clamp(-self.controller_clip, self.controller_clip)
+        controls_vector = controls_vector.clamp(-self.clip_value, self.clip_value)
 
         shapes = [[self.write_head.input_size], [self.read_head.input_size]]
         write_head_controls, read_head_controls = split_tensor(controls_vector, shapes)
 
         self.memory = self.write_head(self.memory, write_head_controls)
         reads = self.read_head(self.memory, read_head_controls)
-        return (self.controller_to_output(controller_output) +
-                self.reads_to_output(reads.view(batch_size, -1)))
+        return (
+            self.controller_to_output(controller_output) +
+            self.reads_to_output(reads.view(batch_size, -1))
+        )
 
     def mem_init(self, batch_size, device):
         self.memory = self.mem_bias.clone().repeat(batch_size, 1, 1).to(device)
@@ -267,7 +268,7 @@ class NTM(nn.Module):
         for t in range(x.size(1)):
             out.append(self.step(x[:, t], debug))
 
-        return torch.sigmoid(torch.stack(out, dim=1))
+        return torch.stack(out, dim=1)
 
 
 class LSTMController(nn.Module):

@@ -1,0 +1,31 @@
+name: Copy NTM seed
+
+task:
+  name: copy
+  bit_width: 8
+  min_len: 1
+  max_len: 20
+  batch_size: 16
+  seed: 1
+
+model:
+  name: ntm
+  mem_word_length: 20
+  mem_cells_count: 128
+  n_writes: 1
+  n_reads: 1
+  controller_n_hidden: 100
+  controller_n_layers: 1
+  clip_value: 20
+  seed: 1
+
+optimizer: rmsprop
+learning_rate: 0.0001
+momentum: 0.9
+gradient_clipping: 10.0
+
+gpu: true
+
+checkpoint_interval: 200
+verbose_interval: 10
+exit_after: null

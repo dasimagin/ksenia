@@ -54,4 +54,4 @@ class LSTM(nn.Module):
         c_0 = self.lstm_c_bias.clone().repeat(1, batch_size, 1)
 
         out, (h_n, c_n) = self.lstm(x, (h_0, c_0))
-        return torch.sigmoid(self.fc(out))
+        return self.fc(out)

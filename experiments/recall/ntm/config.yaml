@@ -1,0 +1,34 @@
+name: Associative Recall NTM
+
+task:
+  name: recall
+  bit_width: 6
+  item_len: 3
+  min_cnt: 2
+  max_cnt: 6
+  batch_size: 64
+  seed: 10
+
+model:
+  name: ntm
+  mem_word_length: 20
+  mem_cells_count: 128
+  n_writes: 1
+  n_reads: 1
+  controller_n_hidden: 100
+  controller_n_layers: 1
+  controller_clip: 20
+  seed: 20
+
+optimizer: rmsprop
+learning_rate: 0.0001
+momentum: 0.9
+gradient_clipping: 10.0
+
+gpu: true
+scheduler: null
+
+checkpoint_interval: 500
+report_interval: 200
+verbose_interval: 10
+exit_after: null
