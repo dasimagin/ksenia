@@ -174,7 +174,7 @@ def train(config):
             message = f"Sequences: {i * config.train.batch_size}, Mean episode_total_rewards: {episode_total_rewards_avg}, loss_avg: {loss_avg}"
             message += f", epsilon: {temp_epsilon(config)} curr_temp_size: {curricua.temp_size} ({time_per_iter:.2f} ms/iter)"
             if config.train.loss.startswith('mse_l'):
-                message += f", temp_k in loss: {temp_k(config, i)}"
+                message += f", temp_k in loss: {temp_k(config, curricua.temp_size)}"
             logging.info(message)
 
             iter_start_time = time_now
