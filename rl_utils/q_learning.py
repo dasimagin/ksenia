@@ -12,14 +12,14 @@ def q_learning(state_values, action_batch, reward_batch, next_state_values, devi
     true_state_values = (1 - config.q_learning.alpha) * state_action_values + config.q_learning.alpha * expected_state_action_values
     return state_action_values, true_state_values
 
-def mse_l1(input, target, config, iteration, size=None):
-    return ((input - target) ** 2 + temp_k(config, iteration) * torch.abs(input)).sum()
+def mse_l1(input, target, config, size):
+    return ((input - target) ** 2 + temp_k(config, size) * torch.abs(input)).sum()
 
-def mse_l2(input, target, config, iteration, size=None):
-    return ((input - target) ** 2 + temp_k(config, iteration) * (input ** 2)).sum()
+def mse_l2(input, target, config, size):
+    return ((input - target) ** 2 + temp_k(config, size) * (input ** 2)).sum()
 
-def mse_lsize(input, target, size, config, iteration):
-    return ((input - target) ** 2 + temp_k(config, iteration) * (input - size) ** 2).sum()
+def mse_lsize(input, target, size, config):
+    return ((input - target) ** 2 + temp_k(config, size) * (input - size) ** 2).sum()
 
 def validate(model, env, device):
     model.init_sequence(1, device)
@@ -34,9 +34,9 @@ def temp_epsilon(config):
     return config.q_learning.eps_end + (config.q_learning.eps_start - config.q_learning.eps_end) * \
             math.exp(-1. * config.iteration / config.q_learning.eps_decay)
 
-def temp_k(config, iteration):
+def temp_k(config, task_size):
     return config.train.loss_k_end + (config.train.loss_k_start - config.train.loss_k_end) * \
-            math.exp(-1. * iteration / config.train.loss_k_decay)
+            math.exp(-1. * task_size / config.train.loss_k_decay)
 
 def select_action(action_probas, device, config):
     sample = random.random()

@@ -5,7 +5,7 @@ gpu: true
 
 task:
   name: sort
-  len_alphabet: 5
+  len_alphabet: 3
   # min_rep: 1
   # max_rep: 1
   min_len: 1
@@ -33,7 +33,7 @@ train:
   loss: mse_lsize
   loss_k_start: 0
   loss_k_end: 0.25
-  loss_k_decay: 1000
+  loss_k_decay: 10
 
 q_learning:
   gamma: 0.999

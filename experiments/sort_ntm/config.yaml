@@ -5,7 +5,7 @@ gpu: true
 
 task:
   name: sort
-  len_alphabet: 5
+  len_alphabet: 3
   # min_rep: 1
   # max_rep: 1
   min_len: 1
