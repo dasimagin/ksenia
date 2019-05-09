@@ -28,7 +28,7 @@ train:
   loss: mse_lsize
   loss_k_start: 0
   loss_k_end: 0.25
-  loss_k_decay: 10
+  loss_k_decay: 100
 
 q_learning:
   gamma: 0.999

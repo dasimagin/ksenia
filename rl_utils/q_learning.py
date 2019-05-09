@@ -36,7 +36,7 @@ def temp_epsilon(config):
 
 def temp_k(config, task_size):
     return config.train.loss_k_end + (config.train.loss_k_start - config.train.loss_k_end) * \
-            math.exp(-1. * task_size / config.train.loss_k_decay)
+            math.exp(-1. * (task_size - 1) / config.train.loss_k_decay)
 
 def select_action(action_probas, device, config):
     sample = random.random()
