@@ -45,13 +45,17 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
         torch.nn.utils.clip_grad_norm_(model.parameters(), config.gradient_clipping)
         optimizer.step()
 
-        pred_binarized = (pred.clone().data > 0.5).float()
+        pred_binarized = (pred.data > 0.5).float()
         cost_time_batch = torch.sum(torch.abs(pred_binarized - y.data), dim=-1)
         cost_batch = torch.sum(cost_time_batch * m, dim=-1)
-        cost = cost_batch.sum() / batch_size
+        cost = cost_batch.sum() / (batch_size * 2)
 
         loss_sum += loss.item()
         cost_sum += cost.item()
+        
+        val_tensors = []
+        for (vx, vy, vm), vlength in validation_data:
+            val_tensors.append((vx.cuda(), vy.cuda(), vm.cuda(), vlength))
 
         if i % config.verbose_interval == 0:
             time_now = time.time()
@@ -73,7 +77,13 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
             utils.save_checkpoint(model, config.checkpoints, loss.item(), cost.item())
 
             logging.info('Validating model on longer sequences')
-            evaluate(i, model, validation_data, writer, config)
+            for vx, vy, vm, vlength in val_tensors:
+                vpred = model(vx)
+                vpred_binarized = (vpred.data > 0.5).float()
+                vcost_time_batch = torch.sum(torch.abs(vpred_binarized - vy.data), dim=-1)
+                vcost_batch = torch.sum(vcost_time_batch * vm, dim=-1)
+                vcost = vcost_batch.sum() / 100
+                writer.add_scalar(f'val/cost{vlength}', vcost.item(), global_step=i * config.task.batch_size)
 
         if config.scheduler is not None and i % config.scheduler.interval == 0:
             logging.info('Learning rate scheduler')
@@ -82,6 +92,7 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
         # Write scalars to tensorboard
         writer.add_scalar('train/loss', loss.item(), global_step=i * config.task.batch_size)
         writer.add_scalar('train/cost', cost.item(), global_step=i * config.task.batch_size)
+
 
         # Stopping
         if not running:
@@ -128,12 +139,12 @@ def setup_model(config):
             seed=config.seed,
         )
 
-        params = [20, 40, 60]
+        params = [30, 40, 60]
         validation_data = []
 
         for length in params:
             example = train_data.gen_batch(
-                batch_size=1,
+                batch_size=50,
                 min_len=length, max_len=length,
                 distribution=np.array([1,])
             )
