@@ -5,7 +5,7 @@ import torch
 import math
 import random
 
-def q_learning(state_values, action_batch, reward_batch, next_state_values, device, config, **params):
+def classic_q_learning(state_values, action_batch, reward_batch, next_state_values, device, config, **params):
     state_action_values = state_values.gather(1, action_batch)
     expected_state_action_values = (next_state_values.max(1)[0] * config.q_learning.gamma) + reward_batch
     true_state_values = state_action_values.clone().detach()
@@ -20,6 +20,9 @@ def dinamic_q_learning(state_values, action_batch, reward_batch, next_state_valu
     return action_batch, state_values, true_state_values
 
 def watkins_q_learning(state_values, action_batch, rewards_batch, next_state_values, device, config):
+    pass
+
+def dinamic_watkins_q_learning(state_values, action_batch, rewards_batch, next_state_values, device, config):
     pass
 
 def mse(action_batch, state_values, target, **params):
@@ -73,7 +76,7 @@ def learn_episode(
          loss,
          device,
          config,
-         q_learning=q_learning,
+         q_learning=classic_q_learning,
          memory=None
     ):
     task_len = curricua.sample()

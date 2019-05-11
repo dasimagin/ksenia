@@ -121,6 +121,16 @@ def train(config):
     else:
         raise Exception('Unknown task')
 
+    if config.q_learning.dinamic:
+        if config.q_learning.watkins:
+            q_learning = dinamic_watkins_q_learning
+        else:
+            q_learning = dinamic_q_learning
+    elif config.q_learning.watkins:
+        q_learning = watkins_q_learning
+    else:
+        q_learning = classic_q_learning
+
     writer = tensorboardX.SummaryWriter(log_dir=str(config.tensorboard))
     iter_start_time = time.time()
     loss_sum = 0.0
@@ -157,7 +167,7 @@ def train(config):
         else:
             temp_loss = loss
         for _ in range(config.train.batch_size):
-            acc_loss, episode_total_reward = learn_episode(curricua, env, model, optimizer, temp_loss, device, config)
+            acc_loss, episode_total_reward = learn_episode(curricua, env, model, optimizer, temp_loss, device, config, q_learning=q_learning)
             episode_total_rewards += episode_total_reward
             total_loss += acc_loss
         episode_total_rewards /= config.train.batch_size
