@@ -99,6 +99,7 @@ def learn_episode(
             memory.episode_save(model.memory)
         acc_loss += loss(*q_learning(action_probas.view(1, -1), action_probas.argmax().view(1, -1), reward_tensored, new_action_probas.view(1, -1), device, config, left_size=env.left_size()))
         action_probas = new_action_probas
+    print('episode finished')
     optimizer.zero_grad()
     acc_loss.backward()
     torch.nn.utils.clip_grad_norm_(model.parameters(),

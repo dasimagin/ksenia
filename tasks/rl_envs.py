@@ -51,13 +51,13 @@ class CopyEnv(object):
         self.input_place = 0
         self.output_place = 0
         self.time = 0
-        self.time_limit = 3 * len(self.input_panel)
         self.true_output = np.array(list(self.input_panel.flatten()) * self.n_copies)
         self.output_panel = np.full_like(self.true_output, -1)
         self.finished = False
         self.action_space = np.arange(self.len_alphabet + 2)
         self.episode_total_reward = 0
         self.input_panel = np.array(list(self.input_panel) + [-1])
+        self.time_limit = 3 * len(self.input_panel)
         return self
 
     def _create_input(self, len_input_seq, **params):
