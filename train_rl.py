@@ -144,7 +144,7 @@ def train(config):
         valid_env = copy(env)
 
     if config.train.loss == 'mse':
-        loss = nn.MSELoss()
+        loss = mse
     elif config.train.loss == 'mse_l1':
         loss = mse_l1
     elif config.train.loss == 'mse_l2':
