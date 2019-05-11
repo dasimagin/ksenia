@@ -59,14 +59,14 @@ def train(config):
     # Load Model
     if config.model.name == 'lstm':
         model = LSTM(
-            n_inputs=config.task.len_alphabet,
+            n_inputs=config.task.len_alphabet + 1,
             n_outputs=config.task.len_alphabet + 2,
             n_hidden=config.model.n_hidden,
             n_layers=config.model.n_layers,
         )
     elif config.model.name == 'ntm' or config.model.name == 'ntm_dntm':
         model = NTM(
-            input_size=config.task.len_alphabet,
+            input_size=config.task.len_alphabet + 1,
             output_size=config.task.len_alphabet + 2,
             mem_word_length=config.model.mem_word_length,
             mem_cells_count=config.model.mem_cells_count,
@@ -78,7 +78,7 @@ def train(config):
         )
     elif config.model.name == 'dntm':
         model = NTM(
-            input_size=config.task.len_alphabet,
+            input_size=config.task.len_alphabet + 1,
             output_size=config.task.len_alphabet + 2,
             mem_word_length=config.model.mem_word_length,
             mem_cells_count=config.model.mem_cells_count,
