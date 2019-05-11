@@ -104,7 +104,7 @@ def learn_episode(
         memory.episode_push(temp_env.episode_total_reward / len(temp_env.output_panel))
     return acc_loss / len(temp_env.output_panel), temp_env.episode_total_reward / len(temp_env.output_panel)
 
-def optimize_model(model, memory, optimizer, loss, device, config, q_learning=q_learning, **q_params):
+def optimize_model(model, memory, optimizer, loss, device, config, q_learning=classic_q_learning, **q_params):
     # TODO: fix it
     transitions = memory.reverse_sample()
     batch = Transition(*zip(*transitions))
