@@ -121,12 +121,12 @@ def train(config):
     else:
         raise Exception('Unknown task')
 
-    if config.q_learning.dinamic:
-        if config.q_learning.watkins:
+    if 'dinamic' in config.q_learning and config.q_learning.dinamic:
+        if 'watkins' in config.q_learning and config.q_learning.watkins:
             q_learning = dinamic_watkins_q_learning
         else:
             q_learning = dinamic_q_learning
-    elif config.q_learning.watkins:
+    elif 'watkins' in config.q_learning and config.q_learning.watkins:
         q_learning = watkins_q_learning
     else:
         q_learning = classic_q_learning
