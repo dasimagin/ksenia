@@ -57,7 +57,7 @@ class CopyEnv(object):
         self.finished = False
         self.action_space = np.arange(self.len_alphabet + 2)
         self.episode_total_reward = 0
-        self.input_panel = np.array(list(self.input_panel) + [-1])
+        # self.input_panel = np.array(list(self.input_panel) + [-1])
         return self
 
     def _create_input(self, len_input_seq, **params):
