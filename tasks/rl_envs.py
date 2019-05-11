@@ -29,7 +29,7 @@ class Curriculum(object):
             return self.rand.choice(self.max_rep - 1) + 1
         e = np.array(np.around(self.rand.geometric(p=0.5, size=1)), dtype='int')
         if type == 1:
-            return self.rand.choice(max(self.min_size, self.temp_size - e), self.temp_size + e) + 1
+            return self.rand.choice(max(self.min_size, self.temp_size - e) + 1, self.temp_size + e) + 1
         if type == 2:
             return self.rand.choice(e) + 1
 
@@ -57,7 +57,7 @@ class CopyEnv(object):
         self.finished = False
         self.action_space = np.arange(self.len_alphabet + 2)
         self.episode_total_reward = 0
-        # self.input_panel = np.array(list(self.input_panel) + [-1])
+        self.input_panel = np.array(list(self.input_panel) + [-1])
         return self
 
     def _create_input(self, len_input_seq, **params):
