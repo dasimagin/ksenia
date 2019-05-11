@@ -5,6 +5,8 @@ import torch
 import math
 import random
 
+EPS = 1e-8
+
 def classic_q_learning(state_values, action_batch, reward_batch, next_state_values, device, config, **params):
     state_action_values = state_values.gather(1, action_batch)
     expected_state_action_values = (next_state_values.max(1)[0] * config.q_learning.gamma) + reward_batch
@@ -14,7 +16,7 @@ def classic_q_learning(state_values, action_batch, reward_batch, next_state_valu
 
 def dinamic_q_learning(state_values, action_batch, reward_batch, next_state_values, device, config, left_size):
     state_action_values = state_values.gather(1, action_batch)
-    expected_state_action_values = (next_state_values.max(1)[0] * config.q_learning.gamma) + reward_batch / left_size
+    expected_state_action_values = (next_state_values.max(1)[0] * config.q_learning.gamma) + reward_batch / (left_size + EPS)
     true_state_values = state_action_values.clone().detach()
     true_state_values = (1 - config.q_learning.alpha) * state_action_values + config.q_learning.alpha * expected_state_action_values
     return action_batch, state_values, true_state_values
