@@ -5,24 +5,38 @@ import torch
 import math
 import random
 
-def q_learning(state_values, action_batch, reward_batch, next_state_values, device, config):
+def q_learning(state_values, action_batch, reward_batch, next_state_values, device, config, **params):
     state_action_values = state_values.gather(1, action_batch)
     expected_state_action_values = (next_state_values.max(1)[0] * config.q_learning.gamma) + reward_batch
     true_state_values = state_action_values.clone().detach()
     true_state_values = (1 - config.q_learning.alpha) * state_action_values + config.q_learning.alpha * expected_state_action_values
-    return state_action_values, true_state_values
+    return action_batch, state_values, true_state_values
+
+def dinamic_q_learning(state_values, action_batch, reward_batch, next_state_values, device, config, left_size):
+    state_action_values = state_values.gather(1, action_batch)
+    expected_state_action_values = (next_state_values.max(1)[0] * config.q_learning.gamma) + reward_batch / left_size
+    true_state_values = state_action_values.clone().detach()
+    true_state_values = (1 - config.q_learning.alpha) * state_action_values + config.q_learning.alpha * expected_state_action_values
+    return action_batch, state_values, true_state_values
 
 def watkins_q_learning(state_values, action_batch, rewards_batch, next_state_values, device, config):
     pass
 
-def mse_l1(input, target, config, size):
-    return ((input - target) ** 2 + temp_k(config, size) * torch.abs(input)).sum()
+def mse(action_batch, state_values, target, **params):
+    state_action_values = state_values.gather(1, action_batch)
+    return ((state_action_values - target) ** 2).sum()
 
-def mse_l2(input, target, config, size):
-    return ((input - target) ** 2 + temp_k(config, size) * (input ** 2)).sum()
+def mse_l1(action_batch, state_values, target, config, size):
+    state_action_values = state_values.gather(1, action_batch)
+    return ((state_action_values - target) ** 2 + temp_k(config, size) * torch.abs(state_action_values)).sum()
 
-def mse_lsize(input, target, size, config):
-    return ((input - target) ** 2 + temp_k(config, size) * (input - size) ** 2).sum()
+def mse_l2(action_batch, state_values, target, config, size):
+    state_action_values = state_values.gather(1, action_batch)
+    return ((state_action_values - target) ** 2 + temp_k(config, size) * state_action_values ** 2).sum()
+
+def mse_lsize(action_batch, state_values, target, config, size):
+    state_action_values = state_values.gather(1, action_batch)
+    return ((state_action_values - target) ** 2 + temp_k(config, size) * (state_values.sum() - size) ** 2).sum()
 
 def validate(model, env, device):
     model.init_sequence(1, device)
@@ -76,7 +90,7 @@ def learn_episode(
         reward_tensored = torch.tensor([reward], device=device, dtype=torch.float32).view(1, -1)
         if memory is not None:
             memory.episode_save(model.memory)
-        acc_loss += loss(*q_learning(action_probas.view(1, -1), action_probas.argmax().view(1, -1), reward_tensored, new_action_probas.view(1, -1), device, config))
+        acc_loss += loss(*q_learning(action_probas.view(1, -1), action_probas.argmax().view(1, -1), reward_tensored, new_action_probas.view(1, -1), device, config, left_size=env.left_size()))
         action_probas = new_action_probas
     optimizer.zero_grad()
     acc_loss.backward()

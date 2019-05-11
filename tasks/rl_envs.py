@@ -68,6 +68,9 @@ class CopyEnv(object):
         else:
             return -1
 
+    def left_size(self):
+        return len(np.where(self.output_panel == -1)[0])
+
     def step(self, action):
         action = int(action)
         if action not in self.action_space:
@@ -138,6 +141,9 @@ class SortEnv(object):
             return self.input_panel[self.input_place]
         else:
             return -1
+
+    def left_size(self):
+        return len(np.where(self.output_panel == -1)[0])
 
     def step(self, action):
         action = int(action)
