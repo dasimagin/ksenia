@@ -82,24 +82,19 @@ def learn_episode(
     task_len = curricua.sample()
     temp_env = env.reset(task_len)
     model.init_sequence(1, device)
-    print(temp_env.read())
     readed = torch.eye(temp_env.len_alphabet + 1, device=device)[temp_env.read()]
     action_probas = model.step(readed)
-    print('step suess')
     acc_loss = torch.zeros(1, device=device)
     while not temp_env.finished:
         action = select_action(action_probas.view(1, -1), device, config)
         reward = temp_env.step(action)
-        print(temp_env.read())
         new_readed = torch.eye(temp_env.len_alphabet + 1, device=device)[temp_env.read()] if not temp_env.finished else None
         new_action_probas = model.step(new_readed) if new_readed is not None else torch.zeros(1, device=device)
-        print('step suess')
         reward_tensored = torch.tensor([reward], device=device, dtype=torch.float32).view(1, -1)
         if memory is not None:
             memory.episode_save(model.memory)
         acc_loss += loss(*q_learning(action_probas.view(1, -1), action_probas.argmax().view(1, -1), reward_tensored, new_action_probas.view(1, -1), device, config, left_size=env.left_size()))
         action_probas = new_action_probas
-    print('episode finished')
     optimizer.zero_grad()
     acc_loss.backward()
     torch.nn.utils.clip_grad_norm_(model.parameters(),

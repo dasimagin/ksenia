@@ -66,7 +66,7 @@ class CopyEnv(object):
 
     def read(self):
         if not self.finished:
-            return self.input_panel[self.input_place]
+            return int(self.input_panel[self.input_place])
         else:
             return -1
 
@@ -141,7 +141,7 @@ class SortEnv(object):
 
     def read(self):
         if not self.finished:
-            return self.input_panel[self.input_place]
+            return int(self.input_panel[self.input_place])
         else:
             return -1
 
