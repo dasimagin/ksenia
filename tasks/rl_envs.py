@@ -28,7 +28,7 @@ class Curriculum(object):
             return self.rand.choice(self.max_rep - 1) + 1
         e = np.array(np.around(self.rand.geometric(p=0.5, size=1)), dtype='int')
         if type == 1:
-            return self.rand.choice(self.temp_size + e) + 1
+            return self.rand.choice(max(1, self.temp_size - e), self.temp_size + e)
         if type == 2:
             return self.rand.choice(e) + 1
 
