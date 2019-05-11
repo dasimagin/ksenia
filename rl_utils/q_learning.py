@@ -45,7 +45,7 @@ def validate(model, env, device):
     model.init_sequence(1, device)
     temp_env = env.reset()
     while not temp_env.finished:
-        readed = torch.eye(temp_env.len_alphabet, device=device)[temp_env.read()]
+        readed = torch.eye(temp_env.len_alphabet + 1, device=device)[temp_env.read()]
         action_probas = model.step(readed)
         _ = temp_env.step(action_probas.argmax())
     return temp_env.episode_total_reward
