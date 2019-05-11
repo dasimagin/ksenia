@@ -25,7 +25,7 @@ class Curriculum(object):
     def sample(self):
         type = self.rand.choice(3, p = [0.1, 0.25, 0.65])
         if type == 0:
-            return self.rand.choice(self.temp_size) + 1
+            return self.rand.choice(self.max_rep - 1) + 1
         e = np.array(np.around(self.rand.geometric(p=0.5, size=1)), dtype='int')
         if type == 1:
             return self.rand.choice(self.temp_size + e) + 1

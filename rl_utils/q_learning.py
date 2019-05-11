@@ -12,6 +12,9 @@ def q_learning(state_values, action_batch, reward_batch, next_state_values, devi
     true_state_values = (1 - config.q_learning.alpha) * state_action_values + config.q_learning.alpha * expected_state_action_values
     return state_action_values, true_state_values
 
+def watkins_q_learning(state_values, action_batch, rewards_batch, next_state_values, device, config):
+    pass
+
 def mse_l1(input, target, config, size):
     return ((input - target) ** 2 + temp_k(config, size) * torch.abs(input)).sum()
 
