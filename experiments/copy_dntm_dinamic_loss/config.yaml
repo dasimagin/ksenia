@@ -1,0 +1,61 @@
+name: Copy Q-learning NTM
+
+seed: 1
+gpu: true
+
+task:
+  name: copy
+  len_alphabet: 5
+  # min_rep: 1
+  # max_rep: 1
+  min_len: 1
+  max_len: 20
+  n_copies: 1
+  update_limit: 1.
+  min_update_iters: 75
+
+model:
+  name: dntm
+  mem_word_length: 5
+  mem_cells_count: 128
+  n_writes: 1
+  n_reads: 1
+  controller_n_hidden: 256
+  controller_n_layers: 1
+  controller_clip: 20
+
+train:
+  checkpoint_interval: 1000
+  report_interval: 100
+  verbose_interval: 25
+  train_iterations: 18000
+  update_interval: 3
+  batch_size: 64
+  loss: mse_lsize
+  loss_k_start: 0
+  loss_k_end: 0.25
+  loss_k_decay: 100
+
+q_learning:
+  gamma: 0.999
+  alpha: 0.1
+  eps_start: 0.9
+  eps_restart: 0.15
+  eps_end: 0.05
+  eps_decay: 150
+  dinamic: True
+
+validation:
+  iterations: 5
+  len_val_seqs:
+    - 25
+    - 50
+    - 75
+    - 100
+    - 150
+
+optim:
+  optimizer: adam
+  learning_rate: 0.0001
+  momentum: 0.9
+  gradient_clipping: 15.0
