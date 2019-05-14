@@ -22,9 +22,13 @@ from models.ntm import NTM
 def choose_complexity(min_len, max_len, cur_complexity):
     rnd = np.random.choice([0, 1, 2], p=[0.1, 0.25, 0.65])
     e = np.random.geometric(1/2)
-    res = np.zeros(max_len - min_len + 1)
+    res = 0
+    if max_len == min_len:
+        res = np.array([0,])
+    else:
+        res = np.zeros(max_len - min_len + 1)
     if rnd == 0:
-        res = 1 / (max_len - min_len + 1)
+        res[:] = 1 / (max_len - min_len + 1)
         return res
     elif rnd == 1:
         max_complexity = min(max_len - min_len + 1, cur_complexity + 1 + e)
@@ -122,6 +126,7 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
         if loss.item() < config.curriculum.threshold \
             and (i - last_curriculum_update) >= config.curriculum.update_step:
             cur_complexity += 1
+            logging.info('complexity is increased. Current complexity is {}'.format(cur_complexity))            
             last_curriculum_update = i
 
         train_data.distribution = choose_complexity(train_data.min_len, train_data.max_len, cur_complexity)
@@ -146,6 +151,8 @@ def setup_model(config):
             task=config.task.task,
             seed=config.seed,
         )
+
+        np.random.seed(config.seed)
 
         params = [20, 30, 40, 60]
         validation_data = []

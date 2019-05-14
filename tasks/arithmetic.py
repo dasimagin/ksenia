@@ -124,7 +124,6 @@ class Arithmetic:
 
     def __iter__(self):
         while True:
-            distrib = np.ones(self.max_len - self.min_len + 1, dtype=np.float32)
             yield self.gen_batch(
                 self.batch_size,
                 self.min_len, self.max_len,
