@@ -19,6 +19,24 @@ from models.lstm import LSTM
 from models.ntm import NTM
 
 
+def choose_complexity(min_len, max_len, cur_complexity):
+    rnd = np.random.choice([0, 1, 2], p=[0.1, 0.25, 0.65])
+    e = np.random.geometric(1/2)
+    res = np.zeros(max_len - min_len + 1)
+    if rnd == 0:
+        res = 1 / (max_len - min_len + 1)
+        return res
+    elif rnd == 1:
+        max_complexity = min(max_len - min_len + 1, cur_complexity + 1 + e)
+        res[:max_complexity] = 1
+        res /= res.sum()
+        return res
+    else:
+        max_complexity = min(max_len - min_len, cur_complexity + e)
+        res[max_complexity] = 1
+        return res
+
+
 def train(model, optimizer, criterion, train_data, validation_data, config):
     if config.scheduler is not None:
         optimizer, scheduler = optimizer
@@ -27,7 +45,9 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
     iter_start_time = time.time()
     loss_sum = 0
     cost_sum = 0
-
+    cur_step = 0
+    last_curriculum_update = 0
+    cur_complexity = 0
     for i, (x, y, m) in enumerate(train_data, 1):
         model.train()
         batch_size, seq_len, seq_width = x.shape
@@ -45,10 +65,9 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
         torch.nn.utils.clip_grad_norm_(model.parameters(), config.gradient_clipping)
         optimizer.step()
 
-        pred_binarized = (pred.data > 0.5).float()
-        cost_time_batch = torch.sum(torch.abs(pred_binarized - y.data), dim=-1)
-        cost_batch = torch.sum(cost_time_batch * m, dim=-1)
-        cost = cost_batch.sum() / (batch_size * 2)
+        pred_idx = pred.data.max(-1)[1]
+        true_idx = y.data.max(-1)[1]
+        cost = ((pred_idx != true_idx).float() * m).sum() / batch_size
 
         loss_sum += loss.item()
         cost_sum += cost.item()
@@ -63,7 +82,7 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
             loss_avg = loss_sum / config.verbose_interval
             cost_avg = cost_sum / config.verbose_interval
 
-            message = f"Iter: {i}, Sequences: {i * config.task.batch_size}, "
+            message = f"Iter: {i}, Sequences: {cur_step}, "
             message += f"loss: {loss_avg:.2f}, cost: {cost_avg:.2f}, "
             message += f"({time_per_iter:.2f} ms/iter)"
             logging.info(message)
@@ -74,58 +93,47 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
 
         if i % config.checkpoint_interval == 0:
             logging.info('Saving checkpoint')
-            utils.save_checkpoint(model, config.checkpoints, loss.item(), cost.item())
+            utils.save_checkpoint(
+                model, 
+                optimizer,
+                cur_step,
+                train_data,
+                None,
+                config.checkpoints)
 
             logging.info('Validating model on longer sequences')
             for vx, vy, vm, vlength in val_tensors:
                 vpred = model(vx)
-                vpred_binarized = (vpred.data > 0.5).float()
-                vcost_time_batch = torch.sum(torch.abs(vpred_binarized - vy.data), dim=-1)
-                vcost_batch = torch.sum(vcost_time_batch * vm, dim=-1)
-                vcost = vcost_batch.sum() / 100
-                writer.add_scalar(f'val/cost{vlength}', vcost.item(), global_step=i * config.task.batch_size)
+                vpred_idx = vpred.data.max(-1)[1]
+                vtrue_idx = vy.data.max(-1)[1]
+                vcost = ((vpred_idx != vtrue_idx).float() * vm).sum() / 50
+                if vlength == 20:
+                    vloss = criterion(vpred, vy, vm)
+                    writer.add_scalar(f'val/loss{vlength}', vloss.item(), global_step=cur_step)
+                writer.add_scalar(f'val/cost{vlength}', vcost.item(), global_step=cur_step)
 
         if config.scheduler is not None and i % config.scheduler.interval == 0:
             logging.info('Learning rate scheduler')
             scheduler.step(cost.item())
 
         # Write scalars to tensorboard
-        writer.add_scalar('train/loss', loss.item(), global_step=i * config.task.batch_size)
-        writer.add_scalar('train/cost', cost.item(), global_step=i * config.task.batch_size)
+        writer.add_scalar('train/loss', loss.item(), global_step=cur_step)
+        writer.add_scalar('train/cost', cost.item(), global_step=cur_step)
+        if loss.item() < config.curriculum.threshold \
+            and (i - last_curriculum_update) >= config.curriculum.update_step:
+            cur_complexity += 1
+            last_curriculum_update = i
+
+        train_data.distribution = choose_complexity(train_data.min_len, train_data.max_len, cur_complexity)
 
 
         # Stopping
         if not running:
             return
-        if config.exit_after and i * config.task.batch_size > config.exit_after:
+        if config.exit_after and cur_step > config.exit_after:
             return
-
-
-def evaluate(step, model, data, writer, config):
-    model.eval()
-    device = 'cuda' if config.gpu and torch.cuda.is_available() else 'cpu'
-
-    with torch.no_grad():
-        for instance in data:
-            if config.task.name == 'arithmetic':
-                example, length = instance
-                start = length + 1
-                name = f"io/len_{length}"
-
-            inp, target, mask = example
-            output = model(inp.to(device))
-            output = output.data.to('cpu').numpy()[0].T
-            target = target.data.numpy()[0].T
-
-            img = utils.input_output_img(
-                target[:, start:],
-                output[:, start:],
-            )
-
-            writer.add_image(
-                name,
-                img, global_step=step * config.task.batch_size
-            )
+        
+        cur_step += batch_size
 
 
 def setup_model(config):
@@ -139,7 +147,7 @@ def setup_model(config):
             seed=config.seed,
         )
 
-        params = [30, 40, 60]
+        params = [20, 30, 40, 60]
         validation_data = []
 
         for length in params:
@@ -173,7 +181,7 @@ def setup_model(config):
             n_reads=config.model.n_reads,
             controller_n_hidden=config.model.controller_n_hidden,
             controller_n_layers=config.model.controller_n_layers,
-            controller_clip=config.model.controller_clip,
+            clip_value=config.model.clip_value,
         )
     else:
         logging.info('Unknown model')

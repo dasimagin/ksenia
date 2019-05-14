@@ -26,6 +26,8 @@ class Arithmetic:
             self.symbols_amount = 4
             self.ohe = OneHotEncoder(categories=[['0', '1', '*', '#']], sparse=False)
         self.rand = np.random.RandomState(seed)
+        self.distribution = np.ones(max_len - min_len + 1)
+        self.distribution /= self.distribution.sum()
         np.random.seed(seed)
 
     def gen_example(self, seq_len, max_len_batch):
@@ -126,7 +128,7 @@ class Arithmetic:
             yield self.gen_batch(
                 self.batch_size,
                 self.min_len, self.max_len,
-                distribution=distrib / distrib.sum()
+                distribution=self.distribution
             )
 
     @staticmethod
@@ -140,10 +142,12 @@ class Arithmetic:
           target: batch first 3D tensor with targets
           mask: batch first 2D tensor of {1, 0} to mask time steps
         """
-        xent = F.binary_cross_entropy(prediction, target, reduction='none')
-        loss_time_batch = xent.sum(-1)
-        loss_batch = torch.sum(loss_time_batch * mask, dim=-1)
-        return loss_batch.sum() / loss_batch.size(0)
+        criterion = torch.nn.CrossEntropyLoss(reduction='none')
+        xent = criterion(
+            prediction.view(-1, prediction.size(-1)),
+            target.max(-1)[1].view(-1))
+        masked_xent = xent * mask.view(-1)
+        return masked_xent.sum() / prediction.size(0)
 
 
 if __name__ == '__main__':
