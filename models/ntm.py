@@ -158,7 +158,7 @@ class WriteHead(nn.Module):
         dict_append(debug, "gates", gates)
         dict_append(debug, "betas", betas)
         dict_append(debug, "shifts", shifts)
-        dcit_append(debug, "gammas", gammas)
+        dict_append(debug, "gammas", gammas)
 
         return WriteHead.mem_update(memory, self.write_dist, self.erase_data, self.write_data)
 
@@ -207,7 +207,7 @@ class ReadHead(nn.Module):
         dict_append(debug, "betas", betas)
         dict_append(debug, "shifts", shifts)
         dict_append(debug, "gammas", gammas)
-        dict_append(debug, "read_data", read_data)
+        dict_append(debug, "read_data", self.read_data)
 
         return self.read_data
 
