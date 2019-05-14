@@ -9,6 +9,24 @@ import torch.nn.functional as F
 EPS = 1e-8
 
 
+def dict_append(d, name, val):
+    if d is not None:
+        values = d.get(name)
+        if not values:
+            values = []
+            d[name] = values
+        values.append(val)
+
+
+def init_debug(debug, initial):
+    if debug is not None and not debug:
+        debug.update(initial)
+
+
+def dict_get(dict, name):
+    return dict.get(name) if dict is not None else None
+
+
 def get_next_tensor_part(src, dims, prev_pos=0):
     if not isinstance(dims, list):
         dims = [dims]
@@ -113,7 +131,7 @@ class WriteHead(nn.Module):
             return torch.zeros(memory.size(0), self.n_heads, memory.size(2)).to(memory)
         return self.write_data
 
-    def forward(self, memory, controls):
+    def forward(self, memory, controls, debug):
         """Perform n_heads writes to memory given controls vector.
 
         Args:
@@ -133,6 +151,14 @@ class WriteHead(nn.Module):
 
         self.write_data = torch.tanh(write_vectors)
         self.erase_data = torch.sigmoid(erase_vectors)
+
+        dict_append(debug, "write_weights", self.write_dist)
+        dict_append(debug, "write_vectors", write_vectors)
+        dict_append(debug, "erase_vectors", erase_vectors)
+        dict_append(debug, "gates", gates)
+        dict_append(debug, "betas", betas)
+        dict_append(debug, "shifts", shifts)
+        dcit_append(debug, "gammas", gammas)
 
         return WriteHead.mem_update(memory, self.write_dist, self.erase_data, self.write_data)
 
@@ -164,7 +190,7 @@ class ReadHead(nn.Module):
             return torch.zeros(mem_shape[0], self.n_heads, mem_shape[2]).to(memory)
         return self.read_data
 
-    def forward(self, memory, controls):
+    def forward(self, memory, controls, debug):
         """Address NTM memory given controls vector
 
         Args:
@@ -176,6 +202,13 @@ class ReadHead(nn.Module):
         self.read_dist = address_memory(
             memory, keys, betas, gates, shifts, gammas, self.get_prev_dist(memory))
         self.read_data = (memory.unsqueeze(1) * self.read_dist.unsqueeze(-1)).sum(-2)
+
+        dict_append(debug, "gates", gates)
+        dict_append(debug, "betas", betas)
+        dict_append(debug, "shifts", shifts)
+        dict_append(debug, "gammas", gammas)
+        dict_append(debug, "read_data", read_data)
+
         return self.read_data
 
 
@@ -230,6 +263,11 @@ class NTM(nn.Module):
 
     def step(self, inp, debug):
         """Perform one NTM time step on a batch of vectors."""
+        init_debug(debug, {
+            'read_head': {},
+            'write_head': {},
+        })
+
         batch_size = inp.size(0)
         prev_read_data = self.read_head.get_prev_data(self.memory).view(batch_size, -1)
         controller_output = self.controller(torch.cat([inp, prev_read_data], -1))
@@ -239,8 +277,14 @@ class NTM(nn.Module):
         shapes = [[self.write_head.input_size], [self.read_head.input_size]]
         write_head_controls, read_head_controls = split_tensor(controls_vector, shapes)
 
-        self.memory = self.write_head(self.memory, write_head_controls)
-        reads = self.read_head(self.memory, read_head_controls)
+        self.memory = self.write_head(
+            self.memory,
+            write_head_controls,
+            dict_get(debug, "write_head"))
+        reads = self.read_head(
+            self.memory,
+            read_head_controls,
+            dict_get(debug, "read_head"))
         return (
             self.controller_to_output(controller_output) +
             self.reads_to_output(reads.view(batch_size, -1))
