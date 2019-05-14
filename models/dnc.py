@@ -15,11 +15,6 @@ WriteArchive = namedtuple(
     ['write_weights', 'add_vector', 'erase_vector', 'write_gate', 'alloc_gate']
 )
 
-ReadArchive = namedtuple(
-    'ReadArchive',
-    ['read_weights', 'read_vector']
-)
-
 
 def dict_append(d, name, val):
     if d is not None:
@@ -145,12 +140,11 @@ class AllocationAddressing(torch.nn.Module):
         phi = torch.addcmul(
             one, -1, free_gates.view(batch_size, n_reads, 1), prev_reads).prod(-2)
 
-        if self.usages is None or self.usages.shape != [batch_size, n_cells]:
+        if self.usages is None or list(self.usages.shape) != [batch_size, n_cells]:
             self.usages = torch.zeros(batch_size, n_cells, device=device)
         else:
             self.usages = torch.addcmul(
                 self.usages, 1, write_weights.detach(), 1 - self.usages) * phi
-
         return phi
 
     def forward(self, write_weights, read_weights, free_gates, write_gate, diff_alloc):
@@ -506,7 +500,7 @@ class ReadHead(nn.Module):
             backward_mode = gates[..., 1:2]
             content_mode = gates[..., 2:]
 
-            self.read_dist = (
+            self.read_weights = (
                 forward_mode * forward_weights +
                 backward_mode * backward_weights +
                 content_mode * content_weights
@@ -518,7 +512,7 @@ class ReadHead(nn.Module):
         else:
             self.read_weights = content_weights
 
-        self.read_vector = (memory.unsqueeze(1) * self.read_dist.unsqueeze(-1)).sum(-2)
+        self.read_vector = (memory.unsqueeze(1) * self.read_weights.unsqueeze(-1)).sum(-2)
 
         dict_append(debug, "read_weights", self.read_weights)
         if masks is not None:
