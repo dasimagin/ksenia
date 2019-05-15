@@ -538,14 +538,14 @@ class DNC(nn.Module):
             diff_alloc=False,
             links=True,
             normalization=False,
-            dropout=False,
+            dropout=0,
     ):
         super().__init__()
         self.input_size = input_size
         self.output_size = output_size
         self.clip_value = clip_value
         self.normalization = normalization
-        self.dropout = dropout
+        self.dropout = nn.Dropout(p=dropout)
 
         self.write_head = WriteHead(
             n_reads,
@@ -570,7 +570,6 @@ class DNC(nn.Module):
         self.controller_to_output = nn.Linear(controller_n_hidden, output_size)
         self.reads_to_output = nn.Linear(cell_width * n_reads, output_size)
 
-        self.register_buffer('mem_bias', torch.Tensor(n_cells, cell_width))
         self.cell_width = cell_width
         self.n_cells = n_cells
         self.memory = None
@@ -581,7 +580,6 @@ class DNC(nn.Module):
         linear_reset(self.controller_to_output)
         linear_reset(self.reads_to_output)
         self.controller.reset_parameters()
-        nn.init.constant_(self.mem_bias, 0)
 
     def calculate_num_params(self):
         count = 0
@@ -623,12 +621,12 @@ class DNC(nn.Module):
         )
 
         return (
-            self.controller_to_output(controller_output) +
+            self.controller_to_output(self.dropout(controller_output)) +
             self.reads_to_output(reads.view(batch_size, -1))
         )
 
     def mem_init(self, batch_size, device):
-        self.memory = self.mem_bias.clone().repeat(batch_size, 1, 1).to(device)
+        self.memory = torch.zeros(batch_size, self.n_cells, self.cell_width).to(device)
 
     def forward(self, x, debug=None):
         """Run ntm on a batch of sequences.
