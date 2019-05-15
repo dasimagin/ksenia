@@ -54,7 +54,7 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
     cur_complexity = 0
     for i, (x, y, m) in enumerate(train_data, 1):
         model.train()
-        batch_size, seq_len, seq_width = x.shape
+        batch_size, seq_len, symbols_amount = x.shape
         if config.gpu and torch.cuda.is_available():
             x = x.cuda()
             y = y.cuda()
@@ -79,7 +79,8 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
         val_tensors = []
         for (vx, vy, vm), vlength in validation_data:
             val_tensors.append((vx.cuda(), vy.cuda(), vm.cuda(), vlength))
-
+        
+        cur_step += batch_size
         if i % config.verbose_interval == 0:
             time_now = time.time()
             time_per_iter = (time_now - iter_start_time) / config.verbose_interval * 1000.0
@@ -137,8 +138,6 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
             return
         if config.exit_after and cur_step > config.exit_after:
             return
-        
-        cur_step += batch_size
 
 
 def setup_model(config):
@@ -189,6 +188,7 @@ def setup_model(config):
             controller_n_hidden=config.model.controller_n_hidden,
             controller_n_layers=config.model.controller_n_layers,
             clip_value=config.model.clip_value,
+            dropout=config.model.dropout
         )
     else:
         logging.info('Unknown model')
@@ -230,6 +230,11 @@ def setup_model(config):
         )
         optimizer = (optimizer, scheduler)
 
+    if config.load:
+        model, optimizer, train_data, validation_data, step = utils.load_checkpoint(
+            model, optimizer, train_data, config.load,
+        )
+
     return model, optimizer, loss, train_data, validation_data
 
 
@@ -252,6 +257,11 @@ def read_config():
         action='store_true',
         help='Keep logs from previous run.'
     )
+    parser.add_argument(
+        '-l', '--load',
+        help='Path to checkpoint file to load from',
+        default=None,
+    )
 
     args = parser.parse_args()
     path = pathlib.Path('experiments')/args.name
@@ -273,6 +283,7 @@ def read_config():
     config.path = path
     config.tensorboard = path/'tensorboard'
     config.checkpoints = path/'checkpoints'
+    config.load = args.load
 
     return config
 

@@ -203,6 +203,7 @@ class ReadHead(nn.Module):
             memory, keys, betas, gates, shifts, gammas, self.get_prev_dist(memory))
         self.read_data = (memory.unsqueeze(1) * self.read_dist.unsqueeze(-1)).sum(-2)
 
+        dict_append(debug, "read_weights", self.read_dist)
         dict_append(debug, "gates", gates)
         dict_append(debug, "betas", betas)
         dict_append(debug, "shifts", shifts)
@@ -224,6 +225,7 @@ class NTM(nn.Module):
             controller_n_hidden,
             controller_n_layers,
             clip_value,
+            dropout=0,
     ):
         super().__init__()
         self.input_size = input_size
@@ -245,6 +247,7 @@ class NTM(nn.Module):
         self.mem_word_length = mem_word_length
         self.mem_cells_count = mem_cells_count
         self.memory = None
+        self.dropout = nn.Dropout(p=dropout)
         self.reset_parameters()
 
     def reset_parameters(self):
@@ -286,7 +289,7 @@ class NTM(nn.Module):
             read_head_controls,
             dict_get(debug, "read_head"))
         return (
-            self.controller_to_output(controller_output) +
+            self.controller_to_output(self.dropout(controller_output)) +
             self.reads_to_output(reads.view(batch_size, -1))
         )
 
