@@ -163,7 +163,8 @@ def train(config):
         episode_total_rewards = 0.
         total_loss = 0.
         if config.train.loss.startswith('mse_l'):
-            temp_loss = partial(loss, size=curricua.temp_size, config=config)
+            size = curricua.temp_size if 'dinamic' not in config.q_learning else 1.
+            temp_loss = partial(loss, size=size, config=config)
         else:
             temp_loss = loss
         for _ in range(config.train.batch_size):
