@@ -1,9 +1,14 @@
 import logging
+import argparse
+import pathlib
+import shutil
 import io
 
 import torch
+import yaml
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
 from mpl_toolkits.axes_grid1 import ImageGrid
 from PIL import Image
 
@@ -52,9 +57,53 @@ def set_logger(log_path):
         logger.addHandler(stream_handler)
 
 
+def read_config():
+    parser = argparse.ArgumentParser(
+        prog='Train/Eval script',
+        description=('Script for training and evaluating memory models on various bitmap tasks. '
+                     'All parameters should be given throug the config file.'),
+    )
+    parser.add_argument(
+        '-n',
+        '--name',
+        type=str,
+        required=True,
+        help='Name of the current experiment. Can also provide name/with/path for grouping'
+    )
+    parser.add_argument(
+        '-k', '--keep',
+        action='store_true',
+        help='Keep logs from previous run.'
+    )
+    parser.add_argument(
+        '-l', '--load',
+        help='Path to model checkpoint file',
+        default=None,
+    )
+
+    args = parser.parse_args()
+    path = pathlib.Path('experiments')/args.name
+
+    assert (path/'config.yaml').exists(), 'No configuration file found.'
+
+    with open(path/'config.yaml') as f:
+        config = DotDict(yaml.safe_load(f))
+
+    # clear previous run logs
+    if not args.keep:
+        (path/'tensorboard').exists() and shutil.rmtree(path/'tensorboard')
+        if args.load is None:
+            (path/'checkpoints').exists() and shutil.rmtree(path/'checkpoints')
+        open(path/'train.log', 'w').close()
+
+    config.path = path
+    config.load = args.load
+    return config
+
+
 def save_checkpoint(
         model, optimizer, step,
-        train_data, validation_data,
+        train_data,
         path,
 ):
     name = type(model).__name__
@@ -64,7 +113,6 @@ def save_checkpoint(
             'model_state_dict': model.state_dict(),
             'optimizer_state_dict': optimizer.state_dict(),
             'task_random_state': train_data.rand.get_state(),
-            'validation_data': validation_data,
             'step': step,
         },
         path/filename
@@ -85,13 +133,27 @@ def load_checkpoint(
     optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
 
     train_data.rand.set_state(checkpoint['task_random_state'])
-    validation_data = checkpoint['validation_data']
     step = checkpoint['step']
 
-    return model, optimizer, train_data, validation_data, step
+    return model, optimizer, train_data, step
 
 
-def input_output_img(target, output):
+def fig2img(fig):
+    buff = io.BytesIO()
+    fig.savefig(buff, bbox_inches='tight', pad_inches=0.1, dpi=90)
+    buff.seek(0)
+    img = np.rollaxis(np.asarray(Image.open(buff)), -1, 0)
+    plt.close(fig)
+
+    return img
+
+
+def input_output_img(
+        target,
+        output,
+        text_top='Target',
+        text_bottom='Output',
+):
     """Plot target and output sequences of bit vectors.
     One under the other. Matplotlib figure size is tweaked
     best for sequence legth in [20, 40, 100].
@@ -127,9 +189,65 @@ def input_output_img(target, output):
     grid[1].set_title('Output:', loc='left')
     grid.cbar_axes[0].colorbar(im)
 
-    buff = io.BytesIO()
-    fig.savefig(buff, bbox_inches='tight', pad_inches=0.1, dpi=90)
-    buff.seek(0)
-    img = np.rollaxis(np.asarray(Image.open(buff)), -1, 0)
-    plt.close(fig)
-    return img
+    return fig2img(fig)
+
+
+def dnc_img(info):
+    def add_subplot(subplot, image, title, ticks):
+        plt.subplot(subplot)
+        im = plt.imshow(image, aspect='auto')
+        plt.title(title, loc='left')
+        plt.axis('on')
+        if not ticks:
+            plt.xticks([])
+            plt.yticks([])
+        return im
+
+    # Write info
+    write_weights = np.array(info['write_head']['write_weights']).T, 'Write weights'
+    alloc_gates = np.array(info['write_head']['alloc_gate']).reshape(1, -1), 'Allocation gates'
+    write_gates = np.array(info['write_head']['write_gate']).reshape(1, -1), 'Write gates'
+
+    # Read info
+    read_modes = np.array(info['read_head']['read_modes'])
+    read_weights = np.array(info['read_head']['read_weights']).T, 'Read weights'
+    forward_modes = read_modes[:, 0:1].T, 'Forward mode'
+    backward_modes = read_modes[:, 1:2].T, 'Backward mode'
+    content_modes = read_modes[:, 2:].T, 'Content mode'
+
+    # Create figure
+    fig = plt.figure(figsize=(10, 10))
+    plt.gray()
+    grid = gridspec.GridSpec(1, 2, figure=fig, wspace=0.2)
+    write = gridspec.GridSpecFromSubplotSpec(
+        3, 1,
+        subplot_spec=grid[0],
+        height_ratios=[10, 1, 1],
+    )
+    read = gridspec.GridSpecFromSubplotSpec(
+        4, 1,
+        subplot_spec=grid[1],
+        height_ratios=[18, 1, 1, 1]
+    )
+
+    # Plot write head
+    for i, (image, title) in enumerate((write_weights, alloc_gates, write_gates)):
+        if title == 'Write weights':
+            add_subplot(write[i], image, title, ticks=True)
+        else:
+            add_subplot(write[i], image, title, ticks=False)
+
+    # Plot read head
+    for i, (image, title) in enumerate((read_weights, forward_modes, backward_modes, content_modes)):
+        if title == 'Read weights':
+            add_subplot(read[i], image, title, ticks=True)
+        else:
+            im = add_subplot(read[i], image, title, ticks=False)
+    plt.subplots_adjust(hspace=0.4)
+
+    # Colorbar
+    cb_ax = fig.add_axes([0.92, 0.11, 0.02, 0.78])
+    fig.colorbar(im, cax=cb_ax)
+    plt.suptitle('DNC memory management')
+
+    return fig2img(fig)

@@ -1,9 +1,12 @@
 """Dataloaders for different tasks with bit vectors.
 """
+import logging
 
 import torch
 import numpy as np
 import torch.nn.functional as F
+
+import utils
 
 
 class BitmapTask:
@@ -23,6 +26,90 @@ class BitmapTask:
         loss_batch = torch.sum(loss_time_batch * mask, dim=-1)
         return loss_batch.sum() / loss_batch.size(0)
 
+    def _gen_batch(self):
+        raise NotImplementedError
+
+    def _gen_name(self, param):
+        raise NotImplementedError
+
+    def _get_examples(self, params):
+        params = [dict(zip(params, i)) for i in zip(*params.values())]
+        examples = [self._gen_batch(batch_size=1, **p) for p in params]
+        return examples, params
+
+    def generalization(self, model, step, writer, config):
+        """Evaluate model generalization on longer sequences"""
+        with torch.no_grad():
+            inp, tar, mask = self._gen_batch(**config.evaluate.generalization)
+
+            # Run model and collect debug info
+            if config.evaluate.fit_memory:
+                model.n_cells = config.evaluate.generalization.n_cells
+
+            device = 'cuda' if config.gpu and torch.cuda.is_available() else 'cpu'
+            inp = inp.to(device)
+            tar = tar.to(device)
+            mask = mask.to(device)
+            pred = model(inp)
+
+            if config.evaluate.fit_memory:
+                model.n_cells = config.model.n_cells
+
+            pred_binarized = (pred.clone().data > 0).float()
+            cost_time_batch = torch.sum(torch.abs(pred_binarized - tar.data), dim=-1)
+            cost_batch = torch.sum(cost_time_batch * mask, dim=-1)
+            cost = cost_batch.sum() / inp.size(0)
+            writer.add_scalar('test/cost', cost.item(), global_step=step*config.task.batch_size)
+
+    def visualize(self, model, step, writer, config):
+        """Evaluate model on few longer examples with visualizations"""
+        device = 'cuda' if config.gpu and torch.cuda.is_available() else 'cpu'
+        examples, params = self._get_examples(config.evaluate.visualization)
+
+        # Evaluate with io and memory visualizations
+        with torch.no_grad():
+            for example, param in zip(examples, params):
+                inp, tar, mask = example
+                info = {}
+
+                # Run model and collect debug info
+                if config.evaluate.fit_memory:
+                    model.n_cells = param['n_cells']
+
+                out = model(
+                    inp.to(device),
+                    debug=info,
+                )
+
+                if config.evaluate.fit_memory:
+                    model.n_cells = config.model.n_cells
+
+                out = torch.sigmoid(out)
+                out = out.detach().cpu().numpy()[0].T
+                tar = tar.detach().cpu().numpy()[0].T
+                mask = mask.detach().cpu().numpy()[0]
+                start = np.flatnonzero(mask)[0]
+
+                io = utils.input_output_img(tar[:, start:], out[:, start:])
+
+                writer.add_image(
+                    'io/' + self._gen_name(param),
+                    io,
+                    global_step=step * config.task.batch_size,
+                )
+
+                if config.model.name == 'dnc':
+                    mem = utils.dnc_img(info)
+                    writer.add_image(
+                        'mem/' + self._gen_name(param),
+                        mem,
+                        global_step=step * config.task.batch_size,
+                    )
+
+    def evaluate(self, model, step, writer, config):
+        self.visualize(model, step, writer, config)
+        self.generalization(model, step, writer, config)
+
 
 class CopyTask(BitmapTask):
     """Data generator for copy and repeat copy tasks.
@@ -35,11 +122,16 @@ class CopyTask(BitmapTask):
         self.full_input_width = bit_width + 1
         self.full_output_width = bit_width + 1
         self.rand = np.random.RandomState(seed)
+        self.special_chars = 1
 
-    def gen_batch(
+    def _gen_name(self, param):
+        return f"len_{param['max_len']}"
+
+    def _gen_batch(
             self,
             batch_size,
             min_len, max_len,
+            **kwargs,
     ):
         full_input_width = self.full_input_width
         full_output_width = self.full_output_width
@@ -77,7 +169,7 @@ class CopyTask(BitmapTask):
 
     def __iter__(self):
         while True:
-            yield self.gen_batch(
+            yield self._gen_batch(
                 self.batch_size,
                 self.min_len, self.max_len,
             )
@@ -109,11 +201,15 @@ class RepeatCopyTask(BitmapTask):
     def _normalize(self, x):
         return x / self.norm_max
 
-    def gen_batch(
+    def _gen_name(self, param):
+        return f"len_{param['max_len']}_rep_{param['max_rep']}"
+
+    def _gen_batch(
             self,
             batch_size,
             min_len, max_len,
             min_rep, max_rep,
+            **kwargs,
     ):
         full_input_width = self.full_input_width
         full_output_width = self.full_output_width
@@ -154,41 +250,11 @@ class RepeatCopyTask(BitmapTask):
 
     def __iter__(self):
         while True:
-            yield self.gen_batch(
+            yield self._gen_batch(
                 self.batch_size,
                 self.min_len, self.max_len,
                 self.min_rep, self.max_rep,
             )
-
-
-class RepeatedCopyTask(BitmapTask):
-    def __init__(
-            self,
-            batch_size,
-            bit_width,
-            min_len,
-            max_len,
-            min_rep,
-            max_rep,
-            seed,
-    ):
-        self.batch_size = batch_size
-        self.bit_width = bit_width
-        self.full_input_width = bit_width + 2
-        self.full_output_width = bit_width + 1
-        self.min_len = min_len
-        self.max_len = max_len
-        self.min_rep = min_rep
-        self.max_rep = max_rep
-        self.rand = np.random.RandomState(seed)
-
-    def gen_batch(
-            self,
-            batch_size,
-            min_len, max_len,
-            min_rep, max_rep,
-    ):
-        return
 
 
 class AssociativeRecallTask(BitmapTask):
@@ -210,9 +276,13 @@ class AssociativeRecallTask(BitmapTask):
         self.max_cnt = max_cnt
         self.rand = np.random.RandomState(seed)
 
-    def gen_batch(
+    def _gen_name(self, param):
+        return f"cnt_{param['max_cnt']}_len_{param['item_len']}"
+
+    def _gen_batch(
             self, batch_size,
             min_cnt, max_cnt,
+            **kwargs,
     ):
         full_input_width = self.full_input_width
         full_output_width = self.full_output_width
@@ -261,7 +331,7 @@ class AssociativeRecallTask(BitmapTask):
 
     def __iter__(self):
         while True:
-            yield self.gen_batch(
+            yield self._gen_batch(
                 self.batch_size,
                 self.min_cnt, self.max_cnt,
             )

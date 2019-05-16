@@ -16,13 +16,13 @@ WriteArchive = namedtuple(
 )
 
 
-def dict_append(d, name, val):
+def dict_append(d, name, tensor):
     if d is not None:
         values = d.get(name)
         if not values:
             values = []
             d[name] = values
-        values.append(val)
+        values.append(tensor.squeeze().detach().cpu().numpy())
 
 
 def init_debug(debug, initial):
@@ -506,8 +506,8 @@ class ReadHead(nn.Module):
                 content_mode * content_weights
             )
 
-            dict_append(debug, "forward_dist", forward_weights)
-            dict_append(debug, "bacward_dist", backward_weights)
+            dict_append(debug, "forward_weights", forward_weights)
+            dict_append(debug, "bacward_weights", backward_weights)
             dict_append(debug, "read_modes", gates)
         else:
             self.read_weights = content_weights
@@ -570,6 +570,7 @@ class DNC(nn.Module):
         self.controller_to_output = nn.Linear(controller_n_hidden, output_size)
         self.reads_to_output = nn.Linear(cell_width * n_reads, output_size)
 
+        self.register_buffer('mem_bias', torch.Tensor(n_cells, cell_width))
         self.cell_width = cell_width
         self.n_cells = n_cells
         self.memory = None

@@ -1,5 +1,7 @@
 name: Copy DNC
 
+# Task part
+
 task:
   name: copy
   bit_width: 8
@@ -7,6 +9,20 @@ task:
   max_len: 20
   batch_size: 16
   seed: 1
+
+evaluate:
+  visualization:
+    min_len: [20, 40, 100]
+    max_len: [20, 40, 100]
+    n_cells: [20, 40, 100]
+  generalization:
+    batch_size: 100
+    min_len: 100
+    max_len: 100
+    n_cells: 100
+  fit_memory: true
+
+# Model part
 
 model:
   name: dnc
@@ -23,15 +39,16 @@ model:
   links: true
   normalization: false
   dropout: 0
-  seed: 100500
+  seed: [73, 14, 22, 69, 100500]
 
-optimizer: adam
-learning_rate: 0.001
+# Training part
+
+optimizer: rmsprop
+learning_rate: 0.0001
 momentum: 0.9
 gradient_clipping: 10.0
-
 gpu: true
 
-checkpoint_interval: 200
+evaluate_interval: 200
 verbose_interval: 10
-exit_after: null
+exit_after: 200000
