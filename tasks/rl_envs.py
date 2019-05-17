@@ -20,18 +20,18 @@ class Curriculum(object):
         if self.temp_size <= self.max_rep and val_acc >= self.update_limit and config.iteration > config.task.min_update_iters:
             self.temp_size += 1
             config.q_learning.eps_start = config.q_learning.eps_restart
-            config.iteration = 0
+            config.iteration = 1
         return config
 
     def sample(self):
         type = self.rand.choice(3, p = [0.1, 0.25, 0.65])
         if type == 0:
-            return self.rand.choice(self.max_rep - 1) + 1
-        e = np.array(np.around(self.rand.geometric(p=0.5, size=1)), dtype='int')
+            return int(self.rand.choice(self.max_rep - 1) + 1)
+        e = int(np.around(self.rand.geometric(p=0.5, size=1)))
         if type == 1:
-            return self.rand.choice(max(self.min_size, self.temp_size - e), self.temp_size + e) + 1
+            return int(self.rand.choice(max(self.min_size, self.temp_size - e), size=1) + 1)
         if type == 2:
-            return self.rand.choice(e) + 1
+            return int(self.rand.choice(e, size=1) + 1)
 
 
 class CopyEnv(object):
