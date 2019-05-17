@@ -26,12 +26,12 @@ class Curriculum(object):
     def sample(self):
         type = self.rand.choice(3, p = [0.1, 0.25, 0.65])
         if type == 0:
-            return int(self.rand.choice(self.max_rep - 1) + 1)
+            return max(self.rand.choice(self.max_rep), 1)
         e = int(np.around(self.rand.geometric(p=0.5, size=1)))
         if type == 1:
-            return int(self.rand.choice(max(self.min_size, self.temp_size - e), size=1) + 1)
+            return max(int(self.rand.choice(2 * e + 1, size=1) - e + self.temp_size), 1)
         if type == 2:
-            return int(self.rand.choice(e, size=1) + 1)
+            return max(self.rand.choice(e, size=1), 1)
 
 
 class CopyEnv(object):
