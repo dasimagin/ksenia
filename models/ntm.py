@@ -9,13 +9,13 @@ import torch.nn.functional as F
 EPS = 1e-8
 
 
-def dict_append(d, name, val):
+def dict_append(d, name, tensor):
     if d is not None:
         values = d.get(name)
         if not values:
             values = []
             d[name] = values
-        values.append(val)
+        values.append(tensor.squeeze().detach().cpu().numpy())
 
 
 def init_debug(debug, initial):
@@ -98,16 +98,24 @@ def address_memory(memory, keys, betas, gates, shifts, gammas, prev_weights):
 
 
 class WriteHead(nn.Module):
-    def __init__(self, n_heads, mem_word_length):
+    def __init__(self, n_heads, mem_word_length, n_cells):
         super().__init__()
         self.n_heads = n_heads
         self.mem_word_length = mem_word_length
+        self.n_cells = n_cells
         self.input_partition = [self.mem_word_length] * 3 + [1, 1, 3, 1]
         self.input_size = self.n_heads * sum(self.input_partition)
         self.shapes = [[self.n_heads, size] for size in self.input_partition]
         self.write_dist = None
         self.write_data = None
         self.erase_data = None
+
+        # initial writes
+        dist = torch.zeros(1, n_heads, n_cells)
+        dist[torch.randint(n_cells, size=(1,)).item()] = 1
+
+        self.write_dist_bias = nn.Parameter(torch.randn(1, n_heads, n_cells) * 10)
+        self.write_data_bias = nn.Parameter(torch.randn(1, n_heads, mem_word_length) * 0.05)
 
     def new_sequence(self):
         self.write_dist = None
@@ -123,12 +131,15 @@ class WriteHead(nn.Module):
 
     def get_prev_dist(self, memory):
         if self.write_dist is None:
-            return torch.zeros(memory.size(0), self.n_heads, memory.size(1)).to(memory)
+            return F.softmax(
+                self.write_dist_bias.clone().repeat(memory.size(0), 1, 1),
+                dim=-1
+            )
         return self.write_dist
 
     def get_prev_data(self, memory):
         if self.write_data is None:
-            return torch.zeros(memory.size(0), self.n_heads, memory.size(2)).to(memory)
+            return torch.tanh(self.write_data_bias.clone().repeat(memory.size(0), 1, 1))
         return self.write_data
 
     def forward(self, memory, controls, debug):
@@ -164,15 +175,18 @@ class WriteHead(nn.Module):
 
 
 class ReadHead(nn.Module):
-    def __init__(self, n_heads, mem_word_length):
+    def __init__(self, n_heads, mem_word_length, n_cells):
         super().__init__()
         self.n_heads = n_heads
         self.mem_word_length = mem_word_length
+        self.n_cells = n_cells
         self.input_partition = [self.mem_word_length, 1, 1, 3, 1]
         self.input_size = self.n_heads * sum(self.input_partition)
         self.shapes = [[self.n_heads, size] for size in self.input_partition]
         self.read_dist = None
         self.read_data = None
+        self.read_dist_bias = nn.Parameter(torch.zeros(1, n_heads, n_cells))
+        self.read_data_bias = nn.Parameter(torch.randn(1, n_heads, mem_word_length) * 0.05)
 
     def new_sequence(self):
         self.read_dist = None
@@ -180,14 +194,15 @@ class ReadHead(nn.Module):
 
     def get_prev_dist(self, memory):
         if self.read_dist is None:
-            mem_shape = memory.shape
-            return torch.zeros(mem_shape[0], self.n_heads, mem_shape[1]).to(memory)
+            return F.softmax(
+                self.read_dist_bias.clone().repeat(memory.size(0), 1, 1),
+                dim=-1,
+            )
         return self.read_dist
 
     def get_prev_data(self, memory):
         if self.read_data is None:
-            mem_shape = memory.shape
-            return torch.zeros(mem_shape[0], self.n_heads, mem_shape[2]).to(memory)
+            return torch.tanh(self.read_data_bias.clone().repeat(memory.size(0), 1, 1))
         return self.read_data
 
     def forward(self, memory, controls, debug):
@@ -231,8 +246,8 @@ class NTM(nn.Module):
         self.input_size = input_size
         self.output_size = output_size
 
-        self.write_head = WriteHead(n_writes, mem_word_length)
-        self.read_head = ReadHead(n_reads, mem_word_length)
+        self.write_head = WriteHead(n_writes, mem_word_length, mem_cells_count)
+        self.read_head = ReadHead(n_reads, mem_word_length, mem_cells_count)
 
         controller_input = input_size + n_reads * mem_word_length
         controls_size = self.read_head.input_size + self.write_head.input_size
@@ -243,7 +258,6 @@ class NTM(nn.Module):
         self.reads_to_output = nn.Linear(n_reads * mem_word_length, output_size)
         self.controller_to_output = nn.Linear(controller_n_hidden, output_size)
 
-        self.register_buffer('mem_bias', torch.Tensor(mem_cells_count, mem_word_length))
         self.mem_word_length = mem_word_length
         self.mem_cells_count = mem_cells_count
         self.memory = None
@@ -255,8 +269,6 @@ class NTM(nn.Module):
         linear_reset(self.controller_to_output)
         linear_reset(self.reads_to_output)
         self.controller.reset_parameters()
-        stddev = 1 / np.sqrt(self.mem_word_length + self.mem_cells_count)
-        nn.init.uniform_(self.mem_bias, -stddev, stddev)
 
     def calculate_num_params(self):
         count = 0
@@ -294,7 +306,7 @@ class NTM(nn.Module):
         )
 
     def mem_init(self, batch_size, device):
-        self.memory = self.mem_bias.clone().repeat(batch_size, 1, 1).to(device)
+        self.memory = torch.zeros(batch_size, self.mem_cells_count, self.mem_word_length).to(device)
 
     def forward(self, x, debug=None):
         """Run ntm on a batch of sequences.

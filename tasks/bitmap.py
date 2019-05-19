@@ -42,18 +42,11 @@ class BitmapTask:
         with torch.no_grad():
             inp, tar, mask = self._gen_batch(**config.evaluate.generalization)
 
-            # Run model and collect debug info
-            if config.evaluate.fit_memory:
-                model.n_cells = config.evaluate.generalization.n_cells
-
             device = 'cuda' if config.gpu and torch.cuda.is_available() else 'cpu'
             inp = inp.to(device)
             tar = tar.to(device)
             mask = mask.to(device)
             pred = model(inp)
-
-            if config.evaluate.fit_memory:
-                model.n_cells = config.model.n_cells
 
             pred_binarized = (pred.clone().data > 0).float()
             cost_time_batch = torch.sum(torch.abs(pred_binarized - tar.data), dim=-1)
@@ -73,16 +66,10 @@ class BitmapTask:
                 info = {}
 
                 # Run model and collect debug info
-                if config.evaluate.fit_memory:
-                    model.n_cells = param['n_cells']
-
                 out = model(
                     inp.to(device),
                     debug=info,
                 )
-
-                if config.evaluate.fit_memory:
-                    model.n_cells = config.model.n_cells
 
                 out = torch.sigmoid(out)
                 out = out.detach().cpu().numpy()[0].T
@@ -100,6 +87,13 @@ class BitmapTask:
 
                 if config.model.name == 'dnc':
                     mem = utils.dnc_img(info)
+                    writer.add_image(
+                        'mem/' + self._gen_name(param),
+                        mem,
+                        global_step=step * config.task.batch_size,
+                    )
+                if config.model.name == 'ntm':
+                    mem = utils.ntm_img(info)
                     writer.add_image(
                         'mem/' + self._gen_name(param),
                         mem,

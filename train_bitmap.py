@@ -36,7 +36,7 @@ def setup(config):
             max_len=config.task.max_len,
             min_rep=config.task.min_rep,
             max_rep=config.task.max_rep,
-            norm_max=10,
+            norm_max=config.task.norm_max,
             seed=config.task.seed,
         )
     elif config.task.name == 'recall':
@@ -87,6 +87,7 @@ def setup(config):
             dealloc=config.model.dealloc,
             diff_alloc=config.model.diff_alloc,
             links=config.model.links,
+            links_sharpening=config.model.links_sharpening,
             normalization=config.model.normalization,
             dropout=config.model.dropout,
         )
@@ -240,6 +241,7 @@ def main():
             logging.info('Total number of parameters %d', model.calculate_num_params())
 
         train(model, optimizer, task, step, config)
+        running = True
 
 
 if __name__ == "__main__":

@@ -251,3 +251,63 @@ def dnc_img(info):
     plt.suptitle('DNC memory management')
 
     return fig2img(fig)
+
+
+def ntm_img(info):
+    def add_subplot(subplot, image, title, ticks):
+        plt.subplot(subplot)
+        im = plt.imshow(image, aspect='auto')
+        plt.title(title, loc='left')
+        plt.axis('on')
+        if not ticks:
+            plt.xticks([])
+            plt.yticks([])
+        return im
+
+    # Write info
+    write_weights = np.array(info['write_head']['write_weights']).T, 'Write weights'
+    write_content_gates = np.array(info['write_head']['gates']).reshape(1, -1), 'Content gates'
+    write_shifts = np.array(info['write_head']['shifts']).T, 'Shifts'
+
+    # Read info
+    read_weights = np.array(info['read_head']['read_weights']).T, 'Read weights'
+    read_content_gates = np.array(info['read_head']['gates']).reshape(1, -1), 'Content gates'
+    read_shifts = np.array(info['read_head']['shifts']).T, 'Shifts'
+
+    # Create figure
+    fig = plt.figure(figsize=(10, 10))
+    plt.gray()
+    grid = gridspec.GridSpec(1, 2, figure=fig, wspace=0.2)
+    write = gridspec.GridSpecFromSubplotSpec(
+        3, 1,
+        subplot_spec=grid[0],
+        height_ratios=[12, 1, 2],
+    )
+    read = gridspec.GridSpecFromSubplotSpec(
+        3, 1,
+        subplot_spec=grid[1],
+        height_ratios=[12, 1, 2]
+    )
+
+    # Plot write head
+    for i, (image, title) in enumerate((write_weights, write_content_gates, write_shifts)):
+        if title == 'Write weights':
+            add_subplot(write[i], image, title, ticks=True)
+        else:
+            add_subplot(write[i], image, title, ticks=False)
+    plt.subplots_adjust(hspace=0.4)
+
+    # Plot read head
+    for i, (image, title) in enumerate((read_weights, read_content_gates, read_shifts)):
+        if title == 'Read weights':
+            add_subplot(read[i], image, title, ticks=True)
+        else:
+            im = add_subplot(read[i], image, title, ticks=False)
+    plt.subplots_adjust(hspace=0.4)
+
+    # Colorbar
+    cb_ax = fig.add_axes([0.92, 0.11, 0.02, 0.78])
+    fig.colorbar(im, cax=cb_ax)
+    plt.suptitle('NTM memory management')
+
+    return fig2img(fig)
