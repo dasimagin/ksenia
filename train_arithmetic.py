@@ -192,6 +192,9 @@ def setup_model(config):
             n_reads=config.model.n_reads,
             controller_n_hidden=config.model.controller_n_hidden,
             controller_n_layers=config.model.controller_n_layers,
+            controller=config.model.controller,
+            layer_sizes=config.model.layer_sizes,
+            controller_output=config.model.controller_output,
             clip_value=config.model.clip_value,
             dropout=config.model.dropout
         )

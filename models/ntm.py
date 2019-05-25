@@ -236,6 +236,9 @@ class NTM(nn.Module):
             controller_n_hidden,
             controller_n_layers,
             clip_value,
+            controller='lstm',
+            controller_output=None,
+            layer_sizes=None,
             dropout=0,
     ):
         super().__init__()
@@ -248,7 +251,11 @@ class NTM(nn.Module):
         controller_input = input_size + n_reads * mem_word_length
         controls_size = self.read_head.input_size + self.write_head.input_size
 
-        self.controller = LSTMController(controller_input, controller_n_hidden, controller_n_layers)
+        self.controller = 0
+        if controller == 'lstm':
+            self.controller = LSTMController(controller_input, controller_n_hidden, controller_n_layers)
+        elif controller == 'feedforward':
+            self.controller = FFController(controller_input, controller_output, layer_sizes)
         self.clip_value = clip_value
         self.controller_to_controls = nn.Linear(controller_n_hidden, controls_size)
         self.reads_to_output = nn.Linear(n_reads * mem_word_length, output_size)
@@ -366,3 +373,30 @@ class LSTMController(nn.Module):
 
         out, self.prev_state = self.lstm(x.unsqueeze(0), self.prev_state)
         return out.squeeze(0)
+
+
+class FFController(nn.Module):
+    """NTM controller based on feedforward network."""
+    def __init__(self, num_inputs, num_outputs, layer_sizes):
+        super().__init__()
+
+        self.layer_sizes = layer_sizes
+        self.num_inputs = num_inputs
+        self.num_outputs = num_outputs
+
+        self.net = nn.Sequential()
+        self.net.add(nn.Linear(num_inputs, layer_sizes[0]))
+        self.net.add(nn.ReLU())
+        for i in range(len(layer_sizes) - 1):
+            self.net.add(nn.Linear(layer_sizes[i], layer_sizes[i + 1]))
+            self.net.add(nn.ReLU())
+        self.net.add(nn.Linear(layer_sizes[-1], num_outputs))
+
+        self.reset_parameters()
+
+    def reset_parameters(self):
+        self.net.apply(linear_reset)
+
+    def forward(self, x):
+        out = self.net(x)
+        return out

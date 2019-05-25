@@ -1,4 +1,8 @@
-name: Arithmetic NTM
+2019-05-25 14:08:18,203:INFO: Loaded config:
+
+2019-05-25 14:08:18,203:INFO: ==============================
+
+2019-05-25 14:08:18,204:INFO: name: Arithmetic NTM
 
 task:
   name: arithmetic
@@ -13,20 +17,15 @@ model:
   mem_cells_count: 128
   n_writes: 1
   n_reads: 1
-
-  controller: lstm # alternative: feedforward
-  clip_value: 20
-  #lstm parameters
   controller_n_hidden: 100
   controller_n_layers: 1
-  #feedforward parameters
-  controller_output: 100
+  clip_value: 20
+  dropout: 0
+  controller: feedforward
   layer_sizes: [150, 150, 150]
-  
+  controller_output: 100
 
-curriculum:
-  update_step: 100
-  threshold: 0.2
+curriculum: null
 
 gpu: true
 seed: 1
@@ -34,7 +33,7 @@ seed: 1
 scheduler: null
 
 optimizer: rmsprop
-learning_rate: 0.0003
+learning_rate: 0.001
 momentum: 0.9
 gradient_clipping: 10.0
 gpu: true
@@ -43,3 +42,7 @@ checkpoint_interval: 500
 report_interval: 200
 verbose_interval: 10
 exit_after: null
+
+2019-05-25 14:08:18,204:INFO: ==============================
+
+2019-05-25 14:08:18,204:INFO: Start training
