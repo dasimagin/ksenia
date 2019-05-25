@@ -17,6 +17,7 @@ import utils
 from tasks.arithmetic import Arithmetic
 from models.lstm import LSTM
 from models.ntm import NTM
+from models.dnc import DNC
 
 
 def choose_complexity(min_len, max_len, cur_complexity):
@@ -124,13 +125,17 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
         # Write scalars to tensorboard
         writer.add_scalar('train/loss', loss.item(), global_step=cur_step)
         writer.add_scalar('train/cost', cost.item(), global_step=cur_step)
-        if loss.item() < config.curriculum.threshold \
-            and (i - last_curriculum_update) >= config.curriculum.update_step:
-            cur_complexity += 1
-            logging.info('complexity is increased. Current complexity is {}'.format(cur_complexity))            
-            last_curriculum_update = i
 
-        train_data.distribution = choose_complexity(train_data.min_len, train_data.max_len, cur_complexity)
+        if config.curriculum is not None:
+            if loss.item() < config.curriculum.threshold \
+                and (i - last_curriculum_update) >= config.curriculum.update_step:
+                cur_complexity += 1
+                logging.info('complexity is increased. Current complexity is {}'.format(cur_complexity))            
+                last_curriculum_update = i
+            train_data.distribution = choose_complexity(train_data.min_len, train_data.max_len, cur_complexity)
+        else:
+            train_data.distribution = np.ones(config.task.max_len - config.task.min_len + 1) \
+                / (config.task.max_len - config.task.min_len + 1)
 
 
         # Stopping
@@ -189,6 +194,17 @@ def setup_model(config):
             controller_n_layers=config.model.controller_n_layers,
             clip_value=config.model.clip_value,
             dropout=config.model.dropout
+        )
+    elif config.model.name == 'dnc':
+        model = DNC(
+            input_size=train_data.symbols_amount,
+            output_size=train_data.symbols_amount,
+            n_cells=config.model.n_cells,
+            cell_width=config.model.cell_width,
+            n_reads=config.model.n_reads,
+            controller_n_hidden=config.model.controller_n_hidden,
+            controller_n_layers=config.model.controller_n_layers,
+            clip_value=config.model.clip_value,
         )
     else:
         logging.info('Unknown model')
