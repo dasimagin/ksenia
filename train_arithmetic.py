@@ -104,7 +104,6 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
                 optimizer,
                 cur_step,
                 train_data,
-                None,
                 config.checkpoints)
 
             logging.info('Validating model on longer sequences')

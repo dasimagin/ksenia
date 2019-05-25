@@ -45,10 +45,10 @@ def split_tensor(src, shapes):
 
 
 def linear_reset(module, gain=1.0):
-    assert isinstance(module, torch.nn.Linear)
-    nn.init.xavier_uniform_(module.weight, gain=gain)
-    if module.bias is not None:
-        module.bias.data.zero_()
+    if isinstance(module, torch.nn.Linear):
+        nn.init.xavier_uniform_(module.weight, gain=gain)
+        if module.bias is not None:
+            module.bias.data.zero_()
 
 
 def circular_convolution(weights, shifts):
@@ -252,7 +252,7 @@ class NTM(nn.Module):
         controls_size = self.read_head.input_size + self.write_head.input_size
 
         self.controller = 0
-        if controller == 'lstm':
+        if controller is None or controller == 'lstm':
             self.controller = LSTMController(controller_input, controller_n_hidden, controller_n_layers)
         elif controller == 'feedforward':
             self.controller = FFController(controller_input, controller_output, layer_sizes)
@@ -384,15 +384,17 @@ class FFController(nn.Module):
         self.num_inputs = num_inputs
         self.num_outputs = num_outputs
 
-        self.net = nn.Sequential()
-        self.net.add(nn.Linear(num_inputs, layer_sizes[0]))
-        self.net.add(nn.ReLU())
+        layers = [nn.Linear(num_inputs, layer_sizes[0]), nn.ReLU()]
         for i in range(len(layer_sizes) - 1):
-            self.net.add(nn.Linear(layer_sizes[i], layer_sizes[i + 1]))
-            self.net.add(nn.ReLU())
-        self.net.add(nn.Linear(layer_sizes[-1], num_outputs))
+            layers.append(nn.Linear(layer_sizes[i], layer_sizes[i + 1]))
+            layers.append(nn.ReLU())
+        layers.append(nn.Linear(layer_sizes[-1], num_outputs))
+        self.net = nn.Sequential(*layers)
 
         self.reset_parameters()
+
+    def new_sequence(self):
+        pass
 
     def reset_parameters(self):
         self.net.apply(linear_reset)
