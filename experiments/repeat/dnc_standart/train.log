@@ -1,0 +1,191 @@
+2019-05-24 16:51:29,559:INFO: Loaded config:
+
+2019-05-24 16:51:29,559:INFO: ==============================
+
+2019-05-24 16:51:29,560:INFO: name: Repeat Copy DNC
+
+task:
+  name: repeat
+  bit_width: 6
+  min_rep: 1
+  max_rep: 10
+  min_len: 1
+  max_len: 10
+  norm_max: 20
+  batch_size: 16
+  seed: 1
+evaluate:
+  visualization:
+    min_len: [10, 20, 10]
+    max_len: [10, 20, 10]
+    min_rep: [10, 10, 20]
+    max_rep: [10, 10, 20]
+  generalization:
+    batch_size: 100
+    min_len: 20
+    max_len: 20
+    min_rep: 10
+    max_rep: 10
+
+# Model part
+
+model:
+  name: dnc
+  cell_width: 20
+  n_cells: 100
+  n_reads: 1
+  controller_n_hidden: 100
+  controller_n_layers: 1
+  clip_value: 20
+  masking: false
+  mask_min: 0
+  dealloc: false
+  diff_alloc: false
+  links: true
+  links_sharpening: true
+  normalization: false
+  dropout: 0
+  # seed: [22, 13, 57]
+  seed: 22
+
+# Train part
+
+optimizer: rmsprop
+learning_rate: 0.0003
+momentum: 0.9
+gradient_clipping: 10.0
+gpu: true
+
+evaluate_interval: 200
+verbose_interval: 10
+exit_after: null
+
+2019-05-24 16:51:29,560:INFO: ==============================
+
+2019-05-24 16:51:29,560:INFO: Start training
+2019-05-24 16:51:29,560:INFO: 
+==============================
+2019-05-24 16:51:29,560:INFO: Running with seed 22
+2019-05-24 16:51:29,561:INFO: ==============================
+
+2019-05-24 16:51:32,313:INFO: Restoring model from checkpoint
+2019-05-24 16:51:32,320:INFO: Configured model
+2019-05-24 16:51:32,321:INFO: Total number of parameters 62144
+2019-05-24 16:51:42,026:INFO: Iter: 1410, Sequences: 22560, loss: 22.73, cost: 6.39, (970.33 ms/iter)
+2019-05-24 16:51:54,546:INFO: Iter: 1420, Sequences: 22720, loss: 14.78, cost: 4.69, (1252.05 ms/iter)
+2019-05-24 16:52:06,226:INFO: Iter: 1430, Sequences: 22880, loss: 13.94, cost: 4.57, (1168.02 ms/iter)
+2019-05-24 16:52:17,119:INFO: Iter: 1440, Sequences: 23040, loss: 62.31, cost: 14.06, (1089.25 ms/iter)
+2019-05-24 16:52:28,079:INFO: Iter: 1450, Sequences: 23200, loss: 179.76, cost: 48.61, (1096.06 ms/iter)
+2019-05-24 16:52:38,968:INFO: Iter: 1460, Sequences: 23360, loss: 112.42, cost: 38.36, (1088.92 ms/iter)
+2019-05-24 16:52:49,809:INFO: Iter: 1470, Sequences: 23520, loss: 110.11, cost: 44.01, (1084.02 ms/iter)
+2019-05-24 16:53:00,632:INFO: Iter: 1480, Sequences: 23680, loss: 64.21, cost: 22.97, (1082.37 ms/iter)
+2019-05-24 16:53:11,009:INFO: Iter: 1490, Sequences: 23840, loss: 34.84, cost: 11.89, (1037.63 ms/iter)
+2019-05-24 16:53:21,573:INFO: Iter: 1500, Sequences: 24000, loss: 28.99, cost: 9.89, (1056.45 ms/iter)
+2019-05-24 16:53:33,171:INFO: Iter: 1510, Sequences: 24160, loss: 24.08, cost: 7.39, (1159.77 ms/iter)
+2019-05-24 16:53:44,084:INFO: Iter: 1520, Sequences: 24320, loss: 22.12, cost: 6.93, (1091.29 ms/iter)
+2019-05-24 16:53:55,360:INFO: Iter: 1530, Sequences: 24480, loss: 23.95, cost: 7.39, (1127.63 ms/iter)
+2019-05-24 16:54:05,692:INFO: Iter: 1540, Sequences: 24640, loss: 20.76, cost: 5.97, (1033.21 ms/iter)
+2019-05-24 16:54:16,004:INFO: Iter: 1550, Sequences: 24800, loss: 18.80, cost: 5.44, (1031.24 ms/iter)
+2019-05-24 16:54:26,908:INFO: Iter: 1560, Sequences: 24960, loss: 18.35, cost: 5.38, (1090.34 ms/iter)
+2019-05-24 16:54:36,476:INFO: Iter: 1570, Sequences: 25120, loss: 16.13, cost: 5.36, (956.81 ms/iter)
+2019-05-24 16:54:46,917:INFO: Iter: 1580, Sequences: 25280, loss: 25.09, cost: 7.67, (1044.11 ms/iter)
+2019-05-24 16:54:58,169:INFO: Iter: 1590, Sequences: 25440, loss: 16.09, cost: 4.47, (1125.25 ms/iter)
+2019-05-24 16:55:09,244:INFO: Iter: 1600, Sequences: 25600, loss: 15.92, cost: 5.04, (1107.46 ms/iter)
+2019-05-24 16:55:09,245:INFO: Evaluating model
+2019-05-24 16:55:19,181:INFO: Saving checkpoint
+2019-05-24 16:55:30,402:INFO: Iter: 1610, Sequences: 25760, loss: 15.63, cost: 4.58, (2115.80 ms/iter)
+2019-05-24 16:55:41,272:INFO: Iter: 1620, Sequences: 25920, loss: 19.01, cost: 5.78, (1086.97 ms/iter)
+2019-05-24 16:55:53,131:INFO: Iter: 1630, Sequences: 26080, loss: 15.87, cost: 5.14, (1185.89 ms/iter)
+2019-05-24 16:56:04,933:INFO: Iter: 1640, Sequences: 26240, loss: 19.82, cost: 5.51, (1180.20 ms/iter)
+2019-05-24 16:56:15,734:INFO: Iter: 1650, Sequences: 26400, loss: 14.56, cost: 4.75, (1080.09 ms/iter)
+2019-05-24 16:56:26,798:INFO: Iter: 1660, Sequences: 26560, loss: 13.72, cost: 4.42, (1106.40 ms/iter)
+2019-05-24 16:56:38,408:INFO: Iter: 1670, Sequences: 26720, loss: 13.57, cost: 4.31, (1161.03 ms/iter)
+2019-05-24 16:56:50,018:INFO: Iter: 1680, Sequences: 26880, loss: 12.96, cost: 4.21, (1160.99 ms/iter)
+2019-05-24 16:57:00,754:INFO: Iter: 1690, Sequences: 27040, loss: 13.60, cost: 4.67, (1073.57 ms/iter)
+2019-05-24 16:57:11,682:INFO: Iter: 1700, Sequences: 27200, loss: 13.50, cost: 4.61, (1092.84 ms/iter)
+2019-05-24 16:57:23,488:INFO: Iter: 1710, Sequences: 27360, loss: 12.86, cost: 4.11, (1180.63 ms/iter)
+2019-05-24 16:57:33,192:INFO: Iter: 1720, Sequences: 27520, loss: 15.97, cost: 5.62, (970.33 ms/iter)
+2019-05-24 16:57:44,758:INFO: Iter: 1730, Sequences: 27680, loss: 18.21, cost: 5.12, (1156.64 ms/iter)
+2019-05-24 16:57:54,916:INFO: Iter: 1740, Sequences: 27840, loss: 12.25, cost: 4.11, (1015.84 ms/iter)
+2019-05-24 16:58:05,772:INFO: Iter: 1750, Sequences: 28000, loss: 12.87, cost: 4.34, (1085.55 ms/iter)
+2019-05-24 16:58:16,691:INFO: Iter: 1760, Sequences: 28160, loss: 12.36, cost: 4.58, (1091.90 ms/iter)
+2019-05-24 16:58:27,998:INFO: Iter: 1770, Sequences: 28320, loss: 12.40, cost: 4.54, (1130.72 ms/iter)
+2019-05-24 16:58:39,064:INFO: Iter: 1780, Sequences: 28480, loss: 16.79, cost: 5.66, (1106.57 ms/iter)
+2019-05-24 16:58:50,408:INFO: Iter: 1790, Sequences: 28640, loss: 12.90, cost: 4.22, (1134.40 ms/iter)
+2019-05-24 16:59:01,987:INFO: Iter: 1800, Sequences: 28800, loss: 11.74, cost: 4.25, (1157.90 ms/iter)
+2019-05-24 16:59:01,989:INFO: Evaluating model
+2019-05-24 16:59:11,936:INFO: Saving checkpoint
+2019-05-24 16:59:23,777:INFO: Iter: 1810, Sequences: 28960, loss: 11.61, cost: 4.05, (2179.01 ms/iter)
+2019-05-24 16:59:34,427:INFO: Iter: 1820, Sequences: 29120, loss: 11.82, cost: 4.24, (1065.04 ms/iter)
+2019-05-24 16:59:44,406:INFO: Iter: 1830, Sequences: 29280, loss: 11.70, cost: 4.40, (997.91 ms/iter)
+2019-05-24 16:59:55,441:INFO: Iter: 1840, Sequences: 29440, loss: 19.22, cost: 5.28, (1103.51 ms/iter)
+2019-05-24 17:00:05,342:INFO: Iter: 1850, Sequences: 29600, loss: 15.19, cost: 4.95, (990.10 ms/iter)
+2019-05-24 17:00:17,255:INFO: Iter: 1860, Sequences: 29760, loss: 17.86, cost: 5.19, (1191.22 ms/iter)
+2019-05-24 17:00:28,642:INFO: Iter: 1870, Sequences: 29920, loss: 31.13, cost: 7.49, (1138.74 ms/iter)
+2019-05-24 17:00:39,525:INFO: Iter: 1880, Sequences: 30080, loss: 20.32, cost: 6.07, (1088.32 ms/iter)
+2019-05-24 17:00:50,607:INFO: Iter: 1890, Sequences: 30240, loss: 24.97, cost: 8.07, (1108.15 ms/iter)
+2019-05-24 17:01:02,414:INFO: Iter: 1900, Sequences: 30400, loss: 29.52, cost: 8.81, (1180.74 ms/iter)
+2019-05-24 17:01:13,164:INFO: Iter: 1910, Sequences: 30560, loss: 26.63, cost: 7.61, (1074.96 ms/iter)
+2019-05-24 17:01:23,510:INFO: Iter: 1920, Sequences: 30720, loss: 14.59, cost: 4.62, (1034.66 ms/iter)
+2019-05-24 17:01:34,159:INFO: Iter: 1930, Sequences: 30880, loss: 19.89, cost: 5.78, (1064.84 ms/iter)
+2019-05-24 17:01:45,812:INFO: Iter: 1940, Sequences: 31040, loss: 18.61, cost: 5.43, (1165.34 ms/iter)
+2019-05-24 17:01:56,967:INFO: Iter: 1950, Sequences: 31200, loss: 21.28, cost: 5.86, (1115.46 ms/iter)
+2019-05-24 17:02:08,044:INFO: Iter: 1960, Sequences: 31360, loss: 13.01, cost: 4.24, (1107.69 ms/iter)
+2019-05-24 17:02:19,362:INFO: Iter: 1970, Sequences: 31520, loss: 12.52, cost: 4.31, (1131.79 ms/iter)
+2019-05-24 17:02:30,914:INFO: Iter: 1980, Sequences: 31680, loss: 22.99, cost: 6.32, (1155.27 ms/iter)
+2019-05-24 17:02:42,468:INFO: Iter: 1990, Sequences: 31840, loss: 12.54, cost: 4.22, (1155.42 ms/iter)
+2019-05-24 17:02:54,033:INFO: Iter: 2000, Sequences: 32000, loss: 12.14, cost: 4.21, (1156.50 ms/iter)
+2019-05-24 17:02:54,035:INFO: Evaluating model
+2019-05-24 17:03:03,965:INFO: Saving checkpoint
+2019-05-24 17:03:14,086:INFO: Iter: 2010, Sequences: 32160, loss: 12.11, cost: 4.48, (2005.28 ms/iter)
+2019-05-24 17:03:24,714:INFO: Iter: 2020, Sequences: 32320, loss: 11.19, cost: 4.12, (1062.79 ms/iter)
+2019-05-24 17:03:35,334:INFO: Iter: 2030, Sequences: 32480, loss: 11.55, cost: 4.06, (1062.02 ms/iter)
+2019-05-24 17:03:46,150:INFO: Iter: 2040, Sequences: 32640, loss: 15.48, cost: 4.79, (1081.53 ms/iter)
+2019-05-24 17:03:57,516:INFO: Iter: 2050, Sequences: 32800, loss: 17.48, cost: 5.28, (1136.68 ms/iter)
+2019-05-24 17:04:08,014:INFO: Iter: 2060, Sequences: 32960, loss: 66.46, cost: 15.22, (1049.74 ms/iter)
+2019-05-24 17:04:18,866:INFO: Iter: 2070, Sequences: 33120, loss: 34.34, cost: 8.89, (1085.25 ms/iter)
+2019-05-24 17:04:30,111:INFO: Iter: 2080, Sequences: 33280, loss: 16.84, cost: 4.61, (1124.49 ms/iter)
+2019-05-24 17:04:41,486:INFO: Iter: 2090, Sequences: 33440, loss: 15.63, cost: 4.56, (1137.45 ms/iter)
+2019-05-24 17:04:52,755:INFO: Iter: 2100, Sequences: 33600, loss: 13.91, cost: 4.23, (1126.96 ms/iter)
+2019-05-24 17:05:04,001:INFO: Iter: 2110, Sequences: 33760, loss: 12.80, cost: 4.23, (1124.55 ms/iter)
+2019-05-24 17:05:16,435:INFO: Iter: 2120, Sequences: 33920, loss: 12.58, cost: 4.16, (1243.37 ms/iter)
+2019-05-24 17:05:28,441:INFO: Iter: 2130, Sequences: 34080, loss: 11.86, cost: 4.12, (1200.60 ms/iter)
+2019-05-24 17:05:39,649:INFO: Iter: 2140, Sequences: 34240, loss: 11.79, cost: 4.29, (1120.82 ms/iter)
+2019-05-24 17:05:51,245:INFO: Iter: 2150, Sequences: 34400, loss: 11.28, cost: 4.04, (1159.64 ms/iter)
+2019-05-24 17:06:02,027:INFO: Iter: 2160, Sequences: 34560, loss: 16.99, cost: 5.01, (1078.14 ms/iter)
+2019-05-24 17:06:13,422:INFO: Iter: 2170, Sequences: 34720, loss: 25.30, cost: 6.51, (1139.57 ms/iter)
+2019-05-24 17:06:24,817:INFO: Iter: 2180, Sequences: 34880, loss: 12.89, cost: 4.57, (1139.51 ms/iter)
+2019-05-24 17:06:36,368:INFO: Iter: 2190, Sequences: 35040, loss: 11.93, cost: 4.05, (1155.02 ms/iter)
+2019-05-24 17:06:46,818:INFO: Iter: 2200, Sequences: 35200, loss: 11.86, cost: 4.06, (1045.08 ms/iter)
+2019-05-24 17:06:46,820:INFO: Evaluating model
+2019-05-24 17:06:56,813:INFO: Saving checkpoint
+2019-05-24 17:07:07,369:INFO: Iter: 2210, Sequences: 35360, loss: 11.42, cost: 4.07, (2055.08 ms/iter)
+2019-05-24 17:07:18,286:INFO: Iter: 2220, Sequences: 35520, loss: 11.39, cost: 4.14, (1091.69 ms/iter)
+2019-05-24 17:07:30,402:INFO: Iter: 2230, Sequences: 35680, loss: 11.76, cost: 4.08, (1211.58 ms/iter)
+2019-05-24 17:07:41,029:INFO: Iter: 2240, Sequences: 35840, loss: 11.74, cost: 4.44, (1062.68 ms/iter)
+2019-05-24 17:07:51,746:INFO: Iter: 2250, Sequences: 36000, loss: 10.77, cost: 4.00, (1071.72 ms/iter)
+2019-05-24 17:08:02,710:INFO: Iter: 2260, Sequences: 36160, loss: 11.71, cost: 4.44, (1096.43 ms/iter)
+2019-05-24 17:08:13,529:INFO: Iter: 2270, Sequences: 36320, loss: 10.79, cost: 3.94, (1081.84 ms/iter)
+2019-05-24 17:08:24,493:INFO: Iter: 2280, Sequences: 36480, loss: 10.67, cost: 4.00, (1096.48 ms/iter)
+2019-05-24 17:08:35,435:INFO: Iter: 2290, Sequences: 36640, loss: 10.63, cost: 3.93, (1094.20 ms/iter)
+2019-05-24 17:08:46,916:INFO: Iter: 2300, Sequences: 36800, loss: 10.14, cost: 3.97, (1148.06 ms/iter)
+2019-05-24 17:08:57,676:INFO: Iter: 2310, Sequences: 36960, loss: 10.48, cost: 4.09, (1075.97 ms/iter)
+2019-05-24 17:09:09,545:INFO: Iter: 2320, Sequences: 37120, loss: 10.43, cost: 4.16, (1186.92 ms/iter)
+2019-05-24 17:09:19,663:INFO: Iter: 2330, Sequences: 37280, loss: 9.97, cost: 3.92, (1011.78 ms/iter)
+2019-05-24 17:09:30,587:INFO: Iter: 2340, Sequences: 37440, loss: 10.01, cost: 4.01, (1092.41 ms/iter)
+2019-05-24 17:09:41,159:INFO: Iter: 2350, Sequences: 37600, loss: 32.67, cost: 7.66, (1057.28 ms/iter)
+2019-05-24 17:09:51,849:INFO: Iter: 2360, Sequences: 37760, loss: 63.64, cost: 14.68, (1068.92 ms/iter)
+2019-05-24 17:10:02,437:INFO: Iter: 2370, Sequences: 37920, loss: 21.04, cost: 6.51, (1058.81 ms/iter)
+2019-05-24 17:10:13,602:INFO: Iter: 2380, Sequences: 38080, loss: 17.11, cost: 5.48, (1116.50 ms/iter)
+2019-05-24 17:10:25,439:INFO: Iter: 2390, Sequences: 38240, loss: 19.20, cost: 5.91, (1183.70 ms/iter)
+2019-05-24 17:10:36,424:INFO: Iter: 2400, Sequences: 38400, loss: 35.41, cost: 9.00, (1098.51 ms/iter)
+2019-05-24 17:10:36,425:INFO: Evaluating model
+2019-05-24 17:10:46,562:INFO: Saving checkpoint
+2019-05-24 17:10:57,208:INFO: Iter: 2410, Sequences: 38560, loss: 17.69, cost: 5.40, (2078.42 ms/iter)
+2019-05-24 17:11:08,673:INFO: Iter: 2420, Sequences: 38720, loss: 13.95, cost: 4.69, (1146.51 ms/iter)
+2019-05-24 17:11:20,154:INFO: Iter: 2430, Sequences: 38880, loss: 12.76, cost: 4.04, (1148.04 ms/iter)
+2019-05-24 17:11:31,610:INFO: Iter: 2440, Sequences: 39040, loss: 12.05, cost: 3.99, (1145.65 ms/iter)
+2019-05-24 17:11:43,110:INFO: Iter: 2450, Sequences: 39200, loss: 11.63, cost: 4.04, (1149.95 ms/iter)
+2019-05-24 17:11:54,130:INFO: Iter: 2460, Sequences: 39360, loss: 23.57, cost: 6.31, (1101.99 ms/iter)
+2019-05-24 17:12:05,342:INFO: Iter: 2470, Sequences: 39520, loss: 32.08, cost: 8.07, (1121.29 ms/iter)
+2019-05-24 17:12:16,571:INFO: Iter: 2480, Sequences: 39680, loss: 14.01, cost: 4.42, (1122.85 ms/iter)

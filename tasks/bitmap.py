@@ -46,7 +46,14 @@ class BitmapTask:
             inp = inp.to(device)
             tar = tar.to(device)
             mask = mask.to(device)
+
+            if 'n_cells' in config.evaluate.generalization:
+                model.n_cells = config.evaluate.generalization.n_cells
+
             pred = model(inp)
+
+            if 'n_cells' in config.evaluate.generalization:
+                model.n_cells = config.model.n_cells
 
             pred_binarized = (pred.clone().data > 0).float()
             cost_time_batch = torch.sum(torch.abs(pred_binarized - tar.data), dim=-1)
@@ -66,10 +73,16 @@ class BitmapTask:
                 info = {}
 
                 # Run model and collect debug info
+                if 'n_cells' in param:
+                    model.n_cells = param['n_cells']
+
                 out = model(
                     inp.to(device),
                     debug=info,
                 )
+
+                if 'n_cells' in param:
+                    model.n_cells = config.model.n_cells
 
                 out = torch.sigmoid(out)
                 out = out.detach().cpu().numpy()[0].T
@@ -101,6 +114,7 @@ class BitmapTask:
                     )
 
     def evaluate(self, model, step, writer, config):
+        model.eval()
         self.visualize(model, step, writer, config)
         self.generalization(model, step, writer, config)
 

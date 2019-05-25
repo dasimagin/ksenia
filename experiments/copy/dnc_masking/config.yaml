@@ -1,0 +1,60 @@
+name: Copy DNC
+
+# Task part
+
+task:
+  name: copy
+  bit_width: 8
+  min_len: 1
+  max_len: 20
+  batch_size: 16
+  seed: 1
+
+evaluate:
+  visualization:
+    min_len: [20, 40, 100]
+    max_len: [20, 40, 100]
+    n_cells: [20, 40, 100]
+  generalization:
+    batch_size: 100
+    min_len: 100
+    max_len: 100
+    n_cells: 100
+
+# Model part
+
+model:
+  name: dnc
+  cell_width: 20
+  n_cells: 20
+  n_reads: 1
+  controller_n_hidden: 100
+  controller_n_layers: 1
+  clip_value: 20
+  masking: true
+  mask_min: 0
+  dealloc: false
+  diff_alloc: false
+  links: true
+  links_sharpening: true
+  normalization: true
+  dropout: 0.1
+  seed: [22, 100500, 73, 14, 69]
+
+# Plan for today:
+#  - run with links sharpening
+#  - add normalization and dropout
+#  - add masking
+#  - add diff alloc
+
+# Training part
+
+optimizer: rmsprop
+learning_rate: 0.0001
+momentum: 0.9
+gradient_clipping: 10.0
+gpu: true
+
+evaluate_interval: 200
+verbose_interval: 10
+exit_after: null

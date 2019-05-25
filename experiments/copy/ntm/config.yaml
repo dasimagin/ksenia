@@ -30,7 +30,7 @@ model:
   controller_n_hidden: 100
   controller_n_layers: 1
   clip_value: 20
-  seed: [100, 14, 888, 22, 100500]
+  seed: [73, 14, 22, 69, 100500]
 
 # Train part
 
@@ -42,4 +42,4 @@ gpu: true
 
 evaluate_interval: 200
 verbose_interval: 10
-exit_after: 70000
+exit_after: null

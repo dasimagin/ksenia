@@ -181,7 +181,14 @@ class AllocationAddressing(torch.nn.Module):
             )
             alloc_dist = sorted_scores.clone().scatter_(-1, free_list, sorted_scores)
         else:
-            one_minus_usage = 1.0 - self.usages
+            # hacky initialization of first usage for better start allocation
+            if write_weights is None:
+                batch_size, _, n_cells = read_weights.shape
+                one_minus_usage = torch.zeros(batch_size, n_cells, device=read_weights.device)
+                one_minus_usage[:, 0] = 1
+            else:
+                one_minus_usage = 1.0 - self.usages
+
             alloc_dist = F.softmax(one_minus_usage * diff_alloc, dim=-1)
 
         return alloc_dist, phi
@@ -418,12 +425,14 @@ class ReadHead(nn.Module):
             masking=False,
             mask_min=0.0,
             links=True,
+            links_sharpening=False,
     ):
         super().__init__()
         self.n_reads = n_reads
         self.cell_width = cell_width
         self.masking = masking
         self.links = links
+        self.links_sharpening = links_sharpening
 
         self.content_addressing = ContentAddressing(mask_min)
         self.temporal_addressing = TemporalMemoryLinkage()
@@ -437,6 +446,9 @@ class ReadHead(nn.Module):
 
         if links:
             self.shapes += [[n_reads, 3]]
+
+        if links_sharpening:
+            self.shapes += [[n_reads, 2]]
 
         self.input_size = sum(
             part[0] * part[1] if isinstance(part, list) else part
@@ -462,6 +474,13 @@ class ReadHead(nn.Module):
             return torch.zeros(mem_shape[0], self.n_reads, mem_shape[2]).to(memory)
         return self.read_vector
 
+    def _sharpen_weights(self, weights, sharpening):
+        weights += EPS
+        weights = weights / weights.max(dim=-1, keepdim=True)[0]
+        weights = weights.pow(sharpening)
+        weights = weights / weights.sum(dim=-1, keepdim=True)
+        return weights
+
     def forward(self, memory, controls, write_weights, debug=None):
         """Address NTM memory given controls vector
 
@@ -474,10 +493,17 @@ class ReadHead(nn.Module):
         # Options
         masks = None
         gates = None
+        sharpening = None
 
+        # Masking optional params
         if self.masking:
-            masks = tensors[0]
+            masks = torch.sigmoid(tensors[0])
             tensors = tensors[1:]
+
+        # Links optional params
+        if self.links_sharpening:
+            sharpening = 1 + F.softplus(tensors[-1])
+            tensors = tensors[:-1]
 
         if self.links:
             gates = F.softmax(tensors[-1], dim=-1)
@@ -499,6 +525,10 @@ class ReadHead(nn.Module):
             forward_mode = gates[..., 0:1]
             backward_mode = gates[..., 1:2]
             content_mode = gates[..., 2:]
+
+            if self.links_sharpening:
+                forward_weights = self._sharpen_weights(forward_weights, sharpening[..., :1])
+                backward_weights = self._sharpen_weights(backward_weights, sharpening[..., 1:])
 
             self.read_weights = (
                 forward_mode * forward_weights +
@@ -537,6 +567,7 @@ class DNC(nn.Module):
             dealloc=False,
             diff_alloc=False,
             links=True,
+            links_sharpening=False,
             normalization=False,
             dropout=0,
     ):
@@ -554,23 +585,29 @@ class DNC(nn.Module):
             diff_alloc=diff_alloc,
             dealloc=dealloc,
         )
+
         self.read_head = ReadHead(
             n_reads,
             cell_width,
             masking=masking,
             mask_min=mask_min,
             links=links,
+            links_sharpening=links_sharpening,
         )
 
         controller_input = input_size + n_reads * cell_width
         controls_size = self.read_head.input_size + self.write_head.input_size
+
+        if normalization:
+            self.normalization = nn.LayerNorm(normalized_shape=controls_size)
+        else:
+            self.normalization = None
 
         self.controller = LSTMController(controller_input, controller_n_hidden, controller_n_layers)
         self.controller_to_controls = nn.Linear(controller_n_hidden, controls_size)
         self.controller_to_output = nn.Linear(controller_n_hidden, output_size)
         self.reads_to_output = nn.Linear(cell_width * n_reads, output_size)
 
-        self.register_buffer('mem_bias', torch.Tensor(n_cells, cell_width))
         self.cell_width = cell_width
         self.n_cells = n_cells
         self.memory = None
@@ -601,6 +638,9 @@ class DNC(nn.Module):
         controller_output = self.controller(torch.cat([inp, last_reads], -1))
         controls_vector = self.controller_to_controls(controller_output)
         controls_vector = controls_vector.clamp(-self.clip_value, self.clip_value)
+
+        if self.normalization is not None:
+            controls_vector = self.normalization(controls_vector)
 
         # Split controls
         shapes = [[self.write_head.input_size], [self.read_head.input_size]]

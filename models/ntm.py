@@ -110,10 +110,6 @@ class WriteHead(nn.Module):
         self.write_data = None
         self.erase_data = None
 
-        # initial writes
-        dist = torch.zeros(1, n_heads, n_cells)
-        dist[torch.randint(n_cells, size=(1,)).item()] = 1
-
         self.write_dist_bias = nn.Parameter(torch.randn(1, n_heads, n_cells) * 10)
         self.write_data_bias = nn.Parameter(torch.randn(1, n_heads, mem_word_length) * 0.05)
 

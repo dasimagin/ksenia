@@ -128,7 +128,7 @@ def setup(config):
 
 
 def train(model, optimizer, task, step, config):
-    writer = tensorboardX.SummaryWriter(log_dir=str(config.tensorboard))
+    writer = tensorboardX.SummaryWriter(logdir=str(config.tensorboard))
     criterion = task.loss
     iter_start_time = time.time()
     loss_sum = 0

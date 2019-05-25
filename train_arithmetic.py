@@ -46,7 +46,7 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
     if config.scheduler is not None:
         optimizer, scheduler = optimizer
 
-    writer = tensorboardX.SummaryWriter(log_dir=str(config.tensorboard))
+    writer = tensorboardX.SummaryWriter(logdir=str(config.tensorboard))
     iter_start_time = time.time()
     loss_sum = 0
     cost_sum = 0
@@ -76,11 +76,11 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
 
         loss_sum += loss.item()
         cost_sum += cost.item()
-        
+
         val_tensors = []
         for (vx, vy, vm), vlength in validation_data:
             val_tensors.append((vx.cuda(), vy.cuda(), vm.cuda(), vlength))
-        
+
         cur_step += batch_size
         if i % config.verbose_interval == 0:
             time_now = time.time()
@@ -100,7 +100,7 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
         if i % config.checkpoint_interval == 0:
             logging.info('Saving checkpoint')
             utils.save_checkpoint(
-                model, 
+                model,
                 optimizer,
                 cur_step,
                 train_data,
@@ -130,7 +130,7 @@ def train(model, optimizer, criterion, train_data, validation_data, config):
             if loss.item() < config.curriculum.threshold \
                 and (i - last_curriculum_update) >= config.curriculum.update_step:
                 cur_complexity += 1
-                logging.info('complexity is increased. Current complexity is {}'.format(cur_complexity))            
+                logging.info('complexity is increased. Current complexity is {}'.format(cur_complexity))
                 last_curriculum_update = i
             train_data.distribution = choose_complexity(train_data.min_len, train_data.max_len, cur_complexity)
         else:
