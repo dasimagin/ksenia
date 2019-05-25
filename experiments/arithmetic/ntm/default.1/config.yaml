@@ -29,7 +29,7 @@ seed: 1
 scheduler: null
 
 optimizer: rmsprop
-learning_rate: 0.0003
+learning_rate: 0.001
 momentum: 0.9
 gradient_clipping: 10.0
 gpu: true

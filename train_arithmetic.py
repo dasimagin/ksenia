@@ -249,7 +249,7 @@ def setup_model(config):
         optimizer = (optimizer, scheduler)
 
     if config.load:
-        model, optimizer, train_data, validation_data, step = utils.load_checkpoint(
+        model, optimizer, train_data, step = utils.load_checkpoint(
             model, optimizer, train_data, config.load,
         )
 

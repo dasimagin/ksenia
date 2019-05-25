@@ -389,6 +389,7 @@ class FFController(nn.Module):
             layers.append(nn.Linear(layer_sizes[i], layer_sizes[i + 1]))
             layers.append(nn.ReLU())
         layers.append(nn.Linear(layer_sizes[-1], num_outputs))
+        layers.append(nn.ReLU())
         self.net = nn.Sequential(*layers)
 
         self.reset_parameters()
