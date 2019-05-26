@@ -41,8 +41,7 @@ model:
   links_sharpening: true
   normalization: false
   dropout: 0
-  # seed: [22, 13, 57]
-  seed: 22
+  seed: [1, 88, 1209, 2213, 2]
 
 # Train part
 

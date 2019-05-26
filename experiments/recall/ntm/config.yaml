@@ -8,27 +8,34 @@ task:
   max_cnt: 6
   batch_size: 64
   seed: 10
+evaluate:
+  visualization:
+    min_cnt: [6, 10, 6]
+    max_cnt: [6, 10, 6]
+    item_len: [3, 3, 5]
+  generalization:
+    batch_size: 100
+    min_cnt: 10
+    max_cnt: 10
+    item_len: 5
 
 model:
   name: ntm
   mem_word_length: 20
-  mem_cells_count: 128
+  mem_cells_count: 100
   n_writes: 1
   n_reads: 1
   controller_n_hidden: 100
   controller_n_layers: 1
-  controller_clip: 20
-  seed: 20
+  clip_value: 20
+  seed: [20, 30, 50]
 
 optimizer: rmsprop
 learning_rate: 0.0001
 momentum: 0.9
 gradient_clipping: 10.0
-
 gpu: true
-scheduler: null
 
-checkpoint_interval: 500
-report_interval: 200
+evaluate_interval: 200
 verbose_interval: 10
 exit_after: null

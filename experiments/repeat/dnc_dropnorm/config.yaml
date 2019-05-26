@@ -1,4 +1,4 @@
-name: Repeat Copy DNC
+name: Repeat DNC with normalization
 
 task:
   name: repeat
@@ -39,10 +39,9 @@ model:
   diff_alloc: false
   links: true
   links_sharpening: true
-  normalization: false
-  dropout: 0
-  # seed: [22, 13, 57]
-  seed: 22
+  normalization: true
+  dropout: 0.1
+  seed: [22, 13, 57, 69, 100500]
 
 # Train part
 

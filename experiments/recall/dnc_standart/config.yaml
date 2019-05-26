@@ -1,0 +1,48 @@
+name: Associative Recall DNC
+
+task:
+  name: recall
+  bit_width: 6
+  item_len: 3
+  min_cnt: 2
+  max_cnt: 6
+  batch_size: 64
+  seed: 10
+evaluate:
+  visualization:
+    min_cnt: [6, 10, 6]
+    max_cnt: [6, 10, 6]
+    item_len: [3, 3, 5]
+  generalization:
+    batch_size: 100
+    min_cnt: 10
+    max_cnt: 10
+    item_len: 5
+
+model:
+  name: dnc
+  cell_width: 20
+  n_cells: 100
+  n_reads: 1
+  controller_n_hidden: 100
+  controller_n_layers: 1
+  clip_value: 20
+  masking: false
+  mask_min: 0
+  dealloc: false
+  diff_alloc: false
+  links: true
+  links_sharpening: false
+  normalization: false
+  dropout: 0
+  seed: [1, 88, 1209]
+
+optimizer: rmsprop
+learning_rate: 0.0001
+momentum: 0.9
+gradient_clipping: 10.0
+gpu: true
+
+evaluate_interval: 200
+verbose_interval: 10
+exit_after: null

@@ -1,6 +1,5 @@
 """Dataloaders for different tasks with bit vectors.
 """
-import logging
 
 import torch
 import numpy as np
@@ -90,13 +89,14 @@ class BitmapTask:
                 mask = mask.detach().cpu().numpy()[0]
                 start = np.flatnonzero(mask)[0]
 
-                io = utils.input_output_img(tar[:, start:], out[:, start:])
+                if config.task.name != 'recall':
+                    io = utils.input_output_img(tar[:, start:], out[:, start:])
 
-                writer.add_image(
-                    'io/' + self._gen_name(param),
-                    io,
-                    global_step=step * config.task.batch_size,
-                )
+                    writer.add_image(
+                        'io/' + self._gen_name(param),
+                        io,
+                        global_step=step * config.task.batch_size,
+                    )
 
                 if config.model.name == 'dnc':
                     mem = utils.dnc_img(info)

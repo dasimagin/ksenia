@@ -14,20 +14,19 @@ evaluate:
   visualization:
     min_len: [20, 40, 100]
     max_len: [20, 40, 100]
-    # n_cells: [20, 40, 100]
+    n_cells: [20, 40, 100]
   generalization:
     batch_size: 100
     min_len: 100
     max_len: 100
-    # n_cells: 100
+    n_cells: 100
 
 # Model part
 
 model:
   name: dnc
   cell_width: 20
-  # n_cells: 20  previous run was with memory liimtations
-  n_cells: 120
+  n_cells: 20
   n_reads: 1
   controller_n_hidden: 100
   controller_n_layers: 1
