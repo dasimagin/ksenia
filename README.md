@@ -44,32 +44,32 @@ Plan is to implement dnc with plugable modules
 performance on algorithmic tasks with different configurations.
 
 * Modules:
-  - [ ] Content based attention:
+  - [x] Content based attention:
     - default;
     - key-value (with masks/and explicit) [1](https://openreview.net/pdf?id=HyGEM3C9KQ);
     - use gumbel softmax for weightings;
     - use location based addresing
-  - [ ] Memory allocation mechanisms
+  - [x] Memory allocation mechanisms
     - default;
     - deallocation [1](https://openreview.net/pdf?id=HyGEM3C9KQ);
-    - differentiable allocation [2](https://ttic.uchicago.edu/~klivescu/MLSLP2017/MLSLP2017_ben-ari.pdf);
-  - [ ] Temporal link matrix
+    - differentiable allocation [2](https://ttic.uchicago.edu/~klivescu/MLSLP2017/MLSLP2017_ben-ari.pdf), checked but nothing worked; 
+  - [x] Temporal link matrix
     - default;
-    - sharpend [1](https://openreview.net/pdf?id=HyGEM3C9KQ)
-    - without link matrix (but with location based addresing);
-  - [ ] *Maybe:* bidirectional, dropout and other architectural tweaks from [3](https://arxiv.org/pdf/1807.02658.pdf) (experiments as a reference)
+    - sharpend [1](https://openreview.net/pdf?id=HyGEM3C9KQ) helped alot
+    - without link matrix (but with location based addresing); (not usefull)
+  - [x] *Maybe:* bidirectional, dropout and other architectural tweaks from [3](https://arxiv.org/pdf/1807.02658.pdf) (experiments as a reference)
 * Experiments:
   - [ ] *Approximate dedline: 15 april:* Simple bitmap tasks (test on all variant)
-    - [ ] Copy task (as a test)
-    - [ ] Repeat copy
+    - [x] Copy task (as a test)
+    - [x] Repeat copy
     - [ ] Repeated copy
-    - [ ] Associative recall (+ take a look at working memory tasks from [paper](https://arxiv.org/pdf/1809.11087v1.pdf))
+    - [x] Associative recall (+ take a look at working memory tasks from [paper](https://arxiv.org/pdf/1809.11087v1.pdf))
     - [ ] Sorting/priority sorting (or another more complex algorithmic task)
 * Memory vizualisations:
-  - [ ] Memory contents + attention distribution
+  - [x] Memory contents + attention distribution
   - [ ] Temporal link matrix
-  - [ ] Gates for read modes
-  - [ ] Visualize memorization (maybe, bet need to read about [this](https://distill.pub/2019/memorization-in-rnns/))
+  - [x] Gates for read modes
+  - [ ] Visualize memorization (maybe, but need to read about [this](https://distill.pub/2019/memorization-in-rnns/))
 * Additionalf ideas:
   - [ ] Plot loss landscape (maybe, but need to read about it first)
 * Someday:
