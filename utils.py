@@ -293,6 +293,7 @@ def ntm_img(info):
     for i, (image, title) in enumerate((write_weights, write_content_gates, write_shifts)):
         if title == 'Write weights':
             add_subplot(write[i], image, title, ticks=True)
+            print(image)
         else:
             add_subplot(write[i], image, title, ticks=False)
     plt.subplots_adjust(hspace=0.4)

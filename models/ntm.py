@@ -74,7 +74,7 @@ def cosine_distance(memory, keys):
     return scores
 
 
-def address_memory(memory, keys, betas, gates, shifts, gammas, prev_weights):
+def address_memory(memory, keys, betas, gates, shifts, gammas, prev_weights, debug=None):
     # constraints
     keys = torch.tanh(keys)
     betas = F.softplus(betas)
@@ -94,6 +94,12 @@ def address_memory(memory, keys, betas, gates, shifts, gammas, prev_weights):
     # sharpen [batch size, num heads, cells count]
     w_sharp = w_shift ** gammas
     w_sharp = torch.div(w_sharp, w_sharp.sum(-1).unsqueeze(-1) + EPS)
+
+    dict_append(debug, "gates", gates)
+    dict_append(debug, "betas", betas)
+    dict_append(debug, "shifts", shifts)
+    dict_append(debug, "gammas", gammas)
+
     return w_sharp
 
 
@@ -153,7 +159,7 @@ class WriteHead(nn.Module):
         betas, gates, shifts, gammas = tensors[3:]
 
         self.write_dist = address_memory(
-            memory, keys, betas, gates, shifts, gammas, self.get_prev_dist(memory),
+            memory, keys, betas, gates, shifts, gammas, self.get_prev_dist(memory), debug=debug
         )
 
         self.write_data = torch.tanh(write_vectors)
@@ -162,10 +168,6 @@ class WriteHead(nn.Module):
         dict_append(debug, "write_weights", self.write_dist)
         dict_append(debug, "write_vectors", write_vectors)
         dict_append(debug, "erase_vectors", erase_vectors)
-        dict_append(debug, "gates", gates)
-        dict_append(debug, "betas", betas)
-        dict_append(debug, "shifts", shifts)
-        dict_append(debug, "gammas", gammas)
 
         return WriteHead.mem_update(memory, self.write_dist, self.erase_data, self.write_data)
 
@@ -211,14 +213,10 @@ class ReadHead(nn.Module):
         keys, betas, gates, shifts, gammas = split_tensor(controls, self.shapes)
 
         self.read_dist = address_memory(
-            memory, keys, betas, gates, shifts, gammas, self.get_prev_dist(memory))
+            memory, keys, betas, gates, shifts, gammas, self.get_prev_dist(memory), debug=debug)
         self.read_data = (memory.unsqueeze(1) * self.read_dist.unsqueeze(-1)).sum(-2)
 
         dict_append(debug, "read_weights", self.read_dist)
-        dict_append(debug, "gates", gates)
-        dict_append(debug, "betas", betas)
-        dict_append(debug, "shifts", shifts)
-        dict_append(debug, "gammas", gammas)
         dict_append(debug, "read_data", self.read_data)
 
         return self.read_data
@@ -255,7 +253,7 @@ class NTM(nn.Module):
         if controller is None or controller == 'lstm':
             self.controller = LSTMController(controller_input, controller_n_hidden, controller_n_layers)
         elif controller == 'feedforward':
-            self.controller = FFController(controller_input, controller_output, layer_sizes)
+            self.controller = FFController(controller_input, controller_n_hidden, layer_sizes)
         self.clip_value = clip_value
         self.controller_to_controls = nn.Linear(controller_n_hidden, controls_size)
         self.reads_to_output = nn.Linear(n_reads * mem_word_length, output_size)
