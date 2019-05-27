@@ -595,3 +595,247 @@
 2019-05-27 15:34:31,265:INFO: Validating model on same-size sequences
 2019-05-27 15:34:36,145:INFO: Validating model on longer sequences
 2019-05-27 15:36:00,644:INFO: Validating model on same-size sequences
+2019-05-27 15:36:45,353:INFO: Validating model on same-size sequences
+2019-05-27 15:37:28,048:INFO: Validating model on same-size sequences
+2019-05-27 15:38:02,575:INFO: Validating model on same-size sequences
+2019-05-27 15:38:43,778:INFO: Validating model on same-size sequences
+2019-05-27 15:39:28,469:INFO: Validating model on same-size sequences
+2019-05-27 15:40:08,093:INFO: Validating model on same-size sequences
+2019-05-27 15:40:47,646:INFO: Validating model on same-size sequences
+2019-05-27 15:41:08,714:INFO: Sequences: 97600, Mean episode_total_rewards: 0.02541030209739091, loss_avg: 0.00016310416162014008, epsilon: 0.059697196786440504 curr_temp_size: 3 (15897.97 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 15:41:29,210:INFO: Validating model on same-size sequences
+2019-05-27 15:42:03,740:INFO: Validating model on same-size sequences
+2019-05-27 15:42:48,386:INFO: Validating model on same-size sequences
+2019-05-27 15:43:25,571:INFO: Validating model on same-size sequences
+2019-05-27 15:44:12,822:INFO: Validating model on same-size sequences
+2019-05-27 15:44:58,541:INFO: Validating model on same-size sequences
+2019-05-27 15:45:44,154:INFO: Validating model on same-size sequences
+2019-05-27 15:46:31,594:INFO: Validating model on same-size sequences
+2019-05-27 15:47:16,076:INFO: Sequences: 99200, Mean episode_total_rewards: 0.0291038566468254, loss_avg: 0.00011965815909206867, epsilon: 0.05919356257769828 curr_temp_size: 3 (14694.50 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 15:47:29,020:INFO: Validating model on same-size sequences
+2019-05-27 15:48:18,807:INFO: Validating model on same-size sequences
+2019-05-27 15:49:11,375:INFO: Validating model on same-size sequences
+2019-05-27 15:49:55,313:INFO: Validating model on same-size sequences
+2019-05-27 15:50:32,036:INFO: Validating model on same-size sequences
+2019-05-27 15:51:13,882:INFO: Validating model on same-size sequences
+2019-05-27 15:51:53,812:INFO: Validating model on same-size sequences
+2019-05-27 15:52:36,227:INFO: Validating model on same-size sequences
+2019-05-27 15:53:25,921:INFO: Sequences: 100800, Mean episode_total_rewards: 0.030038913292589765, loss_avg: 9.501860477030277e-05, epsilon: 0.05871608514619813 curr_temp_size: 3 (14793.80 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 15:53:25,922:INFO: Validating model on same-size sequences
+2019-05-27 15:54:28,910:INFO: Validating model on same-size sequences
+2019-05-27 15:55:18,221:INFO: Validating model on same-size sequences
+2019-05-27 15:55:54,131:INFO: Validating model on same-size sequences
+2019-05-27 15:56:36,324:INFO: Validating model on same-size sequences
+2019-05-27 15:57:13,867:INFO: Validating model on same-size sequences
+2019-05-27 15:57:53,084:INFO: Validating model on same-size sequences
+2019-05-27 15:58:29,344:INFO: Validating model on same-size sequences
+2019-05-27 15:59:08,517:INFO: Validating model on same-size sequences
+2019-05-27 15:59:26,324:INFO: Sequences: 102400, Mean episode_total_rewards: 0.029156249999999998, loss_avg: 0.00013565861620008944, epsilon: 0.05820849986238988 curr_temp_size: 3 (14416.12 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 15:59:26,325:INFO: Validating model on longer sequences
+2019-05-27 16:01:07,360:INFO: Validating model on same-size sequences
+2019-05-27 16:01:57,770:INFO: Validating model on same-size sequences
+2019-05-27 16:02:40,043:INFO: Validating model on same-size sequences
+2019-05-27 16:03:21,019:INFO: Validating model on same-size sequences
+2019-05-27 16:04:03,801:INFO: Validating model on same-size sequences
+2019-05-27 16:04:38,950:INFO: Validating model on same-size sequences
+2019-05-27 16:05:28,133:INFO: Validating model on same-size sequences
+2019-05-27 16:06:03,662:INFO: Validating model on same-size sequences
+2019-05-27 16:06:30,942:INFO: Sequences: 104000, Mean episode_total_rewards: 0.034222352756892234, loss_avg: 6.530632730573415e-05, epsilon: 0.05778218270865985 curr_temp_size: 3 (16984.69 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 16:06:43,611:INFO: Validating model on same-size sequences
+2019-05-27 16:07:32,908:INFO: Validating model on same-size sequences
+2019-05-27 16:08:10,547:INFO: Validating model on same-size sequences
+2019-05-27 16:08:54,859:INFO: Validating model on same-size sequences
+2019-05-27 16:09:49,555:INFO: Validating model on same-size sequences
+2019-05-27 16:10:38,731:INFO: Validating model on same-size sequences
+2019-05-27 16:11:24,003:INFO: Validating model on same-size sequences
+2019-05-27 16:12:20,658:INFO: Validating model on same-size sequences
+2019-05-27 16:13:04,578:INFO: Sequences: 105600, Mean episode_total_rewards: 0.03284865196078432, loss_avg: 7.614135276526213e-05, epsilon: 0.057378006788847254 curr_temp_size: 3 (15745.47 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 16:13:04,593:INFO: Validating model on same-size sequences
+2019-05-27 16:13:48,994:INFO: Validating model on same-size sequences
+2019-05-27 16:14:44,680:INFO: Validating model on same-size sequences
+2019-05-27 16:15:33,820:INFO: Validating model on same-size sequences
+2019-05-27 16:16:29,140:INFO: Validating model on same-size sequences
+2019-05-27 16:17:14,507:INFO: Validating model on same-size sequences
+2019-05-27 16:17:55,363:INFO: Validating model on same-size sequences
+2019-05-27 16:18:37,779:INFO: Validating model on same-size sequences
+2019-05-27 16:19:23,422:INFO: Validating model on same-size sequences
+2019-05-27 16:19:36,335:INFO: Sequences: 107200, Mean episode_total_rewards: 0.032638921522556395, loss_avg: 8.817761205136776e-05, epsilon: 0.056948345122280156 curr_temp_size: 3 (15670.28 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 16:19:59,490:INFO: Validating model on same-size sequences
+2019-05-27 16:20:58,957:INFO: Validating model on same-size sequences
+2019-05-27 16:21:48,700:INFO: Validating model on same-size sequences
+2019-05-27 16:22:22,687:INFO: Validating model on same-size sequences
+2019-05-27 16:23:14,607:INFO: Validating model on same-size sequences
+2019-05-27 16:23:50,872:INFO: Validating model on same-size sequences
+2019-05-27 16:24:23,628:INFO: Validating model on same-size sequences
+2019-05-27 16:25:08,664:INFO: Validating model on same-size sequences
+2019-05-27 16:25:49,757:INFO: Sequences: 108800, Mean episode_total_rewards: 0.029469322344322344, loss_avg: 9.887478314340115e-05, epsilon: 0.0565874754426403 curr_temp_size: 3 (14936.86 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 16:25:49,757:INFO: Validating model on longer sequences
+2019-05-27 16:27:31,228:INFO: Validating model on same-size sequences
+2019-05-27 16:28:20,648:INFO: Validating model on same-size sequences
+2019-05-27 16:29:07,837:INFO: Validating model on same-size sequences
+2019-05-27 16:29:43,383:INFO: Validating model on same-size sequences
+2019-05-27 16:30:20,419:INFO: Validating model on same-size sequences
+2019-05-27 16:31:13,859:INFO: Validating model on same-size sequences
+2019-05-27 16:31:58,677:INFO: Validating model on same-size sequences
+2019-05-27 16:32:52,837:INFO: Validating model on same-size sequences
+2019-05-27 16:33:31,951:INFO: Sequences: 110400, Mean episode_total_rewards: 0.03317642513736264, loss_avg: 7.126762997359038e-05, epsilon: 0.05624534791287809 curr_temp_size: 3 (18487.79 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 16:33:31,952:INFO: Validating model on same-size sequences
+2019-05-27 16:34:10,068:INFO: Validating model on same-size sequences
+2019-05-27 16:34:47,539:INFO: Validating model on same-size sequences
+2019-05-27 16:35:37,703:INFO: Validating model on same-size sequences
+2019-05-27 16:36:31,672:INFO: Validating model on same-size sequences
+2019-05-27 16:37:16,684:INFO: Validating model on same-size sequences
+2019-05-27 16:37:52,943:INFO: Validating model on same-size sequences
+2019-05-27 16:38:36,605:INFO: Validating model on same-size sequences
+2019-05-27 16:39:19,843:INFO: Validating model on same-size sequences
+2019-05-27 16:39:37,574:INFO: Sequences: 112000, Mean episode_total_rewards: 0.03320684523809524, loss_avg: 6.51500653475523e-05, epsilon: 0.05588164716424299 curr_temp_size: 3 (14624.92 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 16:40:01,762:INFO: Validating model on same-size sequences
+2019-05-27 16:40:37,447:INFO: Validating model on same-size sequences
+2019-05-27 16:41:21,419:INFO: Validating model on same-size sequences
+2019-05-27 16:42:01,896:INFO: Validating model on same-size sequences
+2019-05-27 16:42:53,355:INFO: Validating model on same-size sequences
+2019-05-27 16:43:42,628:INFO: Validating model on same-size sequences
+2019-05-27 16:44:28,539:INFO: Validating model on same-size sequences
+2019-05-27 16:45:24,904:INFO: Validating model on same-size sequences
+2019-05-27 16:45:50,936:INFO: Sequences: 113600, Mean episode_total_rewards: 0.033940388655462186, loss_avg: 6.492234766483307e-05, epsilon: 0.05557617757536072 curr_temp_size: 3 (14934.48 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 16:46:01,674:INFO: Validating model on same-size sequences
+2019-05-27 16:46:45,298:INFO: Validating model on same-size sequences
+2019-05-27 16:47:34,169:INFO: Validating model on same-size sequences
+2019-05-27 16:48:18,845:INFO: Validating model on same-size sequences
+2019-05-27 16:49:05,310:INFO: Validating model on same-size sequences
+2019-05-27 16:49:43,758:INFO: Validating model on same-size sequences
+2019-05-27 16:50:29,371:INFO: Validating model on same-size sequences
+2019-05-27 16:51:19,509:INFO: Validating model on same-size sequences
+2019-05-27 16:52:05,280:INFO: Sequences: 115200, Mean episode_total_rewards: 0.031067577030812324, loss_avg: 8.536250330507755e-05, epsilon: 0.05528657287383504 curr_temp_size: 3 (14973.73 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 16:52:05,285:INFO: Validating model on same-size sequences
+2019-05-27 16:52:12,164:INFO: Validating model on longer sequences
+2019-05-27 16:54:02,031:INFO: Validating model on same-size sequences
+2019-05-27 16:54:44,794:INFO: Validating model on same-size sequences
+2019-05-27 16:55:35,685:INFO: Validating model on same-size sequences
+2019-05-27 16:56:18,865:INFO: Validating model on same-size sequences
+2019-05-27 16:56:59,371:INFO: Validating model on same-size sequences
+2019-05-27 16:57:38,507:INFO: Validating model on same-size sequences
+2019-05-27 16:58:19,833:INFO: Validating model on same-size sequences
+2019-05-27 16:59:02,406:INFO: Validating model on same-size sequences
+2019-05-27 16:59:20,037:INFO: Sequences: 116800, Mean episode_total_rewards: 0.030127349624060152, loss_avg: 0.00010474428534507752, epsilon: 0.0549787068367864 curr_temp_size: 3 (17390.30 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 16:59:51,423:INFO: Validating model on same-size sequences
+2019-05-27 17:00:30,913:INFO: Validating model on same-size sequences
+2019-05-27 17:01:29,527:INFO: Validating model on same-size sequences
+2019-05-27 17:02:20,841:INFO: Validating model on same-size sequences
+2019-05-27 17:02:59,885:INFO: Validating model on same-size sequences
+2019-05-27 17:03:44,694:INFO: Validating model on same-size sequences
+2019-05-27 17:04:30,923:INFO: Validating model on same-size sequences
+2019-05-27 17:05:15,730:INFO: Validating model on same-size sequences
+2019-05-27 17:05:51,741:INFO: Sequences: 118400, Mean episode_total_rewards: 0.03215204326923077, loss_avg: 7.063020952045918e-05, epsilon: 0.05472013241228771 curr_temp_size: 3 (15668.14 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 17:06:09,343:INFO: Validating model on same-size sequences
+2019-05-27 17:06:54,287:INFO: Validating model on same-size sequences
+2019-05-27 17:07:44,485:INFO: Validating model on same-size sequences
+2019-05-27 17:08:30,251:INFO: Validating model on same-size sequences
+2019-05-27 17:09:13,236:INFO: Validating model on same-size sequences
+2019-05-27 17:09:54,395:INFO: Validating model on same-size sequences
+2019-05-27 17:10:31,107:INFO: Validating model on same-size sequences
+2019-05-27 17:11:12,883:INFO: Validating model on same-size sequences
+2019-05-27 17:11:59,980:INFO: Sequences: 120000, Mean episode_total_rewards: 0.030273523351648356, loss_avg: 9.396562352776528e-05, epsilon: 0.05447498732500382 curr_temp_size: 3 (14729.59 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 17:11:59,981:INFO: Validating model on same-size sequences
+2019-05-27 17:12:44,212:INFO: Validating model on same-size sequences
+2019-05-27 17:13:34,864:INFO: Validating model on same-size sequences
+2019-05-27 17:14:18,408:INFO: Validating model on same-size sequences
+2019-05-27 17:14:59,821:INFO: Validating model on same-size sequences
+2019-05-27 17:15:49,608:INFO: Validating model on same-size sequences
+2019-05-27 17:16:28,218:INFO: Validating model on same-size sequences
+2019-05-27 17:17:15,092:INFO: Validating model on same-size sequences
+2019-05-27 17:18:03,273:INFO: Validating model on same-size sequences
+2019-05-27 17:18:26,304:INFO: Sequences: 121600, Mean episode_total_rewards: 0.030804802529986356, loss_avg: 8.959010243415832e-05, epsilon: 0.054214384350927645 curr_temp_size: 3 (15452.96 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 17:18:26,305:INFO: Validating model on longer sequences
+2019-05-27 17:20:52,916:INFO: Validating model on same-size sequences
+2019-05-27 17:21:36,172:INFO: Validating model on same-size sequences
+2019-05-27 17:22:25,610:INFO: Validating model on same-size sequences
+2019-05-27 17:23:09,719:INFO: Validating model on same-size sequences
+2019-05-27 17:24:01,216:INFO: Validating model on same-size sequences
+2019-05-27 17:24:40,873:INFO: Validating model on same-size sequences
+2019-05-27 17:25:19,237:INFO: Validating model on same-size sequences
+2019-05-27 17:26:03,670:INFO: Validating model on same-size sequences
+2019-05-27 17:26:35,358:INFO: Sequences: 123200, Mean episode_total_rewards: 0.031434671945701355, loss_avg: 8.52876715362072e-05, epsilon: 0.053995505826065396 curr_temp_size: 3 (19562.16 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 17:26:49,228:INFO: Validating model on same-size sequences
+2019-05-27 17:27:36,209:INFO: Validating model on same-size sequences
+2019-05-27 17:28:28,371:INFO: Validating model on same-size sequences
+2019-05-27 17:29:06,919:INFO: Validating model on same-size sequences
+2019-05-27 17:29:57,846:INFO: Validating model on same-size sequences
+2019-05-27 17:30:41,995:INFO: Validating model on same-size sequences
+2019-05-27 17:31:20,478:INFO: Validating model on same-size sequences
+2019-05-27 17:32:05,440:INFO: Validating model on same-size sequences
+2019-05-27 17:32:53,886:INFO: Sequences: 124800, Mean episode_total_rewards: 0.03235648616734143, loss_avg: 8.23727622628212e-05, epsilon: 0.053787994989732864 curr_temp_size: 3 (15141.13 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 17:32:53,887:INFO: Validating model on same-size sequences
+2019-05-27 17:33:46,571:INFO: Validating model on same-size sequences
+2019-05-27 17:34:31,708:INFO: Validating model on same-size sequences
+2019-05-27 17:35:18,589:INFO: Validating model on same-size sequences
+2019-05-27 17:35:56,510:INFO: Validating model on same-size sequences
+2019-05-27 17:36:40,997:INFO: Validating model on same-size sequences
+2019-05-27 17:37:23,710:INFO: Validating model on same-size sequences
+2019-05-27 17:38:04,109:INFO: Validating model on same-size sequences
+2019-05-27 17:38:54,150:INFO: Validating model on same-size sequences
+2019-05-27 17:39:15,670:INFO: Sequences: 126400, Mean episode_total_rewards: 0.03073395076232247, loss_avg: 7.250911556184292e-05, epsilon: 0.05356739933472524 curr_temp_size: 3 (15271.33 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 17:39:42,705:INFO: Validating model on same-size sequences
+2019-05-27 17:40:36,730:INFO: Validating model on same-size sequences
+2019-05-27 17:41:22,822:INFO: Validating model on same-size sequences
+2019-05-27 17:42:14,303:INFO: Validating model on same-size sequences
+2019-05-27 17:42:53,907:INFO: Validating model on same-size sequences
+2019-05-27 17:43:45,300:INFO: Validating model on same-size sequences
+2019-05-27 17:44:38,844:INFO: Validating model on same-size sequences
+2019-05-27 17:45:26,386:INFO: Validating model on same-size sequences
+2019-05-27 17:45:53,261:INFO: Sequences: 128000, Mean episode_total_rewards: 0.03504901960784314, loss_avg: 5.3521119989454744e-05, epsilon: 0.053382122663458334 curr_temp_size: 3 (15903.64 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 17:45:53,261:INFO: Validating model on longer sequences
+2019-05-27 17:48:01,847:INFO: Validating model on same-size sequences
+2019-05-27 17:48:40,871:INFO: Validating model on same-size sequences
+2019-05-27 17:49:12,925:INFO: Validating model on same-size sequences
+2019-05-27 17:49:56,585:INFO: Validating model on same-size sequences
+2019-05-27 17:50:34,341:INFO: Validating model on same-size sequences
+2019-05-27 17:51:14,237:INFO: Validating model on same-size sequences
+2019-05-27 17:52:01,308:INFO: Validating model on same-size sequences
+2019-05-27 17:52:51,300:INFO: Validating model on same-size sequences
+2019-05-27 17:53:33,537:INFO: Sequences: 129600, Mean episode_total_rewards: 0.0306391369047619, loss_avg: 9.720048867166042e-05, epsilon: 0.05320646853278608 curr_temp_size: 3 (18411.05 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 17:53:33,537:INFO: Validating model on same-size sequences
+2019-05-27 17:54:16,582:INFO: Validating model on same-size sequences
+2019-05-27 17:55:05,839:INFO: Validating model on same-size sequences
+2019-05-27 17:55:59,948:INFO: Validating model on same-size sequences
+2019-05-27 17:56:49,235:INFO: Validating model on same-size sequences
+2019-05-27 17:57:30,315:INFO: Validating model on same-size sequences
+2019-05-27 17:58:17,736:INFO: Validating model on same-size sequences
+2019-05-27 17:58:57,278:INFO: Validating model on same-size sequences
+2019-05-27 17:59:38,014:INFO: Validating model on same-size sequences
+2019-05-27 17:59:57,671:INFO: Sequences: 131200, Mean episode_total_rewards: 0.032242246240601506, loss_avg: 7.292882539331913e-05, epsilon: 0.05301973834223185 curr_temp_size: 3 (15365.38 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 18:00:23,822:INFO: Validating model on same-size sequences
+2019-05-27 18:01:10,216:INFO: Validating model on same-size sequences
+2019-05-27 18:02:03,234:INFO: Validating model on same-size sequences
+2019-05-27 18:02:45,059:INFO: Validating model on same-size sequences
+2019-05-27 18:03:34,354:INFO: Validating model on same-size sequences
+2019-05-27 18:04:11,561:INFO: Validating model on same-size sequences
+2019-05-27 18:04:57,545:INFO: Validating model on same-size sequences
+2019-05-27 18:05:38,244:INFO: Validating model on same-size sequences
+2019-05-27 18:06:05,814:INFO: Sequences: 132800, Mean episode_total_rewards: 0.031703125, loss_avg: 6.946616340428591e-05, epsilon: 0.05286290502595585 curr_temp_size: 3 (14725.72 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 18:06:26,588:INFO: Validating model on same-size sequences
+2019-05-27 18:07:12,944:INFO: Validating model on same-size sequences
+2019-05-27 18:07:49,701:INFO: Validating model on same-size sequences
+2019-05-27 18:08:33,523:INFO: Validating model on same-size sequences
+2019-05-27 18:09:24,109:INFO: Validating model on same-size sequences
+2019-05-27 18:10:13,137:INFO: Validating model on same-size sequences
+2019-05-27 18:11:01,327:INFO: Validating model on same-size sequences
+2019-05-27 18:11:46,391:INFO: Validating model on same-size sequences
+2019-05-27 18:12:27,933:INFO: Sequences: 134400, Mean episode_total_rewards: 0.032122968266253875, loss_avg: 9.072467684745789e-05, epsilon: 0.052714217014440234 curr_temp_size: 3 (15284.77 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 18:12:27,934:INFO: Validating model on same-size sequences
+2019-05-27 18:12:32,330:INFO: Validating model on longer sequences
+2019-05-27 18:14:10,856:INFO: Validating model on same-size sequences
+2019-05-27 18:14:57,503:INFO: Validating model on same-size sequences
+2019-05-27 18:15:36,932:INFO: Validating model on same-size sequences
+2019-05-27 18:16:20,777:INFO: Validating model on same-size sequences
+2019-05-27 18:17:12,260:INFO: Validating model on same-size sequences
+2019-05-27 18:17:49,716:INFO: Validating model on same-size sequences
+2019-05-27 18:18:27,584:INFO: Validating model on same-size sequences
+2019-05-27 18:19:13,175:INFO: Validating model on same-size sequences
+2019-05-27 18:19:27,591:INFO: Sequences: 136000, Mean episode_total_rewards: 0.03199188311688312, loss_avg: 9.288710542023182e-05, epsilon: 0.05255615332065074 curr_temp_size: 3 (16786.30 ms/iter), temp_k in loss: 0.004950331673311187
+2019-05-27 18:19:50,692:INFO: Validating model on same-size sequences
+2019-05-27 18:20:39,261:INFO: Validating model on same-size sequences
+2019-05-27 18:21:19,928:INFO: Validating model on same-size sequences
+2019-05-27 18:22:13,029:INFO: Validating model on same-size sequences
+2019-05-27 18:22:56,334:INFO: Validating model on same-size sequences
+2019-05-27 18:23:35,282:INFO: Validating model on same-size sequences
